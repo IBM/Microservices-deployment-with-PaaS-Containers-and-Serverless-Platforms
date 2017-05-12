@@ -1,0 +1,7 @@
+applications:
+- name: FlightAssist
+  host: flightassist
+  path: .
+  domain: mybluemix.net
+  instances: 1
+  memory: 512M

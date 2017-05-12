@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# You can `source` this file in your shell to use a local Node.js installation
+# to run/test the application without pushing to Bluemix
+
+export DEVMODE=true
+export DEV_URL=http://localhost:3000/
+
+export FLIGHTSTATS_APP_ID=<insert app ID>
+export FLIGHTSTATS_APP_KEY=<insert app key>
+
+export TRIPIT_API_KEY=<insert API key>
+export TRIPIT_API_SECRET=<insert API secret>
+
+export CLOUDANT_URL=<insert cloudant URL from Bluemix credentials view>
+export WEATHER_URL=<insert Weather company URL from Bluemix credentials view>
+
+# for demo purposes you may want to force the UI to show flights even if
+# they aren't within the next 24 hour window; use this variable set to "true"
+# to force the UI to do so:
+# export FORCE_FLIGHT_VIEW=true
+
+# For deploying with Swarm or Kubernetes using secrets support, you can
+# export the following variable set to the appropriate orchestration engine.
+# Usually this will be done via a yaml file (see docker-compose.yaml as an
+# example) but could be done using command line tools like `docker service create`
+# export DEPLOY=swarm|kubernetes
+
+# To use the externalized/containerized weather microservice, export this variable
+# set to "true"
+export USE_WEATHER_SERVICE=true
+
+# To use an OpenWhisk function-as-a-service implementation for retrieving the
+# forecast, export the following variable as true
+# export USE_WEATHER_SERVERLESS=true
+# You will also require your OpenWhisk credentials which you can retrieve
+# from the `wsk` command line client like this: 
+# $ wsk property get --auth | awk  '{print $3}'
+export OPENWHISK_AUTH=<insert openwhisk auth credentials>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <base href="/">
+    <title>FlightAssist | Watson Powered Conversation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="og:title" content="Conversation Chat Simple" />
+    <meta property="og:description" content="FlightAssist demo application using Watson Conversation API" />
+    <link rel="stylesheet" href="css/conversation.css">
+    <link rel="stylesheet" href="css/flightassist.css">
+<style>
+ .altoption {
+	 background: #839fd2 !important;
+ }
+</style>
+</head>
+
+<body>
+    <div id="contentParent" class="responsive-columns-wrapper">
+        <div id="chat-column-holder" class="responsive-column content-column">
+            <div class="chat-column">
+                <div id="scrollingChat"></div>
+				<div id="inputBox" style="bottom: 0%; position: fixed; width: 80%;">
+                   <label for="textInput" class="inputOutline">
+                      <input id="textInput" class="input responsive-column"
+                             placeholder="Ask a question about your upcoming travel" type="text"
+                             onkeydown="ConversationPanel.inputKeyDown(event, this)">
+                    </label>
+				</div>
+            </div>
+        </div>
+        <div id="flight-output-column" class="fixed-column content-column" style="width: 50%;">
+            <div id="flight-information">
+                <div id="flight-results">
+                    <!-- trip data will be loaded here -->
+                </div>
+                <div class="throbber-div" id="throbber-div-1">
+                    <img src="/images/throbber.gif" class="ajax-loader" />
+                </div>
+                <div id="flight-alternates">
+                    <!-- alternate flight data will be loaded here -->
+                </div>
+                <div class="throbber-div" id="throbber-div-2">
+                    <img src="/images/throbber.gif" class="ajax-loader" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/mustache.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/conversation.js"></script>
+    <script src="/js/trips.js"></script>
+    <script src="/js/global.js"></script>
+</body>
+
+</html>

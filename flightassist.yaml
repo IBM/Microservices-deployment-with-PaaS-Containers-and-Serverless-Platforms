@@ -1,0 +1,97 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: weather-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: weather-service
+      labels:
+        run: weather-service
+    spec:
+      containers:
+        - name: weather-service
+          image: "registry.ng.bluemix.net/<namespace>/weather-service:v5"
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: DEPLOY
+            value: "kubernetes"
+          volumeMounts:
+            - mountPath: /run/secrets/service-bind
+              name: weather-service-bind-volume
+      volumes:
+        - name: weather-service-bind-volume
+          secret:
+            defaultMode: 420
+            secretName: binding-myweatherinsights
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-service
+  labels:
+    run: weather-service
+spec:
+  type: NodePort
+  selector:
+    run: weather-service
+  ports:
+   - protocol: TCP
+     port: 5000
+     nodePort: 30081
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: flightassist-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: flightassist-service
+      labels:
+        run: flightassist-service
+    spec:
+      containers:
+        - name: flightassist-service
+          image: "registry.ng.bluemix.net/<namespace>/flightassist:v6"
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: DEPLOY
+            value: "kubernetes"
+          - name: USE_WEATHER_SERVICE
+            value: "true"
+          - name: BASE_URL
+            value: "http://<your-app-end-point-url>/"
+          - name: FORCE_FLIGHT_VIEW
+            value: "true"
+          volumeMounts:
+            - mountPath: /opt/service-bind
+              name: service-bind-volume2
+            - mountPath: /run/secrets
+              name: mysecret-volume
+      volumes:
+        - name: service-bind-volume2
+          secret:
+            defaultMode: 420
+            secretName: binding-mycloudant
+        - name: mysecret-volume
+          secret:
+            defaultMode: 420
+            secretName: mysecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flightassist-service
+  labels:
+    run: flightassist-service
+spec:
+  type: NodePort
+  selector:
+    run: flightassist-service
+  ports:
+   - protocol: TCP
+     port: 3000
+     nodePort: 30080

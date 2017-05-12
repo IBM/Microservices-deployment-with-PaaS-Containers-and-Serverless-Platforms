@@ -1,0 +1,180 @@
+.throbber-div {
+    display: none;
+    height: 48px;
+    position: relative;
+}
+
+img.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -16px;
+    margin-top: -16px;
+    display: block;
+}
+
+.resultsHeader {
+    padding: 10px;
+    margin-left: 20px;
+    font-size: 85%;
+}
+
+.tripName {
+    font-weight: 600;
+    font-size: 95%;
+    color: rgb(58, 84, 76);
+}
+
+.tripDestination {
+    font-weight: 600;
+    font-size: 95%;
+    color: rgb(58, 84, 76);
+}
+
+.resultsContainer {
+    text-align: left;
+    width: 80%;
+    margin-left: 2%;
+}
+
+.flightresults {
+    background: #efefef;
+    opacity: 0.8;
+}
+
+.flightid {
+    font-size: 110%;
+    width: 50%;
+    background: #3f3f3f;
+    color: white;
+    font-weight: bold;
+    padding: 2px;
+    padding-left: 15px;
+    border-top: 1px solid #bbbbbb;
+    border-right: 1px solid #cccccc;
+}
+
+.flighttime {
+    font-size: 95%;
+    font-weight: 300;
+    font-style: italic;
+    color: #dddddd;
+}
+
+.airport {
+    margin: 10px;
+    padding: 25px;
+}
+
+.airportDetails {
+    padding-right: 15px;
+    padding-left: 5px;
+    width: 30%;
+}
+
+
+/* Mobile */
+
+@media screen and (max-width: 800px) {
+    .resultsContainer {
+        width: 100%;
+        margin-left: 1%;
+    }
+    .airportDetails {
+        padding-right: 10px;
+        padding-left: 3px;
+        width: 25%;
+    }
+}
+
+.airportCode {
+    font-size: 170%;
+    font-weight: bold;
+    color: #558a26;
+}
+
+.airportLoc {
+    font-size: 80%;
+    font-weight: 300;
+    font-style: italic;
+    color: #9d9d9d;
+}
+
+.flightInfo {
+    text-align: top;
+    margin-top: 2px;
+    padding-left: 10px;
+    border-left: 1px solid #cdcdcd;
+}
+
+.fieldTitle {
+    font-weight: bold;
+}
+
+.flightTime,
+.gateInfo {
+    color: #5d5d5d;
+    font-weight: 400;
+}
+
+.flightstatInfo {
+    display: none;
+}
+
+.weatherInfo {
+    display: none;
+}
+
+.weatherCity {
+    font-weight: 500;
+}
+
+.weatherData {
+    color: #0033cd;
+    font-size: 80%;
+    padding: 3px;
+    margin: 0px;
+    background: #cccccc;
+    opacity: 0.9;
+}
+
+.statusDetail {
+    color: #002266;
+    font-size: 70%;
+    padding: 2px;
+    margin: 0px;
+    background: #999999;
+    border-top: 1px solid #555555;
+    opacity: 0.9;
+}
+
+.flightStatsStatus {
+    font-weight: 500;
+}
+
+.altoption {
+    margin-top: 30px;
+    padding-left: 3px;
+    border-top: 2px solid #5d5d5d;
+    border-bottom: 2px solid #5d5d5d;
+    background: #3f3f3f;
+}
+
+.airportId,
+.airportFrom,
+.airportTo {
+    font-weight: 500;
+}
+
+.optionitem {
+    padding-left: 0px;
+    background: #cccccc;
+    color: #3f3f3f;
+    opacity: 0.7;
+}
+
+.altflightTime {
+    font-size: 70%;
+    margin-left: 15px;
+    padding: 2px;
+}

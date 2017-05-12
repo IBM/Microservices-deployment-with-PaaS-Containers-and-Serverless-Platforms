@@ -1,0 +1,17 @@
+FROM registry.ng.bluemix.net/ibmnode:v4
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+#have the docker daemon bind the app to port 3000
+EXPOSE 3000
+
+# Install app dependencies, assuming npm is already installed on the image
+COPY package.json /usr/src/app/
+RUN npm install
+
+# Bundle app source code inside the docker image
+COPY . /usr/src/app
+
+CMD [ "node", "./flightassist.js" ]

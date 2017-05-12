@@ -1,0 +1,73 @@
+version: "3.1"
+
+services:
+
+  flightassist:
+    image: flightassist:local
+    environment:
+      - DEVMODE=true
+      - DEV_URL=http://localhost/
+      - FORCE_FLIGHT_VIEW=true
+      - USE_WEATHER_SERVICE=true
+      - DEPLOY=swarm
+    ports:
+      - "80:3000"
+    networks:
+      - fassist-front
+      - fassist-back
+    depends_on:
+      - weather-service
+    secrets:
+      - flightstats_app_id
+      - flightstats_app_key
+      - tripit_api_key
+      - tripit_api_secret
+      - cloudant_url
+      - weather_url
+    deploy:
+      mode: replicated
+      replicas: 2
+      # service restart policy
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  weather-service:
+    image: weather-service:v1
+    networks:
+      - fassist-back
+    ports:
+      - "5000:5000"
+    environment:
+      - DEPLOY=swarm
+    secrets:
+      - weather_url
+    deploy:
+      mode: replicated
+      replicas: 1
+      # service restart policy
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+networks:
+  fassist-back:
+  fassist-front:
+
+secrets:
+  flightstats_app_id:
+    external: true
+  flightstats_app_key:
+    external: true
+  tripit_api_key:
+    external: true
+  tripit_api_secret:
+    external: true
+  cloudant_url:
+    external: true
+  weather_url:
+    external: true

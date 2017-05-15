@@ -4,7 +4,7 @@ This project is in progress. However, you can visit [README_old.md](README_old.m
 
 # How to Use Flightassist
 
-First, you want to [add a trip from Triplt](https://www.tripit.com/trip/create). Then, add a new flight plan for your trip. In your plan, please fill in your confirmation number or airline with flight number.
+First, you want to [add a trip on Triplt](https://www.tripit.com/trip/create). Then, add a new flight plan for your trip. In your plan, please fill in your confirmation number or airline with flight number.
 
 ![Triple plan](images/plans.png)
 

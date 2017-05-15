@@ -4,6 +4,7 @@ This project is in progress. However, you can visit [README_old.md](README_old.m
 
 ## Included Components
 The scenarios are accomplished by using:
+
 - [Cloud Foundry](https://www.cloudfoundry.org)
 - [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
 - [OpenWhisk](https://www.ibm.com/cloud-computing/bluemix/openwhisk)
@@ -38,9 +39,9 @@ Now copy `dot-env` to `.env` and edit `.env` to fill in all required credentials
 Lastly, install [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and Setup [Kubernetes Cluster](https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials) for PAAS and Containers deployments.
 
 ## Scenarios
-- [Scenario One: Deploy Flightassist as containers using Kubernetes Clusters](#scenario-one-deploy-flightassist-as-containers-using-kubernetes-clusters)
-- [Scenario Two: Deploy Flightassist on Cloud Platform using Cloud Foundry](#scenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
-- [Scenario Three: Deploy Flightassist with Serverless using OpenWhisk](#scenario-three-deploy-flightassist-with-serverless-using-openwhisk)
+- [Scenario One: Deploy Flightassist as containers using Kubernetes Clusters](#secenario-one-deploy-flightassist-as-containers-using-kubernetes-clusters)
+- [Scenario Two: Deploy Flightassist on Cloud Platform using Cloud Foundry](#secenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
+- [Scenario Three: Deploy Flightassist with Serverless using OpenWhisk](#secenario-three-deploy-flightassist-with-serverless-using-openwhisk)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
@@ -51,7 +52,7 @@ In this scenario, we want to deploy flightassist as containers hosting on Kubern
 First, install the container registry plugin for Bluemix CLI.
 
 ```bash
- bx plugin install container-registry -r Bluemix
+bx plugin install container-registry -r Bluemix
 ```
 Next, build your own docker images and push them to your own bluemix container registry.
 
@@ -64,7 +65,7 @@ docker push registry.ng.bluemix.net/<namespace>/flightassist
 docker push registry.ng.bluemix.net/<namespace>/weather-service
 ```
 
-Then, you need to run the following commands to bind your Cloudant and Weather Insights services to your clusters.
+Then, you need to run the following commands to bind your Cloudant and Weather Insights services to your clusters. 
 
 ```bash
 bx cs cluster-service-bind {your-cluster-name} default {cloudantNoSQLDB-service-name}
@@ -113,6 +114,43 @@ Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-fl
 
 # Scenario Three: Deploy Flightassist with Serverless using OpenWhisk
 
+## Using Serverless with Kubernetes Cluster
+
+**Important**: You must complete [scenario one](#secenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
+
+First, delete your previous service and deployment.
+
+```bash
+kubectl delete -f flightassist.yaml
+```
+
+Edit your **flightassist.yaml** file and uncomment `USE_WEATHER_SERVERLESS` and `OPENWHISK_AUTH` environment variables. Then replace `<insert openwhisk auth credentials>` with your own openwhisk auth credential and set `USE_WEATHER_SERVICE` to **false**.
+
+Next, you can remove the service and deployment code for weather-service in your flightassist.yaml and save it.
+
+Then, redeploy it with the new yaml files.
+
+```bash
+kubectl create -f flightassist.yaml
+```
+
+Now you can check your flightassist's logs or go to [OpenWhisk Dashboard](https://console.ng.bluemix.net/openwhisk/dashboard) to varify the OpenWhisk action is being utilized to query the weather data for each airport.
+
+Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+
+## Using Serverless with Cloud Foundry
+
+**Important**: You must complete [scenario two](#secenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
+
+Go to the *Runtime* settings for your cloud foundry application and add these extra three environment variables to enable OpenWhisk:
+
+- `OPENWHISK_AUTH` : Your OpenWhisk Authentication. You can run `wsk property get --auth | awk '{print $3}'` to view your authentication
+- `USE_WEATHER_SERVERLESS` : put `true` to enable serverless option.
+- `USE_WEATHER_SERVICE` : put `false` to disable the microservice for weather because it will intervene the serverless option.
+
+Now save it and your application should restart automatically with serverless operating the weather functions. You can check your logs or go to [OpenWhisk Dashboard](https://console.ng.bluemix.net/openwhisk/dashboard) to varify the OpenWhisk action is being utilized to query the weather data for each airport.
+
+Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 
 # How to Use Flightassist

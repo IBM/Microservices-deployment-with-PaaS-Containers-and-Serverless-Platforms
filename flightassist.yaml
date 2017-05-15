@@ -12,6 +12,7 @@ spec:
     spec:
       containers:
         - name: weather-service
+          #change <namespace> to your namespace, obtain your name space via `bx cr namespaces`
           image: "registry.ng.bluemix.net/<namespace>/weather-service"
           imagePullPolicy: IfNotPresent
           env:
@@ -55,14 +56,21 @@ spec:
     spec:
       containers:
         - name: flightassist-service
+          #change <namespace> to your namespace, obtain your name space via `bx cr namespaces`
           image: "registry.ng.bluemix.net/<namespace>/flightassist"
           imagePullPolicy: IfNotPresent
           env:
           - name: DEPLOY
             value: "kubernetes"
+          # For Serverless option, uncomment the following environment variables, fill in your openwhisk auth credential, and set USE_WEATHER_SERVICE to false
+          # - name: USE_WEATHER_SERVERLESS
+          #   value: "true"
+          # - name: OPENWHISK_AUTH
+          #   value: "<insert openwhisk auth credentials>"
           - name: USE_WEATHER_SERVICE
             value: "true"
           - name: BASE_URL
+            #replace <your-app-end-point-url> to your `ip:nodeport`. You can obtain your ip via `kubectl get nodes` and your nodeport is 30080.
             value: "http://<your-app-end-point-url>/"
           - name: FORCE_FLIGHT_VIEW
             value: "true"

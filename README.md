@@ -116,7 +116,7 @@ Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-fl
 
 ## Using Serverless with Kubernetes Cluster
 
-**Important**: You must complete [scenario one](#secenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
+**Important**: You must complete [scenario one](#scenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
 
 First, delete your previous service and deployment.
 
@@ -140,7 +140,7 @@ Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-fl
 
 ## Using Serverless with Cloud Foundry
 
-**Important**: You must complete [scenario two](#secenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
+**Important**: You must complete [scenario two](#scenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
 
 Go to the *Runtime* settings for your cloud foundry application and add these extra three environment variables to enable OpenWhisk:
 

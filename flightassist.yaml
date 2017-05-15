@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: weather-service
-          image: "registry.ng.bluemix.net/<namespace>/weather-service:v5"
+          image: "registry.ng.bluemix.net/<namespace>/weather-service"
           imagePullPolicy: IfNotPresent
           env:
           - name: DEPLOY
@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
         - name: flightassist-service
-          image: "registry.ng.bluemix.net/<namespace>/flightassist:v6"
+          image: "registry.ng.bluemix.net/<namespace>/flightassist"
           imagePullPolicy: IfNotPresent
           env:
           - name: DEPLOY

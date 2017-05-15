@@ -60,9 +60,11 @@ Next, build your own docker images and push them to your own bluemix container r
 
 ```bash
 docker build -f Dockerfile.local -t registry.ng.bluemix.net/<namespace>/flightassist .
-docker build -f flightassist-weather/Dockerfile.alpine -t registry.ng.bluemix.net/<namespace>/weather-service .
+cd flightassist-weather
+docker build -f Dockerfile.alpine -t registry.ng.bluemix.net/<namespace>/weather-service .
 docker push registry.ng.bluemix.net/<namespace>/flightassist
 docker push registry.ng.bluemix.net/<namespace>/weather-service
+cd ..
 ```
 
 Then, you need to run the following commands to bind your Cloudant and Weather Insights services to your clusters. 
@@ -124,7 +126,9 @@ First, delete your previous service and deployment.
 kubectl delete -f flightassist.yaml
 ```
 
-Edit your **flightassist.yaml** file and uncomment `USE_WEATHER_SERVERLESS` and `OPENWHISK_AUTH` environment variables. Then replace `<insert openwhisk auth credentials>` with your own openwhisk auth credential and set `USE_WEATHER_SERVICE` to **false**.
+Edit your **flightassist.yaml** file and uncomment `USE_WEATHER_SERVERLESS` and `OPENWHISK_AUTH` environment variables. 
+
+Then, replace `<insert openwhisk auth credentials>` with your own openwhisk auth credential and set `USE_WEATHER_SERVICE` to **false**.
 
 Next, you can remove the service and deployment code for weather-service in your flightassist.yaml and save it.
 

@@ -16,15 +16,7 @@ The scenarios are accomplished by using:
 
 ## Prerequisites
 
-For this example, we will use Bluemix's [The Cloudant NoSQL database service](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south) and [Insights for Weather service](https://console.ng.bluemix.net/catalog/services/weather-company-data?env_id=ibm:yp:us-south) for our database and weather data. Therefore, we want to create each of these services and mark down their service credentials. 
-
-Before moving on, the demo application is missing code to create the databases used
-to cache API responses in your newly created Cloudant instance. One simple way
-to make sure these databases are initialized is through the Bluemix console UI.
-Go to your new Cloudant service and open the Cloudant UI console using the link from your
-service instance page. Once at the Cloudant console you will need to
-create the **trips**, **weather**, and **connections** databases for
-the cacheing code to work properly.
+For this example, install [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and Setup [Kubernetes Cluster](https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials) for PAAS and Containers deployments.
 
 Then, we also need [TripIt Developer API](https://www.tripit.com/developer/create) and [FlightStats Developer API](https://developer.flightstats.com/signup) for our flight status. 
 
@@ -34,9 +26,21 @@ credentials activated for a 30-day trial with the API.
 
 Futhermore, we need to install [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli) to deploy it with serverless and Mark down its credentials.
 
-Now copy `dot-env` to `.env` and edit `.env` to fill in all required credentials from your five services. (i.e. FLIGHTSTATS_APP_ID, FLIGHTSTATS_APP_KEY, TRIPIT_API_KEY, TRIPIT_API_SECRET, CLOUDANT_URL, WEATHER_URL, and OPENWHISK_AUTH)
+Lastly, we will use Bluemix's [The Cloudant NoSQL database service](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south) and [Insights for Weather service](https://console.ng.bluemix.net/catalog/services/weather-company-data?env_id=ibm:yp:us-south) for our database and weather data. Therefore, run the following commands to create cloudant and Insights for Weather service. 
 
-Lastly, install [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and Setup [Kubernetes Cluster](https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials) for PAAS and Containers deployments.
+```bash
+bx service create cloudantNoSQLDB Lite mycloudant
+bx service create weatherinsights Free-v2 myweatherinsights
+```
+
+Before moving on, the demo application is missing code to create the databases used
+to cache API responses in your newly created Cloudant instance. One simple way
+to make sure these databases are initialized is through the Bluemix console UI.
+Go to your new Cloudant service and open the Cloudant UI console using the link from your
+service instance page. Once at the Cloudant console you will need to
+create the **trips**, **weather**, and **connections** databases for
+the cacheing code to work properly.
+
 
 ## Scenarios
 - [Scenario One: Deploy Flightassist as containers using Kubernetes Clusters](#scenario-one-deploy-flightassist-as-containers-using-kubernetes-clusters)
@@ -56,7 +60,9 @@ bx plugin install container-registry -r Bluemix
 ```
 Next, build your own docker images and push them to your own bluemix container registry.
 
-> Replace `<namespace>` with your own namespace
+> Replace `<namespace>` with your own namespace, you can view your namespace by running `bx cr namespaces`
+>
+> If you have unauthorized error, run `bx cr login` to authorized your container-registry.
 
 ```bash
 docker build -f Dockerfile.local -t registry.ng.bluemix.net/<namespace>/flightassist .
@@ -115,34 +121,6 @@ application.
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 # Scenario Three: Deploy Flightassist with Serverless using OpenWhisk
-
-## Using Serverless with Kubernetes Cluster
-
-**Important**: You must complete [scenario one](#scenario-one-deploy-flightassist-as-containers-using-kubernetes-clusters) in order to proceed the following steps.
-
-First, delete your previous service and deployment.
-
-```bash
-kubectl delete -f flightassist.yaml
-```
-
-Edit your **flightassist.yaml** file and uncomment `USE_WEATHER_SERVERLESS` and `OPENWHISK_AUTH` environment variables. 
-
-Then, replace `<insert openwhisk auth credentials>` with your own openwhisk auth credential and set `USE_WEATHER_SERVICE` to **false**.
-
-Next, you can remove the service and deployment code for weather-service in your flightassist.yaml and save it.
-
-Then, redeploy it with the new yaml files.
-
-```bash
-kubectl create -f flightassist.yaml
-```
-
-Now you can check your flightassist's logs or go to [OpenWhisk Dashboard](https://console.ng.bluemix.net/openwhisk/dashboard) to varify the OpenWhisk action is being utilized to query the weather data for each airport.
-
-Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
-
-## Using Serverless with Cloud Foundry
 
 **Important**: You must complete [scenario two](#scenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
 

@@ -116,7 +116,7 @@ Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-fl
 
 ## Using Serverless with Kubernetes Cluster
 
-**Important**: You must complete [scenario one](#scenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
+**Important**: You must complete [scenario one](#scenario-one-deploy-flightassist-as-containers-using-kubernetes-clusters) in order to proceed the following steps.
 
 First, delete your previous service and deployment.
 

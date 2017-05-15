@@ -39,9 +39,9 @@ Now copy `dot-env` to `.env` and edit `.env` to fill in all required credentials
 Lastly, install [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and Setup [Kubernetes Cluster](https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials) for PAAS and Containers deployments.
 
 ## Scenarios
-- [Scenario One: Deploy Flightassist as containers using Kubernetes Clusters](#secenario-one-deploy-flightassist-as-containers-using-kubernetes-clusters)
-- [Scenario Two: Deploy Flightassist on Cloud Platform using Cloud Foundry](#secenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
-- [Scenario Three: Deploy Flightassist with Serverless using OpenWhisk](#secenario-three-deploy-flightassist-with-serverless-using-openwhisk)
+- [Scenario One: Deploy Flightassist as containers using Kubernetes Clusters](#scenario-one-deploy-flightassist-as-containers-using-kubernetes-clusters)
+- [Scenario Two: Deploy Flightassist on Cloud Platform using Cloud Foundry](#scenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
+- [Scenario Three: Deploy Flightassist with Serverless using OpenWhisk](#scenario-three-deploy-flightassist-with-serverless-using-openwhisk)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 

@@ -22,6 +22,17 @@ stages:
     job: Build
   triggers:
   - type: stage
+  properties:
+  - name: BLUEMIX_USER
+    type: text
+  - name: BLUEMIX_PASSWORD
+    type: secure
+  - name: BLUEMIX_ACCOUNT
+    type: secure
+  - name: CLUSTER_NAME
+    type: text
+  - name: API_KEY
+    type: secure
   jobs:
   - name: Deploy
     type: deployer

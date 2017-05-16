@@ -1,6 +1,5 @@
 applications:
-- name: FlightAssistsss
-  host: flightassistsss
+- name: FlightAssist
   path: .
   domain: mybluemix.net
   instances: 1

@@ -123,7 +123,7 @@ Congratulation, now your Flightassist application should be running on `http://<
 
 First, edit `manifest.yml` and select your own unique application **name** and **host** since the name flightassist is already used.
 
-Next, edit `flightassist.js` to set the `baseURL` variable (around line 16) to your selected hostname.
+Next, edit `flightassist.js` to set the `baseURL` variable (around line 22) to your selected hostname.
 
 Then, type the following commands to push your application.
 
@@ -143,6 +143,22 @@ application should be operational at the hostname route you selected for your CF
 application. 
 
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+
+### Deploy using DevOps Toolchain (In progress)
+
+Click the following button to deploy your app. Then go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
+   - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
+   - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
+   - `TRIPIT_API_KEY` : API key assigned by TripIt
+   - `TRIPIT_API_SECRET` : API secret assigned by TripIt
+
+In addition, you can add the following environment variables to enable serverless.
+- `OPENWHISK_AUTH` : Your OpenWhisk Authentication. You can run `wsk property get --auth | awk '{print $3}'` to view your authentication
+- `USE_WEATHER_SERVERLESS` : put `true` to enable serverless option.
+- `USE_WEATHER_SERVICE` : put `false` to disable the microservice for weather because it will intervene the serverless option.
+
+[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/containers-paas-serverless)
+
 
 # Scenario Three: Deploy Flightassist with Serverless using OpenWhisk
 

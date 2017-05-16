@@ -19,7 +19,7 @@ if (process.env.CONVERSATION_MODE === "true") {
 }
 
 // if deploying to a different route, update this variable:
-var baseURL = "http://flightassistsss.mybluemix.net/";
+var baseURL = "http://flightassist.mybluemix.net/";
 if (process.env.DEVMODE === "true") {
     baseURL = process.env.DEV_URL;
 }

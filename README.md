@@ -131,14 +131,7 @@ Then, type the following commands to push your application.
 cf push
 ```
 
-Once your application is deployed, you need to make service bindings by running the following commands.
-
-```bash
-cf bind-service {your-application-name} mycloudant
-cf bind-service {your-application-name} myweatherinsights
-```
-
-Go to the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
+Now, go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
    - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
    - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
    - `TRIPIT_API_KEY` : API key assigned by TripIt

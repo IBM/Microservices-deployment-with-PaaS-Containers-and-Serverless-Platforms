@@ -1,7 +1,10 @@
 applications:
-- name: FlightAssist
-  host: flightassist
+- name: FlightAssistsss
+  host: flightassistsss
   path: .
   domain: mybluemix.net
   instances: 1
   memory: 512M
+  services:
+  - mycloudant
+  - myweatherinsights

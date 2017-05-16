@@ -4,13 +4,11 @@ stages:
   inputs:
   - type: git
     branch: master
-    service: ${SAMPLE_REPO}
   triggers:
   - type: commit
   jobs:
   - name: Build
     type: builder
-    artifact_dir: ''
     build_type: shell
     script: |-
       #!/bin/bash
@@ -20,7 +18,6 @@ stages:
   - type: job
     stage: BUILD
     job: Build
-    dir_name: null
   triggers:
   - type: stage
   jobs:

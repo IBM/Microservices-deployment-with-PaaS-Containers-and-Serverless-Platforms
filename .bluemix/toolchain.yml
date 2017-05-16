@@ -10,7 +10,7 @@ required:
 
 # Github repos
 sample-repo:
-  service_id: git
+  service_id: githubpublic
   parameters:
     repo_name: "{{name}}"
     repo_url: https://github.com/IBM/containers-paas-serverless

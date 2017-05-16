@@ -33,40 +33,41 @@ The scenarios are accomplished by using:
 
 ## Prerequisites
 
-For this example, install [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and Setup [Kubernetes Cluster](https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials) for PAAS and Containers deployments.
+- Install [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and Setup [Kubernetes Cluster](https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials) for PAAS and Containers deployments.
 
-Then, we also need [TripIt Developer API](https://www.tripit.com/developer/create) and [FlightStats Developer API](https://developer.flightstats.com/signup) for our flight status. 
+- Register and obtain the [TripIt Developer API](https://www.tripit.com/developer/create) and [FlightStats Developer API](https://developer.flightstats.com/signup) to query flight status. 
 
-When signing up for a FlightStats developer key, note that there is a
-review process that may take 24 hours or more to get your application
-credentials activated for a 30-day trial with the API.
+  When signing up for a FlightStats developer key, note that there is a
+  review process that may take 24 hours or more to get your application
+  credentials activated for a 30-day trial with the API.
 
-Futhermore, we need to install [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli) to deploy it with serverless and Mark down its credentials.
 
-Lastly, we will use Bluemix's [The Cloudant NoSQL database service](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south) and [Insights for Weather service](https://console.ng.bluemix.net/catalog/services/weather-company-data?env_id=ibm:yp:us-south) for our database and weather data. Therefore, run the following commands to create cloudant and Insights for Weather service. 
+- Futhermore, install [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli) to deploy it with serverless and Mark down its credentials.
 
-> For this example, we recommend you name your services to *mycloudant* and *myweatherinsights*.
+- Lastly, we will use Bluemix's [The Cloudant NoSQL database service](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south) and [Insights for Weather service](https://console.ng.bluemix.net/catalog/services/weather-company-data?env_id=ibm:yp:us-south) for our database and weather data. Therefore, run the following commands to create cloudant and Insights for Weather service. 
 
-```bash
-bx service create cloudantNoSQLDB Lite mycloudant
-bx service create weatherinsights Free-v2 myweatherinsights
-```
+	> For this example, we recommend you name your services to *mycloudant* and *myweatherinsights*.
 
-Before moving on, the demo application is missing code to create the databases used
-to cache API responses in your newly created Cloudant instance. One simple way
-to make sure these databases are initialized is through the Bluemix console UI.
-Go to your new Cloudant service and open the Cloudant UI console using the link from your
-service instance page. Once at the Cloudant console you will need to
-create the **trips**, **weather**, and **connections** databases for
-the cacheing code to work properly.
+  ```bash
+  bx service create cloudantNoSQLDB Lite mycloudant
+  bx service create weatherinsights Free-v2 myweatherinsights
+  ```
 
-Alternately, you can run the following commands with your cloudant URL (You can found it in your cloudantDB credentials) to create the databases.
+  Before moving on, the demo application is missing code to create the databases used
+  to cache API responses in your newly created Cloudant instance. One simple way
+  to make sure these databases are initialized is through the Bluemix console UI.
+  Go to your new Cloudant service and open the Cloudant UI console using the link from your
+  service instance page. Once at the Cloudant console you will need to
+  create the **trips**, **weather**, and **connections** databases for
+  the cacheing code to work properly.
 
-```bash
-curl -k -X PUT {your-cloudantURL}/trips
-curl -k -X PUT {your-cloudantURL}/weather
-curl -k -X PUT {your-cloudantURL}/connections
-```
+  Alternately, you can run the following commands with your cloudant URL (You can found it in your cloudantDB credentials) to create the databases.
+
+  ```bash
+  curl -k -X PUT {your-cloudantURL}/trips
+  curl -k -X PUT {your-cloudantURL}/weather
+  curl -k -X PUT {your-cloudantURL}/connections
+  ```
 
 
 ## Scenarios

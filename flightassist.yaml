@@ -12,6 +12,7 @@ spec:
     spec:
       containers:
         - name: weather-service
+          #change <namespace> to your namespace, obtain your name space via `bx cr namespaces`
           image: "registry.ng.bluemix.net/<namespace>/weather-service"
           imagePullPolicy: IfNotPresent
           env:

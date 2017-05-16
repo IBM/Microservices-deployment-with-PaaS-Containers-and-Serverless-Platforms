@@ -69,15 +69,57 @@ The scenarios are accomplished by using:
   curl -k -X PUT {your-cloudantURL}/connections
   ```
 
+## Deploy using DevOps Toolchain (In progress)
 
-## Scenarios
-- [Scenario One: Deploy Flightassist as containers using Kubernetes Clusters](#scenario-one-deploy-flightassist-as-containers-using-kubernetes-clusters)
-- [Scenario Two: Deploy Flightassist on Cloud Platform using Cloud Foundry](#scenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
+Click the following button to deploy your app. Then go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
+   - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
+   - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
+   - `TRIPIT_API_KEY` : API key assigned by TripIt
+   - `TRIPIT_API_SECRET` : API secret assigned by TripIt
+   - `BASE_URL`: You URL for accessing your application. e.g. {app_name}.mybluemix.net
+
+In addition, you can add the following environment variables to enable serverless.
+- `OPENWHISK_AUTH` : Your OpenWhisk Authentication. You can run `wsk property get --auth | awk '{print $3}'` to view your authentication
+- `USE_WEATHER_SERVERLESS` : put `true` to enable serverless option.
+- `USE_WEATHER_SERVICE` : put `false` to disable the microservice for weather because it will intervene the serverless option.
+
+[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/containers-paas-serverless)
+
+
+
+# Scenarios
+- [Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
+- [Scenario Two: Deploy Flightassist as containers using Docker Compose and Kubernetes Clusters](#scenario-two-deploy-flightassist-as-containers-using-docker-compose-and-kubernetes-clusters)
 - [Scenario Three: Deploy Flightassist with Serverless using OpenWhisk](#scenario-three-deploy-flightassist-with-serverless-using-openwhisk)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
-# Scenario One: Deploy Flightassist as containers using Kubernetes Clusters
+# Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry
+
+First, edit `manifest.yml` and select your own unique application **name** since the name flightassist is already used.
+
+Then, type the following commands to push your application.
+
+```bash
+cf push
+```
+
+Now, go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
+   - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
+   - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
+   - `TRIPIT_API_KEY` : API key assigned by TripIt
+   - `TRIPIT_API_SECRET` : API secret assigned by TripIt
+   - `BASE_URL`: You URL for accessing your application. e.g. {app_name}.mybluemix.net
+
+Your application should restart automatically, but can be done manually as well
+in the UI. With the service bindings and added environment variables, the
+application should be operational at the hostname route you selected for your CF
+application. 
+
+Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+
+
+# Scenario Two: Deploy Flightassist as containers using Docker Compose and Kubernetes Clusters
 
 In this scenario, we want to deploy flightassist as containers hosting on Kubernetes. Thus, we will create our own docker images for flightassist and upload to the private repository using bluemix's container registry. Then, we will deploy those images to the kubernetes cluster.
 
@@ -119,51 +161,9 @@ kubectl create -f flightassist.yaml
 
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
-# Scenario Two: Deploy Flightassist on Cloud Platform using Cloud Foundry
-
-First, edit `manifest.yml` and select your own unique application **name** and **host** since the name flightassist is already used.
-
-Next, edit `flightassist.js` to set the `baseURL` variable (around line 22) to your selected hostname.
-
-Then, type the following commands to push your application.
-
-```bash
-cf push
-```
-
-Now, go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
-   - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
-   - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
-   - `TRIPIT_API_KEY` : API key assigned by TripIt
-   - `TRIPIT_API_SECRET` : API secret assigned by TripIt
-
-Your application should restart automatically, but can be done manually as well
-in the UI. With the service bindings and added environment variables, the
-application should be operational at the hostname route you selected for your CF
-application. 
-
-Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
-
-### Deploy using DevOps Toolchain (In progress)
-
-Click the following button to deploy your app. Then go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
-   - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
-   - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
-   - `TRIPIT_API_KEY` : API key assigned by TripIt
-   - `TRIPIT_API_SECRET` : API secret assigned by TripIt
-   - `BASE_URL`: You URL for accessing your application. e.g. {app_name}.mybluemix.net
-
-In addition, you can add the following environment variables to enable serverless.
-- `OPENWHISK_AUTH` : Your OpenWhisk Authentication. You can run `wsk property get --auth | awk '{print $3}'` to view your authentication
-- `USE_WEATHER_SERVERLESS` : put `true` to enable serverless option.
-- `USE_WEATHER_SERVICE` : put `false` to disable the microservice for weather because it will intervene the serverless option.
-
-[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/containers-paas-serverless)
-
-
 # Scenario Three: Deploy Flightassist with Serverless using OpenWhisk
 
-**Important**: You must complete [scenario two](#scenario-two-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
+**Important**: You must complete [scenario one](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
 
 Go to the *Runtime* settings for your cloud foundry application and add these extra three environment variables to enable OpenWhisk:
 

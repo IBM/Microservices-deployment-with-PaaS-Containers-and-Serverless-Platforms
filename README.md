@@ -96,12 +96,10 @@ After you deployed Flightassist using any platform, you can go to [How to Use Fl
 
 # Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry
 
-First, edit `manifest.yml` and select your own unique application **name** since the name flightassist is already used.
-
-Then, type the following commands to push your application.
+First, type the following commands to push your application with your own unique application name.
 
 ```bash
-cf push
+cf push {your_unique_app_name}
 ```
 
 Now, go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:

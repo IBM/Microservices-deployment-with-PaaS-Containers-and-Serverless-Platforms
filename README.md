@@ -151,6 +151,7 @@ Click the following button to deploy your app. Then go to https://console.ng.blu
    - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
    - `TRIPIT_API_KEY` : API key assigned by TripIt
    - `TRIPIT_API_SECRET` : API secret assigned by TripIt
+   - `BASE_URL`: You URL for accessing your application. e.g. {app_name}.mybluemix.net
 
 In addition, you can add the following environment variables to enable serverless.
 - `OPENWHISK_AUTH` : Your OpenWhisk Authentication. You can run `wsk property get --auth | awk '{print $3}'` to view your authentication

@@ -1,6 +1,23 @@
 # Containers vs PAAS vs Serverless
 
-This project is in progress. However, you can visit [README_old.md](README_old.md) for instructions from the original version.
+> This project is in progress. However, you can visit [README_old.md](README_old.md) for instructions from the original version.
+
+Flightassist is a Node.js example application for demonstrating and
+comparing various application deployment technologies in the IBM Bluemix
+public cloud.
+
+The intent for this project, when complete, is that it will be
+deployable as a Cloud Foundry application, a containerized application
+using at least one factored-out microservice, and as a set of
+functions deployable to OpenWhisk, the IBM Bluemix function-as-a-service
+offering.
+
+Specifically, a set of trade-offs and comparisons can be made between
+these deployment models, and this application is a proving ground for
+those discussions. This will be the basis for the talk given by
+Lin Sun and Phil Estes at [IBM Interconnect 2017](https://www.ibm.com/cloud-computing/us/en/interconnect/)
+titled [Containerize, PaaS, or Go Serverless? A Case Study in
+Application Deployment Models](https://myibm.ibm.com/events/interconnect/all-sessions/session/4467A).
 
 ## Included Components
 The scenarios are accomplished by using:
@@ -28,6 +45,8 @@ Futhermore, we need to install [OpenWhisk CLI](https://console.ng.bluemix.net/op
 
 Lastly, we will use Bluemix's [The Cloudant NoSQL database service](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south) and [Insights for Weather service](https://console.ng.bluemix.net/catalog/services/weather-company-data?env_id=ibm:yp:us-south) for our database and weather data. Therefore, run the following commands to create cloudant and Insights for Weather service. 
 
+> For this example, we recommend you name your services to *mycloudant* and *myweatherinsights*.
+
 ```bash
 bx service create cloudantNoSQLDB Lite mycloudant
 bx service create weatherinsights Free-v2 myweatherinsights
@@ -40,6 +59,14 @@ Go to your new Cloudant service and open the Cloudant UI console using the link 
 service instance page. Once at the Cloudant console you will need to
 create the **trips**, **weather**, and **connections** databases for
 the cacheing code to work properly.
+
+Alternately, you can run the following commands with your cloudant URL (You can found it in your cloudantDB credentials) to create the databases.
+
+```bash
+curl -k -X PUT {your-cloudantURL}/trips
+curl -k -X PUT {your-cloudantURL}/weather
+curl -k -X PUT {your-cloudantURL}/connections
+```
 
 
 ## Scenarios
@@ -76,8 +103,8 @@ cd ..
 Then, you need to run the following commands to bind your Cloudant and Weather Insights services to your clusters. 
 
 ```bash
-bx cs cluster-service-bind {your-cluster-name} default {cloudantNoSQLDB-service-name}
-bx cs cluster-service-bind {your-cluster-name} default {weather-insights-service-name}
+bx cs cluster-service-bind {your-cluster-name} default mycloudant
+bx cs cluster-service-bind {your-cluster-name} default myweatherinsights
 ```
 
 Next, modify the secret.yaml file with flightstats-app-id, flightstats-app-key, tripit-api-key, and tripit-api-secret.
@@ -105,7 +132,12 @@ Then, type the following commands to push your application.
 cf push
 ```
 
-Once your application is deployed, you need to make service bindings; go to the Bluemix console, open your application and use the UI to bind your two Bluemix services (Cloudant and Weather Data) to your application.
+Once your application is deployed, you need to make service bindings by running the following commands.
+
+```bash
+cf bind-service {your-application-name} mycloudant
+cf bind-service {your-application-name} myweatherinsights
+```
 
 Go to the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
    - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats

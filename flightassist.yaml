@@ -12,7 +12,6 @@ spec:
     spec:
       containers:
         - name: weather-service
-          #change <namespace> to your namespace, obtain your name space via `bx cr namespaces`
           image: "registry.ng.bluemix.net/<namespace>/weather-service"
           imagePullPolicy: IfNotPresent
           env:
@@ -25,6 +24,7 @@ spec:
         - name: weather-service-bind-volume
           secret:
             defaultMode: 420
+            #if your weather service name is not `myweatherinsights`, replace `myweatherinsights` to your weather service name here
             secretName: binding-myweatherinsights
 ---
 apiVersion: v1
@@ -62,11 +62,6 @@ spec:
           env:
           - name: DEPLOY
             value: "kubernetes"
-          # For Serverless option, uncomment the following environment variables, fill in your openwhisk auth credential, and set USE_WEATHER_SERVICE to false
-          # - name: USE_WEATHER_SERVERLESS
-          #   value: "true"
-          # - name: OPENWHISK_AUTH
-          #   value: "<insert openwhisk auth credentials>"
           - name: USE_WEATHER_SERVICE
             value: "true"
           - name: BASE_URL
@@ -83,6 +78,7 @@ spec:
         - name: service-bind-volume2
           secret:
             defaultMode: 420
+            #if your cloudant service name is not `mycloudant`,replace `mycloudant` to your cloudant service name here
             secretName: binding-mycloudant
         - name: mysecret-volume
           secret:

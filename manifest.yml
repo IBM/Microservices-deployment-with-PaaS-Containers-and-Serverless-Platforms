@@ -1,3 +1,4 @@
+---
 declared-services:
   - mycloudant:
       label: cloudantNoSQLDB

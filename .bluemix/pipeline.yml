@@ -41,7 +41,6 @@ stages:
       region_id: ${PROD_REGION_ID}
       organization: ${PROD_ORG_NAME}
       space: ${PROD_SPACE_NAME}
-      application: Pipeline
     script: |
       #!/bin/bash
       cf create-service cloudantNoSQLDB Lite mycloudant

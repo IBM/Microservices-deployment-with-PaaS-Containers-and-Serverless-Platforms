@@ -1,3 +1,11 @@
+declared-services:
+  - mycloudant:
+      label: cloudantNoSQLDB
+      plan: Lite
+  - myweatherinsights:
+      label: weatherinsights
+      plan: Free-v2
+
 applications:
 - name: FlightAssist
   path: .

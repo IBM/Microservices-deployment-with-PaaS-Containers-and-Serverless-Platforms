@@ -108,9 +108,9 @@ bx cs cluster-service-bind {your-cluster-name} default mycloudant
 bx cs cluster-service-bind {your-cluster-name} default myweatherinsights
 ```
 
-Next, modify the secret.yaml file with flightstats-app-id, flightstats-app-key, tripit-api-key, and tripit-api-secret.
+Next, modify the secret.yaml file with **flightstats-app-id**, **flightstats-app-key**, **tripit-api-key**, and **tripit-api-secret**.
 
-Then, edit the flightassist.yaml and replace the ```<namespace>``` with your own namespace. You can obtain your namespace by running `bx cr namespace`. Also replace `<your-app-end-point-url>` with the endpoint of the application.  If you are using the free cluster provided by IBM Container service, this is your node ip and nodeport (e.g. 169.47.237.139:30080). You can obtain your IP by running `kubectl get nodes` and your nodeport is 30080.
+Then, edit the flightassist.yaml and replace the ```<namespace>``` with your own namespace. You can obtain your namespace by running `bx cr namespace`. Also replace `<your-app-end-point-url>` with your node ip and nodeport (e.g. 169.47.237.139:30080). You can obtain your IP by running `kubectl get nodes` and your nodeport is 30080.
 
 Lastly, run the following commands to deploy the secret and deployment.
 
@@ -119,7 +119,7 @@ kubectl create -f secret.yaml
 kubectl create -f flightassist.yaml
 ```
 
-Congratulation, now your Flightassist application should be running on your application's end point URL (e.g. IP:30080). You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+Congratulation, now your Flightassist application should be running on your application's end point URL (e.g. `IP:30080`). You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 # Scenario Two: Deploy Flightassist on Cloud Platform using Cloud Foundry
 

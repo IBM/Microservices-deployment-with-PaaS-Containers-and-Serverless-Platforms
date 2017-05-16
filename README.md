@@ -94,11 +94,9 @@ Next, build your own docker images and push them to your own bluemix container r
 
 ```bash
 docker build -f Dockerfile.local -t registry.ng.bluemix.net/<namespace>/flightassist .
-cd flightassist-weather
-docker build -f Dockerfile.alpine -t registry.ng.bluemix.net/<namespace>/weather-service .
+docker build -f flightassist-weather/Dockerfile.alpine -t registry.ng.bluemix.net/<namespace>/weather-service flightassist-weather
 docker push registry.ng.bluemix.net/<namespace>/flightassist
 docker push registry.ng.bluemix.net/<namespace>/weather-service
-cd ..
 ```
 
 Then, you need to run the following commands to bind your Cloudant and Weather Insights services to your clusters. 
@@ -119,7 +117,7 @@ kubectl create -f secret.yaml
 kubectl create -f flightassist.yaml
 ```
 
-Congratulation, now your Flightassist application should be running on your application's end point URL (e.g. `IP:30080`). You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 # Scenario Two: Deploy Flightassist on Cloud Platform using Cloud Foundry
 

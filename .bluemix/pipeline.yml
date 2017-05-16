@@ -1,0 +1,20 @@
+---
+stages:
+- name: DEPLOY
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+    dir_name: null
+  triggers:
+  - type: stage
+  jobs:
+  - name: Deploy
+    type: deployer
+    script: |
+      #!/bin/bash
+      cf create-service cloudantNoSQLDB Lite mycloudant
+      cf create-service weatherinsights Free-v2 myweatherinsights
+      cf push "${CF_APP}"
+      # View logs
+      # cf logs "${CF_APP}" --recent

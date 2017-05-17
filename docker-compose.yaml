@@ -3,7 +3,7 @@ version: "3.1"
 services:
 
   flightassist:
-    image: flightassist:local
+    image: flightassist
     environment:
       - DEVMODE=true
       - DEV_URL=http://localhost/
@@ -35,7 +35,7 @@ services:
         window: 120s
 
   weather-service:
-    image: weather-service:v1
+    image: weather-service
     networks:
       - fassist-back
     ports:

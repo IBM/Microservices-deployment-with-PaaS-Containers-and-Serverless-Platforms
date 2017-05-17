@@ -24,7 +24,7 @@ export WEATHER_URL=<insert Weather company URL from Bluemix credentials view>
 # export the following variable set to the appropriate orchestration engine.
 # Usually this will be done via a yaml file (see docker-compose.yaml as an
 # example) but could be done using command line tools like `docker service create`
-# export DEPLOY=swarm|kubernetes
+export DEPLOY=swarm
 
 # To use the externalized/containerized weather microservice, export this variable
 # set to "true"
@@ -36,4 +36,4 @@ export USE_WEATHER_SERVICE=true
 # You will also require your OpenWhisk credentials which you can retrieve
 # from the `wsk` command line client like this: 
 # $ wsk property get --auth | awk  '{print $3}'
-export OPENWHISK_AUTH=<insert openwhisk auth credentials>
+# export OPENWHISK_AUTH=<insert openwhisk auth credentials>

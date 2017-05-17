@@ -48,7 +48,7 @@ if __name__ == '__main__':
     if deploy_mode == 'swarm':
         with open('/run/secrets/weather_url', 'r') as url_secret:
                 WEATHER_EP=url_secret.read().replace('\n', '')
-    if deploy_mode == 'kubernetes':
+    elif deploy_mode == 'kubernetes':
         with open('/run/secrets/service-bind/binding', 'r') as url_secret:
                 data = json.loads(url_secret.read())
                 WEATHER_EP=data['url']

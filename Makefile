@@ -50,7 +50,7 @@ bxdeploy: bximage
 
 # note that the compose yaml also expects the weather service image to be available as well
 # which is hosted in a separate project: github.com/estesp/flightassist-weather
-swarmdeploy: localimage swarmsecrets
+swarmdeploy: swarmsecrets
 	docker stack deploy -c docker-compose.yaml flightassist
 
 swarmsecrets: create-swarm-secrets.sh

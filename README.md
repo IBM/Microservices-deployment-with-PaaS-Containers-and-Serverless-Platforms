@@ -61,7 +61,7 @@ The scenarios are accomplished by using:
   create the **trips**, **weather**, and **connections** databases for
   the cacheing code to work properly.
 
-  Alternately, you can run the following commands with your cloudant URL (You can found it in your cloudantDB credentials) to create the databases.
+  Alternately, you can run the following commands with your cloudant URL (You can go to https://console.ng.bluemix.net/dashboard/apps/ and found it in your mycloudant service credentials) to create the databases.
 
   ```bash
   curl -k -X PUT {your-cloudantURL}/trips
@@ -89,12 +89,16 @@ In addition, you can add the following environment variables to enable serverles
 
 # Scenarios
 - [Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
-- [Scenario Two: Deploy Flightassist as containers using Docker Compose and Kubernetes Clusters](#scenario-two-deploy-flightassist-as-containers-using-docker-compose-and-kubernetes-clusters)
+- [Scenario Two: Deploy Flightassist as containers using Docker Swarm and Kubernetes Clusters](#scenario-two-deploy-flightassist-as-containers-using-docker-swarm-and-kubernetes-clusters)
+  - 1. [Docker Compose](#docker-swarm)
+  - 2. [Kubernetes Clusters](#kubernetes-clusters)
 - [Scenario Three: Deploy Flightassist with Serverless using OpenWhisk](#scenario-three-deploy-flightassist-with-serverless-using-openwhisk)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 # Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry
+
+In this scenario, we will deploy Flightassist as a monolithic application and host it on Cloud Foundry.
 
 First, type the following commands to push your application with your own unique application name.
 
@@ -117,9 +121,25 @@ application.
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 
-# Scenario Two: Deploy Flightassist as containers using Docker Compose and Kubernetes Clusters
+# Scenario Two: Deploy Flightassist as containers using Docker Swarm and Kubernetes Clusters
 
-In this scenario, we want to deploy flightassist as containers hosting on Kubernetes. Thus, we will create our own docker images for flightassist and upload to the private repository using bluemix's container registry. Then, we will deploy those images to the kubernetes cluster.
+In this scenario, we want to break down Flightassist to multiple containers. Therefore, we will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Docker Swarm or Kubernetes. 
+
+## 1. Docker Swarm
+
+First, rename the `dot-env` file to `.env` file. Add all the credentials for **FLIGHTSTATS_APP_ID**, **FLIGHTSTATS_APP_KEY**, **TRIPIT_API_KEY**,**TRIPIT_API_SECRET**,**CLOUDANT_URL**, and **WEATHER_URL** to your `.env` file.
+
+Then, run the following commands to build your docker images and run Docker Swarm. 
+
+```bash
+docker build -f Dockerfile.local -t flightassist .
+docker build -f flightassist-weather/Dockerfile.alpine -t weather-service flightassist-weather
+make swarmdeploy
+```
+
+Now, your FlightAssist application should be running on http://localhost/
+
+## 2. Kubernetes Clusters
 
 First, install the container registry plugin for Bluemix CLI.
 

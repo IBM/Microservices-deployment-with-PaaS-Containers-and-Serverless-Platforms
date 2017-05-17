@@ -1,50 +1,6 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: weather-service
-spec:
-  replicas: 1
-  template:
-    metadata:
-      name: weather-service
-      labels:
-        run: weather-service
-    spec:
-      containers:
-        - name: weather-service
-          #change <namespace> to your namespace, obtain your name space via `bx cr namespaces`
-          image: "registry.ng.bluemix.net/<namespace>/weather-service"
-          imagePullPolicy: IfNotPresent
-          env:
-          - name: DEPLOY
-            value: "kubernetes"
-          volumeMounts:
-            - mountPath: /run/secrets/service-bind
-              name: weather-service-bind-volume
-      volumes:
-        - name: weather-service-bind-volume
-          secret:
-            defaultMode: 420
-            secretName: binding-myweatherinsights
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: weather-service
-  labels:
-    run: weather-service
-spec:
-  type: NodePort
-  selector:
-    run: weather-service
-  ports:
-   - protocol: TCP
-     port: 5000
-     nodePort: 30081
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
   name: flightassist-service
 spec:
   replicas: 1
@@ -57,13 +13,18 @@ spec:
       containers:
         - name: flightassist-service
           #change <namespace> to your namespace, obtain your name space via `bx cr namespaces`
-          image: "registry.ng.bluemix.net/<namespace>/flightassist"
+          image: registry.ng.bluemix.net/<namespace>/flightassist:latest
           imagePullPolicy: IfNotPresent
           env:
           - name: DEPLOY
             value: "kubernetes"
           - name: USE_WEATHER_SERVICE
+            value: "false"
+          - name: USE_WEATHER_SERVERLESS
             value: "true"
+          - name: OPENWHISK_AUTH
+            #replace <your-openwhisk-auth> to your actual OpenWhisk Authendication.
+            value: <your-openwhisk-auth>
           - name: BASE_URL
             #replace <your-app-end-point-url> to your `ip:nodeport`. You can obtain your ip via `kubectl get nodes` and your nodeport is 30080.
             value: "http://<your-app-end-point-url>/"
@@ -74,11 +35,17 @@ spec:
               name: service-bind-volume2
             - mountPath: /run/secrets
               name: mysecret-volume
+            - mountPath: /opt/service-bind2
+              name: weather-service-bind-volume
       volumes:
         - name: service-bind-volume2
           secret:
             defaultMode: 420
             secretName: binding-mycloudant
+        - name: weather-service-bind-volume
+          secret:
+            defaultMode: 420
+            secretName: binding-myweatherinsights
         - name: mysecret-volume
           secret:
             defaultMode: 420

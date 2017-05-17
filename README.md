@@ -90,8 +90,8 @@ In addition, you can add the following environment variables to enable serverles
 # Scenarios
 - [Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
 - [Scenario Two: Deploy Flightassist as containers using Docker Swarm and Kubernetes Clusters](#scenario-two-deploy-flightassist-as-containers-using-docker-swarm-and-kubernetes-clusters)
-  - 1. [Docker Compose](#docker-swarm)
-  - 2. [Kubernetes Clusters](#kubernetes-clusters)
+  - 1. [Docker Swarm](#1-docker-swarm)
+  - 2. [Kubernetes Clusters](#2-kubernetes-clusters)
 - [Scenario Three: Deploy Flightassist with Serverless using OpenWhisk](#scenario-three-deploy-flightassist-with-serverless-using-openwhisk)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
@@ -138,6 +138,7 @@ make swarmdeploy
 ```
 
 Now, your FlightAssist application should be running on http://localhost/
+
 
 ## 2. Kubernetes Clusters
 

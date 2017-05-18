@@ -55,6 +55,17 @@ stages:
     type: text
   - name: API_KEY
     type: secure
+    
+  - name: flightstats-app-id
+    type: secure
+  - name: flightstats-app-key
+    type: secure
+  - name: tripit-api-key
+    type: secure
+  - name: tripit-api-secret
+    type: secure
+  - name: openwhisk-auth
+    type: secure
   jobs:
   - name: Deploy
     type: deployer

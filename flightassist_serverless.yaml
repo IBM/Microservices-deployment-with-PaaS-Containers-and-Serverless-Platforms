@@ -13,7 +13,7 @@ spec:
       containers:
         - name: flightassist-service
           #change <namespace> to your namespace, obtain your name space via `bx cr namespaces`
-          image: registry.ng.bluemix.net/<namespace>/flightassist:latest
+          image: "registry.ng.bluemix.net/<namespace>/flightassist"
           imagePullPolicy: IfNotPresent
           env:
           - name: DEPLOY

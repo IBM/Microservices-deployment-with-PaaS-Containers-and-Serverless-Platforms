@@ -42,7 +42,7 @@ The scenarios are accomplished by using:
   credentials activated for a 30-day trial with the API.
 
 
-- Futhermore, install [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli) to deploy it with serverless and Mark down its credentials.
+- Futhermore, install [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli) and Mark down its credentials for  deploying flightassist with serverless.
 
 - Lastly, we will use Bluemix's [The Cloudant NoSQL database service](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south) and [Insights for Weather service](https://console.ng.bluemix.net/catalog/services/weather-company-data?env_id=ibm:yp:us-south) for our database and weather data. Therefore, run the following commands to create cloudant and Insights for Weather service. 
 
@@ -169,7 +169,7 @@ bx cs cluster-service-bind {your-cluster-name} default myweatherinsights
 
 Next, modify the secret.yaml file with **flightstats-app-id**, **flightstats-app-key**, **tripit-api-key**, and **tripit-api-secret**.
 
-Then, edit the flightassist.yaml and replace the ```<namespace>``` with your own namespace. You can obtain your namespace by running `bx cr namespace`. Also replace `<your-app-end-point-url>` with your node ip and nodeport (e.g. 169.47.237.139:30080). You can obtain your IP by running `kubectl get nodes` and your nodeport is 30080.
+Then, edit the `flightassist.yaml` and replace the ```<namespace>``` with your own namespace. You can obtain your namespace by running `bx cr namespace`. Also replace `<your-app-end-point-url>` with your node ip and nodeport (e.g. 169.47.237.139:30080). You can obtain your IP by running `kubectl get nodes` and your nodeport is 30080.
 
 Lastly, run the following commands to deploy the secret and deployment.
 
@@ -181,6 +181,8 @@ kubectl create -f flightassist.yaml
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 # Scenario Three: Deploy Flightassist with Serverless using OpenWhisk
+
+## 1. With Cloud Foundry
 
 **Important**: You must complete [scenario one](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry) in order to proceed the following steps.
 
@@ -194,6 +196,25 @@ Now save it and your application should restart automatically with serverless op
 
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
+## 2. With Kubernetes Clusters
+
+**Important**: You must complete [scenario two for Kubernetes Clusters](#2-kubernetes-clusters) in order to proceed the following steps.
+
+First, you want to delete all the services and deployments from the previous scenario.
+
+```bash
+kubectl delete -f flightassist.yaml
+```
+
+Next, edit `flightassist_serverless.yaml` and replace the `<namespace>` with your own namespace, `<your-app-end-point-url>` with your node ip and nodeport, and `<your-openwhisk-auth>` with your OpenWhisk authendication. You can run `wsk property get --auth | awk '{print $3}'` to view your OpenWhisk authentication.
+
+Now, let's deploy the new flightassist app with serverless.
+
+```bash
+kubectl create -f flightassist_serverless.yaml
+```
+
+Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 # How to Use Flightassist
 

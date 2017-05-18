@@ -22,10 +22,9 @@ if (process.env.DEVMODE === "true") {
     var binding = JSON.parse(fs.readFileSync('/opt/service-bind/binding', 'utf8'));
     cURL = binding.url;
     if (process.env.USE_WEATHER_SERVERLESS == "true"){
-    var weatherbinding = JSON.parse(fs.readFileSync('/opt/service-bind2/binding', 'utf8'));
-    weatherURL = weatherbinding.url;
+        var weatherbinding = JSON.parse(fs.readFileSync('/opt/service-bind2/binding', 'utf8'));
+        weatherURL = weatherbinding.url;
     }
-    console.log("hey passed?");
 } else {
     var vcap_services = JSON.parse(process.env.VCAP_SERVICES);
     cURL = vcap_services.cloudantNoSQLDB[0].credentials.url;

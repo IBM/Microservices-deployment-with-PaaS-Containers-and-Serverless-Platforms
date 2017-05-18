@@ -182,6 +182,8 @@ Congratulation, now your Flightassist application should be running on `http://<
 
 # Scenario Three: Deploy Flightassist with Serverless using OpenWhisk
 
+In this scenario, we will deploy Flightassist with serverless to show how you could replace your microservices with OpenWhisk actions. 
+
 **Important**: You must complete [scenario two for Kubernetes Clusters](#2-kubernetes-clusters) in order to proceed the following steps.
 
 First, you want to delete all the services and deployments from the previous scenario.

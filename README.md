@@ -71,7 +71,12 @@ The scenarios are accomplished by using:
 
 ## Deploy using DevOps Toolchain (In progress)
 
-Click the following button to deploy your app. Then go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
+Click the button to deploy your app and continue with one of the following scenarios.
+
+[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/containers-paas-serverless)
+
+### Toolchain Scenarios One: Monolithic Cloud Foundry Application with Serverless(Optional).
+Go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
    - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
    - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
    - `TRIPIT_API_KEY` : API key assigned by TripIt
@@ -83,8 +88,9 @@ In addition, you can add the following environment variables to enable serverles
 - `USE_WEATHER_SERVERLESS` : put `true` to enable serverless option.
 - `USE_WEATHER_SERVICE` : put `false` to disable the microservice for weather because it will intervene the serverless option.
 
-[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/containers-paas-serverless)
+### Toolchain Scenarios Two: Microservices or Serverless with Kubernetes Clusters.
 
+Click **View logs and history** and access your application via the URL link at the end of your logs.
 
 
 # Scenarios
@@ -214,7 +220,7 @@ Now, let's deploy the new flightassist app with serverless.
 kubectl create -f flightassist_serverless.yaml
 ```
 
-Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. Also, you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 # How to Use Flightassist
 

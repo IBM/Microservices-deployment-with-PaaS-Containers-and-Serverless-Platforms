@@ -131,6 +131,7 @@ Then, run the following commands to build your docker images and run Docker Swar
 ```bash
 docker build -f Dockerfile.local -t flightassist .
 docker build -f flightassist-weather/Dockerfile.alpine -t weather-service flightassist-weather
+./create-secrets.sh
 docker-compose up
 ```
 

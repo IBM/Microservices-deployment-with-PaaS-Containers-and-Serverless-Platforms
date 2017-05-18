@@ -42,10 +42,12 @@ stages:
       space: ${PROD_SPACE_NAME}
       application: Pipeline
     script: |
-      #!/bin/bash
-      . ./scripts/install_bx.sh
-      ./scripts/bx_login.sh
-      ./scripts/deploy.sh
+       #!/bin/bash
+       cf create-service cloudantNoSQLDB Lite mycloudant
+       cf create-service weatherinsights Free-v2 myweatherinsights
+       cf push "${CF_APP}"
+       # View logs
+       # cf logs "${CF_APP}" --recent
 hooks:
 - enabled: true
   label: null

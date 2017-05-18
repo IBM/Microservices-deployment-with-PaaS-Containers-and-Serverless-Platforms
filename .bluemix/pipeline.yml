@@ -64,12 +64,9 @@ stages:
       space: ${PROD_SPACE_NAME}
       application: ${CF_APP_NAME}
     script: |
-       #!/bin/bash
-       cf create-service cloudantNoSQLDB Lite mycloudant
-       cf create-service weatherinsights Free-v2 myweatherinsights
-       cf push "${CF_APP}"
-       # View logs
-       # cf logs "${CF_APP}" --recent
+      ./install_bx.sh
+      ./bx_login.sh
+      ./deploy.sh
 hooks:
 - enabled: true
   label: null

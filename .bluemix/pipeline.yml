@@ -22,6 +22,28 @@ stages:
     job: Build
   triggers:
   - type: stage
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ${PROD_REGION_ID}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
+      application: ${CF_APP_NAME}
+    script: |
+       #!/bin/bash
+       cf create-service cloudantNoSQLDB Lite mycloudant
+       cf create-service weatherinsights Free-v2 myweatherinsights
+       cf push "${CF_APP}"
+       # View logs
+       # cf logs "${CF_APP}" --recent
+- name: DEPLOY
+  inputs: 
+  - type: job
+    stage: BUILD
+    job: Build
+  triggers:
+  - type: stage
   properties:
   - name: BLUEMIX_USER
     type: text

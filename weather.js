@@ -116,7 +116,11 @@ function handleViaWeatherMicroservice(req, resp, data) {
     console.log("using external weather microservice: " + process.env.USE_WEATHER_SERVICE);
     // overwrite host, endpoint to point to our weather microservice
     if (process.env.DEVMODE === "true" && process.env.DEPLOY !== "swarm") {
-        host = "localhost";
+        if(process.env.DEPLOY !== "compose"){
+            host = "localhost";
+        } else{
+            host = "weather-service";
+        }
     } else {
         host = "weather-service";
     }

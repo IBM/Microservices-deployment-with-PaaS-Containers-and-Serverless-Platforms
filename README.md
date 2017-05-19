@@ -56,9 +56,11 @@ Click **View logs and history** and access your application via the URL link at 
 
 # Steps
 1. [Create your Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
-2. [Scenarios](#2-scenarios)
+2. [Deployment Scenarios](#2-deployment-scenarios)
 
 # 1. Create your Cloudant Database and Insights for Weather Service
+
+Since we need to create services using the command line, we need to install [Bluemix CLI](http://clis.ng.bluemix.net/ui/home.html) before proceeding to the following steps.
 
 We will use Bluemix's [The Cloudant NoSQL database service](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south) and [Insights for Weather service](https://console.ng.bluemix.net/catalog/services/weather-company-data?env_id=ibm:yp:us-south) for our database and weather data. Therefore, run the following commands to create cloudant and Insights for Weather service. 
 
@@ -80,10 +82,10 @@ curl -k -X PUT {your-cloudantURL}/connections
 ```
 
 
-# 2. Scenarios
+# 2. Deployment Scenarios
 - [Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
-- [Scenario Two: Deploy Flightassist as containers using Docker Swarm and Kubernetes Clusters](#scenario-two-deploy-flightassist-as-containers-using-docker-swarm-and-kubernetes-clusters)
-  - 1. [Docker Swarm](#1-docker-swarm)
+- [Scenario Two: Deploy Flightassist as containers using Docker Compose and Kubernetes Clusters](#scenario-two-deploy-flightassist-as-containers-using-docker-compose-and-kubernetes-clusters)
+  - 1. [Docker Compose](#1-docker-compose)
   - 2. [Kubernetes Clusters](#2-kubernetes-clusters)
 - [Scenario Three: Deploy Flightassist with Serverless using OpenWhisk](#scenario-three-deploy-flightassist-with-serverless-using-openwhisk)
 
@@ -116,26 +118,30 @@ application.
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 
-# Scenario Two: Deploy Flightassist as containers using Docker Swarm and Kubernetes Clusters
+# Scenario Two: Deploy Flightassist as containers using Docker Compose and Kubernetes Clusters
 
-In this scenario, we want to break down Flightassist to multiple containers. Therefore, we will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Docker Swarm or Kubernetes. 
+In this scenario, we want to break down Flightassist to multiple containers. Therefore, we will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Docker Compose or Kubernetes. 
 
 ## 1. Docker Compose
 
 First, install [Docker CLI](https://www.docker.com/community-edition#/download).
 
-Next, rename the `dot-env` file to `.env` file. Add all the credentials for **FLIGHTSTATS_APP_ID**, **FLIGHTSTATS_APP_KEY**, **TRIPIT_API_KEY**,**TRIPIT_API_SECRET**,**CLOUDANT_URL**, and **WEATHER_URL** to your `.env` file.
+Next, edit the `docker-compose.yaml` file and add your credentials for **FLIGHTSTATS_APP_ID**, **FLIGHTSTATS_APP_KEY**, **TRIPIT_API_KEY**,**TRIPIT_API_SECRET**,**CLOUDANT_URL**, and **WEATHER_URL**. You can run the following command to view your service credentials.
 
-Then, run the following commands to build your docker images and run Docker Swarm. 
+```bash
+bx service keys {service_name} #This will output all your service keys
+bx service key-show {service_name} {service key} #This will output your service credential, "url" is Your service URL
+```
+
+Then, run the following commands to build your docker images and run Docker Compose. 
 
 ```bash
 docker build -f Dockerfile.local -t flightassist .
 docker build -f flightassist-weather/Dockerfile.alpine -t weather-service flightassist-weather
-./create-secrets.sh
-docker stack deploy -c docker-compose.yaml flightassist #will changed to compose only later
+docker-compose up
 ```
 
-Now, your FlightAssist application should be running on http://localhost/
+Now, your FlightAssist application should be running on http://localhost:3000/
 
 
 ## 2. Kubernetes Clusters

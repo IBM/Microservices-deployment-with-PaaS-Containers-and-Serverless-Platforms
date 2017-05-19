@@ -3,71 +3,36 @@ version: "3.1"
 services:
 
   flightassist:
-    image: flightassist
+    image: flightassist:latest
     environment:
       - DEVMODE=true
-      - DEV_URL=http://localhost/
+      - DEV_URL=http://localhost:3000/
+      - DEPLOY=compose
       - FORCE_FLIGHT_VIEW=true
       - USE_WEATHER_SERVICE=true
-      - DEPLOY=swarm
+      - FLIGHTSTATS_APP_ID=<insert app ID>
+      - FLIGHTSTATS_APP_KEY=<insert app key>
+      - TRIPIT_API_KEY=<insert API key>
+      - TRIPIT_API_SECRET=<insert API secret>
+      - CLOUDANT_URL=<insert cloudant URL from Bluemix credentials view>
     ports:
-      - "80:3000"
+      - "3000:3000"
     networks:
       - fassist-front
       - fassist-back
     depends_on:
       - weather-service
-    secrets:
-      - flightstats_app_id
-      - flightstats_app_key
-      - tripit_api_key
-      - tripit_api_secret
-      - cloudant_url
-      - weather_url
-    deploy:
-      mode: replicated
-      replicas: 2
-      # service restart policy
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
 
   weather-service:
-    image: weather-service
+    image: weather-service:latest
     networks:
       - fassist-back
     ports:
       - "5000:5000"
     environment:
-      - DEPLOY=swarm
-    secrets:
-      - weather_url
-    deploy:
-      mode: replicated
-      replicas: 1
-      # service restart policy
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
+      - WEATHER_URL=<insert Weather company URL from Bluemix credentials view>
+      - DEPLOY=compose
 
 networks:
   fassist-back:
   fassist-front:
-
-secrets:
-  flightstats_app_id:
-    external: true
-  flightstats_app_key:
-    external: true
-  tripit_api_key:
-    external: true
-  tripit_api_secret:
-    external: true
-  cloudant_url:
-    external: true
-  weather_url:
-    external: true

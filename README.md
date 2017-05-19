@@ -132,7 +132,7 @@ Then, run the following commands to build your docker images and run Docker Swar
 docker build -f Dockerfile.local -t flightassist .
 docker build -f flightassist-weather/Dockerfile.alpine -t weather-service flightassist-weather
 ./create-secrets.sh
-docker-compose up
+docker stack deploy -c docker-compose.yaml flightassist #will changed to compose only later
 ```
 
 Now, your FlightAssist application should be running on http://localhost/

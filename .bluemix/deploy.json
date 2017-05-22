@@ -54,7 +54,7 @@
             "type": "string"
         }
     },
-    "required": ["prod-region", "prod-organization", "prod-space", "bluemix-cluster-account", "bluemix-cluster-name", "FLIGHTSTATS_APP_ID", "FLIGHTSTATS_APP_KEY", "TRIPIT_API_KEY", "TRIPIT_API_SECRET"],
+    "required": ["prod-region", "prod-organization", "prod-space", "bluemix-cluster-account", "bluemix-cluster-name", "flightstats-app-id", "flightstats-app-key", "tripit-api-key", "tripit-api-secret"],
     "anyOf": [
         {
             "required": ["bluemix-user", "bluemix-password"]

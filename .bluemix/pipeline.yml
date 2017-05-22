@@ -15,7 +15,7 @@ stages:
     script: |-
       #!/bin/bash
       bash -n *.sh
-- name: DEPLOY
+- name: Cloud Foundry DEPLOY
   inputs: 
   - type: job
     stage: BUILD
@@ -23,7 +23,7 @@ stages:
   triggers:
   - type: stage
   jobs:
-  - name: Deploy
+  - name: Cloud Foundry Deploy
     type: deployer
     target:
       region_id: ${PROD_REGION_ID}
@@ -43,7 +43,7 @@ stages:
        cf restage "${CF_APP}"
        # View logs
        # cf logs "${CF_APP}" --recent
-- name: DEPLOY
+- name: Kubernetes DEPLOY
   inputs: 
   - type: job
     stage: BUILD
@@ -81,7 +81,7 @@ stages:
   - name: openwhisk-auth
     type: secure
   jobs:
-  - name: Deploy
+  - name: Kubernetes Deploy
     type: deployer
     target:
       region_id: ${PROD_REGION_ID}

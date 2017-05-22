@@ -22,6 +22,19 @@ stages:
     job: Build
   triggers:
   - type: stage
+  properties:
+  - name: flightstats-app-id
+    type: secure
+    value: ${FLIGHTSTATS_APP_ID}
+  - name: flightstats-app-key
+    type: secure
+    value: ${FLIGHTSTATS_APP_KEY}
+  - name: tripit-api-key
+    type: secure
+    value: ${TRIPIT_API_KEY}
+  - name: tripit-api-secret
+    type: secure
+    value: ${TRIPIT_API_SECRET}
   jobs:
   - name: Cloud Foundry Deploy
     type: deployer

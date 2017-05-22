@@ -37,19 +37,19 @@
             "description": "Your cluster name. Retrieve it with [bx cs clusters].",
             "type": "string"
         },
-        "FLIGHTSTATS_APP_ID": {
+        "flightstats-app-id": {
             "description": "Your Flightstats Application ID. You can obtain one via https://developer.flightstats.com/signup",
             "type": "string"
         },
-        "FLIGHTSTATS_APP_KEY":{
+        "flightstats-app-key":{
             "description": "Your Flightstats Application Key",
             "type": "string"
         },
-        "TRIPIT_API_KEY":{
+        "tripit-api-key":{
             "description": "Your TripIt API Key, You can obtain one via https://www.tripit.com/developer/create",
             "type": "string"
         },
-        "TRIPIT_API_SECRET":{
+        "tripit-api-secret":{
             "description": "Your TripIt API Secret",
             "type": "string"
         }
@@ -97,22 +97,22 @@
           "type": "text",
           "readonly": false,
           "title": "Flightstats APP ID",
-          "key": "FLIGHTSTATS_APP_ID"
+          "key": "flightstats-app-id"
         },{
           "type": "password",
           "readonly": false,
           "title": "Flightstats APP Key",
-          "key": "FLIGHTSTATS_APP_KEY"
+          "key": "flightstats-app-key"
         },{
           "type": "text",
           "readonly": false,
           "title": "TripIt API Key",
-          "key": "TRIPIT_API_KEY"
+          "key": "tripit-api-key"
         },{
           "type": "password",
           "readonly": false,
           "title": "TripIt API Secret",
-          "key": "TRIPIT_API_SECRET"
+          "key": "tripit-api-secret"
         },
         {
             "type": "table",

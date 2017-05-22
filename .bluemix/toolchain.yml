@@ -36,10 +36,10 @@ sample-build:
       API_KEY: "{{deploy.parameters.bluemix-api-key}}"
       BLUEMIX_ACCOUNT: "{{deploy.parameters.bluemix-cluster-account}}"
       CLUSTER_NAME: "{{deploy.parameters.bluemix-cluster-name}}"
-      FLIGHTSTATS_APP_ID: "{{deploy.parameters.FLIGHTSTATS_APP_ID}}"
-      FLIGHTSTATS_APP_KEY: "{{deploy.parameters.FLIGHTSTATS_APP_KEY}}"
-      TRIPIT_API_KEY: "{{deploy.parameters.TRIPIT_API_KEY}}"
-      TRIPIT_API_SECRET: "{{deploy.parameters.TRIPIT_API_SECRET}}"
+      FLIGHTSTATS_APP_ID: "{{deploy.parameters.flightstats-app-id}}"
+      FLIGHTSTATS_APP_KEY: "{{deploy.parameters.flightstats-app-key}}"
+      TRIPIT_API_KEY: "{{deploy.parameters.tripit-api-key}}"
+      TRIPIT_API_SECRET: "{{deploy.parameters.tripit-api-secret}}"
      execute: true
     services: ["sample-repo"]
   hidden: [form, description]

@@ -23,16 +23,16 @@ stages:
   triggers:
   - type: stage
   properties:
-  - name: flightstats-app-id
+  - name: FLIGHTSTATS_APP_ID
     type: secure
     value: ${FLIGHTSTATS_APP_ID}
-  - name: flightstats-app-key
+  - name: FLIGHTSTATS_APP_KEY
     type: secure
     value: ${FLIGHTSTATS_APP_KEY}
-  - name: tripit-api-key
+  - name: TRIPIT_API_KEY
     type: secure
     value: ${TRIPIT_API_KEY}
-  - name: tripit-api-secret
+  - name: TRIPIT_API_SECRET
     type: secure
     value: ${TRIPIT_API_SECRET}
   jobs:
@@ -79,16 +79,16 @@ stages:
   - name: API_KEY
     type: secure
     value: ${API_KEY}
-  - name: flightstats-app-id
+  - name: FLIGHTSTATS_APP_ID
     type: secure
     value: ${FLIGHTSTATS_APP_ID}
-  - name: flightstats-app-key
+  - name: FLIGHTSTATS_APP_KEY
     type: secure
     value: ${FLIGHTSTATS_APP_KEY}
-  - name: tripit-api-key
+  - name: TRIPIT_API_KEY
     type: secure
     value: ${TRIPIT_API_KEY}
-  - name: tripit-api-secret
+  - name: TRIPIT_API_SECRET
     type: secure
     value: ${TRIPIT_API_SECRET}
   - name: openwhisk-auth

@@ -37,17 +37,12 @@ When signing up for a FlightStats developer key, note that there is a review pro
 
 ## Deploy using DevOps Toolchain (In progress)
 
-Click the button to deploy your app and continue with one of the following scenarios.
+Click the button to deploy your app and fill in all the variables from **Delivery Pipeline** and click create.
 
 [![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/containers-paas-serverless)
 
 ### Toolchain Scenarios One: Monolithic Cloud Foundry Application.
-Go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
-   - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
-   - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
-   - `TRIPIT_API_KEY` : API key assigned by TripIt
-   - `TRIPIT_API_SECRET` : API secret assigned by TripIt
-   - `BASE_URL`: You URL for accessing your application. e.g. {app_name}.mybluemix.net
+You should see a link under the Cloud Foundry stage and that's where your application is hosting. 
 
 ### Toolchain Scenarios Two: Microservices or Serverless with Kubernetes Clusters.
 

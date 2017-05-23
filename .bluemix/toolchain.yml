@@ -40,6 +40,7 @@ sample-build:
       FLIGHTSTATS_APP_KEY: "{{deploy.parameters.flightstats-app-key}}"
       TRIPIT_API_KEY: "{{deploy.parameters.tripit-api-key}}"
       TRIPIT_API_SECRET: "{{deploy.parameters.tripit-api-secret}}"
+      OPENWHISK_AUTH: "{{deploy.parameters.openwhisk-auth}}"
      execute: true
     services: ["sample-repo"]
   hidden: [form, description]

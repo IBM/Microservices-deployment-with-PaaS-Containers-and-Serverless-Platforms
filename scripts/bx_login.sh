@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -z $CF_ORG ]; then
   CF_ORG="$BLUEMIX_ORG"

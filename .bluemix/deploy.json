@@ -52,9 +52,13 @@
         "tripit-api-secret":{
             "description": "Your TripIt API Secret",
             "type": "string"
+        },
+        "openwhisk-auth":{
+            "description": "Enter your OpenWhisk Auth to enable serverless for Bluemix Cluster. Else, leave it blank to use microservices on Bluemix Cluster",
+            "type": "string"
         }
     },
-    "required": ["prod-region", "prod-organization", "prod-space", "bluemix-cluster-account", "bluemix-cluster-name", "flightstats-app-id", "flightstats-app-key", "tripit-api-key", "tripit-api-secret"],
+    "required": ["prod-region", "prod-organization", "prod-space", "bluemix-cluster-account", "bluemix-cluster-name", "flightstats-app-id", "flightstats-app-key", "tripit-api-key", "tripit-api-secret","openwhisk-auth"],
     "anyOf": [
         {
             "required": ["bluemix-user", "bluemix-password"]
@@ -113,6 +117,11 @@
           "readonly": false,
           "title": "TripIt API Secret",
           "key": "tripit-api-secret"
+        },{
+          "type": "password",
+          "readonly": false,
+          "title": "OpenWhisk Auth",
+          "key": "openwhisk-auth"
         },
         {
             "type": "table",

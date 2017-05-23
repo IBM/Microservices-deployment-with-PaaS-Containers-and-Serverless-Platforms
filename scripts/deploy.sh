@@ -15,21 +15,23 @@ if [ $? -ne 0 ]; then
 fi
 eval "$exp"
 
-# echo -e "Deleting previous version of Gitlab if it exists"
-# kubectl delete --ignore-not-found=true svc,pvc,deployment -l app=gitlab
-# kubectl delete --ignore-not-found=true -f kubernetes/local-volumes.yaml
+echo -e "Deleting previous version of FlightAssist if it exists"
+kubectl delete --ignore-not-found=true svc,deployment flightassist-service
+kubectl delete --ignore-not-found=true svc,deployment weather-service
 
+bx cs cluster-service-bind $CLUSTER_NAME default mycloudant
+bx cs cluster-service-bind $CLUSTER_NAME default myweatherinsights
 
-# echo -e "Creating pods"
-# kubectl create -f kubernetes/local-volumes.yaml
-# kubectl create -f kubernetes/postgres.yaml
-# sleep 5s
-# kubectl create -f kubernetes/redis.yaml
-# sleep 5s
-# kubectl create -f kubernetes/gitlab.yaml
-# kubectl get nodes
-# kubectl get svc gitlab
+sed -i s#<insert app ID>#$FLIGHTSTATS_APP_ID# secret.yaml
+sed -i s#<insert app key>#$FLIGHTSTATS_APP_KEY# secret.yaml
+sed -i s#<insert API key>#$TRIPIT_API_KEY# secret.yaml
+sed -i s#<insert API secret>#$TRIPIT_API_SECRET# secret.yaml
 
-# echo "" && echo "View your Gitlab website at http://$IP_ADDR:30080"
+sed -i s#<your-app-end-point-url>#$IP_ADDR:30080# flightassist.yaml
+sed -i s#registry.ng.bluemix.net/<namespace>/flightassist#docker.io/tomcli/flightassist# flightassist.yaml
+sed -i s#registry.ng.bluemix.net/<namespace>/weather-service#docker.io/tomcli/weather-service# flightassist.yaml
 
-# echo "Note: Your Gitlab may take up to 5 minutes to be fully functioning"
+kubectl create -f secret.yaml
+kubectl create -f flightassist.yaml
+
+echo "" && echo "View your FlightAssist website at http://$IP_ADDR:30080"

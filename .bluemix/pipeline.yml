@@ -91,7 +91,7 @@ stages:
   - name: TRIPIT_API_SECRET
     type: secure
     value: ${TRIPIT_API_SECRET}
-  - name: openwhisk-auth
+  - name: OPENWHISK_AUTH
     type: secure
   jobs:
   - name: Kubernetes Deploy

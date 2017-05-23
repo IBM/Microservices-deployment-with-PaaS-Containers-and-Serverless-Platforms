@@ -31,7 +31,7 @@ The scenarios are accomplished by using:
 
 ## Prerequisites
 
-Register and obtain the [TripIt Developer API](https://www.tripit.com/developer/create) and [FlightStats Developer API](https://developer.flightstats.com/signup) to query flight status. 
+Register and obtain the [FlightStats Developer API](https://developer.flightstats.com/signup) and [TripIt Developer API](https://www.tripit.com/developer/create) to query flight status. 
 
 When signing up for a FlightStats developer key, note that there is a review process that may take 24 hours or more to get your application credentials activated for a 30-day trial with the API.
 

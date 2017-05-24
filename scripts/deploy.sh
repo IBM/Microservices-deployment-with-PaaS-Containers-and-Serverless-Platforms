@@ -23,10 +23,10 @@ kubectl delete --ignore-not-found=true -f secret.yaml
 bx cs cluster-service-bind $CLUSTER_NAME default mycloudant
 bx cs cluster-service-bind $CLUSTER_NAME default myweatherinsights
 
-sed -i s#<insert app ID>#$FLIGHTSTATS_APP_ID# secret.yaml
-sed -i s#<insert app key>#$FLIGHTSTATS_APP_KEY# secret.yaml
-sed -i s#<insert API key>#$TRIPIT_API_KEY# secret.yaml
-sed -i s#<insert API secret>#$TRIPIT_API_SECRET# secret.yaml
+sed -i s#<insert-app-ID>#$FLIGHTSTATS_APP_ID# secret.yaml
+sed -i s#<insert-app-key>#$FLIGHTSTATS_APP_KEY# secret.yaml
+sed -i s#<insert-API-key>#$TRIPIT_API_KEY# secret.yaml
+sed -i s#<insert-API-secret>#$TRIPIT_API_SECRET# secret.yaml
 
 kubectl create -f secret.yaml
 

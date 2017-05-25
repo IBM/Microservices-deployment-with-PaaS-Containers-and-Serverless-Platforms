@@ -30,7 +30,6 @@ The scenarios are accomplished by using:
 - [TripIt Developer API](https://www.tripit.com/developer)
 - [FlightStats Developer API](https://developer.flightstats.com)
 
-
 ## Prerequisites
 
 Register and obtain the [FlightStats Developer API](https://developer.flightstats.com/signup) and [TripIt Developer API](https://www.tripit.com/developer/create) to query flight status. 
@@ -53,6 +52,39 @@ Otherwise, fill in the **OpenWhisk Auth** variable to enable serverless for your
 
 Then, click **View logs and history** in your pipeline to access your application via the URL link at the end of your logs.
 
+
+## Code Structure
+
+### Cloud Foundry application
+
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| All Javascript files (*.js)         | The implementation of the flightstats, tripIt, and weather information, shared by all deployment options |
+| [package.json](package.json)     | List the packages required by the application |
+| [manifest.yml](manifest.yml)     | Description of the application to be deployed |
+
+### Kubernetes deployment with microservices
+
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| All Javascript files (*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
+| [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
+| [package.json](package.json)         | List the packages required by the application |
+| [Dockerfile.local](Dockerfile.local) and [Dockerfile.alpine](flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
+| [flightassist.yaml](flightassist.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
+
+### Kubernetes deployment with serverless
+
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| [weather.js](weather.js)       | Trigger actions in OpenWhisk to get the weather information |
+| All Javascript files (*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
+| [package.json](package.json)         | List the packages required by the application |
+| [Dockerfile.local](Dockerfile.local)         | Description of the Docker image          |
+| [flightassist_serverless.yaml](flightassist_serverless.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
 
 # Steps
 1. [Create your Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
@@ -173,7 +205,7 @@ bx cs cluster-service-bind {your-cluster-name} default mycloudant
 bx cs cluster-service-bind {your-cluster-name} default myweatherinsights
 ```
 
-Next, modify the secret.yaml file with **flightstats-app-id**, **flightstats-app-key**, **tripit-api-key**, and **tripit-api-secret**.
+Next, create secret to give FlightStats and TripIt API credentials for Flightassist. Modify the secret.yaml file with **flightstats-app-id**, **flightstats-app-key**, **tripit-api-key**, and **tripit-api-secret**.
 
 Then, edit the `flightassist.yaml` and replace the ```<namespace>``` with your own namespace. You can obtain your namespace by running `bx cr namespace`. Also replace `<your-app-end-point-url>` with your node ip and nodeport (e.g. 169.47.237.139:30080). You can obtain your IP by running `kubectl get nodes` and your nodeport is 30080.
 

@@ -15,7 +15,7 @@ stages:
     script: |-
       #!/bin/bash
       bash -n *.sh
-- name: Cloud Foundry DEPLOY
+- name: Cloud Foundry Deploy
   inputs: 
   - type: job
     stage: BUILD
@@ -56,7 +56,7 @@ stages:
        cf restage "${CF_APP}"
        # View logs
        # cf logs "${CF_APP}" --recent
-- name: Kubernetes DEPLOY
+- name: Kubernetes Deploy
   inputs: 
   - type: job
     stage: BUILD

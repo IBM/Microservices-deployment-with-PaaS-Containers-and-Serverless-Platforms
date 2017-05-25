@@ -43,14 +43,14 @@ Click the button to deploy your app and fill in all the variables from **Deliver
 [![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/containers-paas-serverless)
 
 ### Toolchain Scenarios One: Monolithic Cloud Foundry Application.
-You should see a link under the Cloud Foundry stage and that's where your application is hosting. 
+You should see a link under the Cloud Foundry Deploy stage and that's where your application is hosting. 
 
 ### Toolchain Scenarios Two: Microservices or Serverless with Kubernetes Clusters.
 
 If you want to deploy with microservices, please leave the **OpenWhisk Auth** variable blank on **Delivery Pipeline**.
 Otherwise, fill in the **OpenWhisk Auth** variable to enable serverless for your Flightassist.
 
-Then, click **View logs and history** in your pipeline to access your application via the URL link at the end of your logs.
+Then, click **View logs and history** under Kubernetes Deploy stage in your pipeline to access your application via the URL link at the end of your logs.
 
 
 ## Code Structure

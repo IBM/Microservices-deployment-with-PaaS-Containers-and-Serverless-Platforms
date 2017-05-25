@@ -45,10 +45,10 @@ function application_setup() {
   # bx cs cluster-service-bind $CLUSTER_NAME default myweatherinsights
 
   #set dummy cred
-  sed -i s#"<insert-app-ID>"#1234abc# secret.yaml
-  sed -i s#"<insert-app-key>"#1234abc# secret.yaml
-  sed -i s#"<insert-API-key>"#1234abc# secret.yaml
-  sed -i s#"<insert-API-secret>"#1234abc# secret.yaml
+  sed -i s#"<insert-app-ID>"#"abc"# secret.yaml
+  sed -i s#"<insert-app-key>"#"abc"# secret.yaml
+  sed -i s#"<insert-API-key>"#"abc"# secret.yaml
+  sed -i s#"<insert-API-secret>"#"abc"# secret.yaml
   kubectl create -f secret.yaml
 
   echo "Create FlightAssist"

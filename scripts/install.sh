@@ -15,6 +15,7 @@ function install_bluemix_cli() {
 function bluemix_auth() {
   echo "Authenticating with Bluemix"
   echo "1" | bx login -a https://api.ng.bluemix.net -u $BLUEMIX_USER -p $BLUEMIX_PASS
+  echo "1" | cf login -a https://api.ng.bluemix.net -u $BLUEMIX_USER -p $BLUEMIX_PASS
   curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   bx plugin install container-service -r Bluemix
   echo "Installing kubectl"
@@ -35,6 +36,7 @@ function cluster_setup() {
 
 function application_setup() {
   #creating services
+
   bx service create cloudantNoSQLDB Lite mycloudant
   bx service create weatherinsights Free-v2 myweatherinsights
   
@@ -42,10 +44,10 @@ function application_setup() {
   bx cs cluster-service-bind $CLUSTER_NAME default myweatherinsights
 
   #set dummy cred
-  sed -i s#"<insert-app-ID>"#"example"# secret.yaml
-  sed -i s#"<insert-app-key>"#"example"# secret.yaml
-  sed -i s#"<insert-API-key>"#"example"# secret.yaml
-  sed -i s#"<insert-API-secret>"#"example"# secret.yaml
+  sed -i s#"<insert-app-ID>"#"1234567"# secret.yaml
+  sed -i s#"<insert-app-key>"#"1234567"# secret.yaml
+  sed -i s#"<insert-API-key>"#"1234567"# secret.yaml
+  sed -i s#"<insert-API-secret>"#"1234567"# secret.yaml
   kubectl create -f secret.yaml
 
   echo "Create FlightAssist"

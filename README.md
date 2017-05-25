@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/IBM/containers-paas-serverless.svg?branch=master)](https://travis-ci.org/IBM/containers-paas-serverless)
+
 # Containers vs PAAS vs Serverless
 
 Flightassist is a Node.js example application for demonstrating and

@@ -60,16 +60,28 @@ Then, click **View logs and history** in your pipeline to access your applicatio
 | File                                     | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
 | [flightassist.js](flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
-| All Javascript files (*.js)         | The implementation of the flightstats, tripIt, and weather information, shared by all deployment options |
+| All JavaScript files (*.js)         | The implementation of the flightstats, tripIt, and weather information, shared by all deployment options |
 | [package.json](package.json)     | List the packages required by the application |
 | [manifest.yml](manifest.yml)     | Description of the application to be deployed |
+
+### Docker Compose with microservices
+
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| All JavaScript files (*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
+| [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
+| [package.json](package.json)         | List the packages required by the application |
+| [Dockerfile.local](Dockerfile.local) and [Dockerfile.alpine](flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
+| [docker-compose.yaml](docker-compose.yaml) | Specification file for the deployment of the service in Docker |
+
 
 ### Kubernetes deployment with microservices
 
 | File                                     | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
 | [flightassist.js](flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
-| All Javascript files (*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
+| All JavaScript files (*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
 | [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
 | [package.json](package.json)         | List the packages required by the application |
 | [Dockerfile.local](Dockerfile.local) and [Dockerfile.alpine](flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
@@ -81,7 +93,7 @@ Then, click **View logs and history** in your pipeline to access your applicatio
 | ---------------------------------------- | ---------------------------------------- |
 | [flightassist.js](flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
 | [weather.js](weather.js)       | Trigger actions in OpenWhisk to get the weather information |
-| All Javascript files (*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
+| All JavaScript files (*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
 | [package.json](package.json)         | List the packages required by the application |
 | [Dockerfile.local](Dockerfile.local)         | Description of the Docker image          |
 | [flightassist_serverless.yaml](flightassist_serverless.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |

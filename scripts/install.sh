@@ -37,11 +37,12 @@ function cluster_setup() {
 function application_setup() {
   #creating services
 
-  bx service create cloudantNoSQLDB Lite mycloudant
-  bx service create weatherinsights Free-v2 myweatherinsights
+  # Trial accounts that are expired cannot use any Bluemix service other than kubernetes cluster.
+  # bx service create cloudantNoSQLDB Lite mycloudant
+  # bx service create weatherinsights Free-v2 myweatherinsights
   
-  bx cs cluster-service-bind $CLUSTER_NAME default mycloudant
-  bx cs cluster-service-bind $CLUSTER_NAME default myweatherinsights
+  # bx cs cluster-service-bind $CLUSTER_NAME default mycloudant
+  # bx cs cluster-service-bind $CLUSTER_NAME default myweatherinsights
 
   #set dummy cred
   sed -i s#"<insert-app-ID>"#"1234567"# secret.yaml
@@ -66,4 +67,3 @@ install_bluemix_cli
 bluemix_auth
 cluster_setup
 application_setup
-cluster_setup

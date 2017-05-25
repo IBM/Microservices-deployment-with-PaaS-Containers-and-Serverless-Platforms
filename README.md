@@ -37,9 +37,9 @@ Register and obtain the [FlightStats Developer API](https://developer.flightstat
 
 When signing up for a FlightStats developer key, note that there is a review process that may take 24 hours or more to get your application credentials activated for a 30-day trial with the API.
 
-## Deploy using DevOps Toolchain (In progress)
+## Deploy using DevOps Toolchain 
 
-Click the button to deploy your app and fill in all the variables from **Delivery Pipeline** and click create.
+Click the button to deploy your app and fill in all the variables from **Delivery Pipeline**. For Further instructions, please follow the [Toolchain instructions](https://github.com/IBM/container-journey-template/blob/master/Toolchain_Instructions_new.md).
 
 [![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/containers-paas-serverless)
 
@@ -48,7 +48,10 @@ You should see a link under the Cloud Foundry stage and that's where your applic
 
 ### Toolchain Scenarios Two: Microservices or Serverless with Kubernetes Clusters.
 
-Click **View logs and history** and access your application via the URL link at the end of your logs.
+If you want to deploy with microservices, please leave the **OpenWhisk Auth** variable blank on **Delivery Pipeline**.
+Otherwise, fill in the **OpenWhisk Auth** variable to enable serverless for your Flightassist.
+
+Then, click **View logs and history** in your pipeline to access your application via the URL link at the end of your logs.
 
 
 # Steps

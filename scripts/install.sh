@@ -31,8 +31,6 @@ function cluster_setup() {
   kubectl delete --ignore-not-found=true svc,deployment flightassist-service
   kubectl delete --ignore-not-found=true svc,deployment weather-service
   kubectl delete --ignore-not-found=true -f secret.yaml
-
-  echo "Cluster is clean"
 }
 
 function application_setup() {

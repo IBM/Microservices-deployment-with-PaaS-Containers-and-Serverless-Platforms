@@ -45,10 +45,10 @@ function application_setup() {
   # bx cs cluster-service-bind $CLUSTER_NAME default myweatherinsights
 
   #set dummy cred
-  sed -i s#"<insert-app-ID>"#"abc"# secret.yaml
-  sed -i s#"<insert-app-key>"#"abc"# secret.yaml
-  sed -i s#"<insert-API-key>"#"abc"# secret.yaml
-  sed -i s#"<insert-API-secret>"#"abc"# secret.yaml
+  sed -i s#"<insert-app-ID>"#"1930fe0e"# secret.yaml
+  sed -i s#"<insert-app-key>"#"2153768d0be39fcb226ee76d28499ded"# secret.yaml
+  sed -i s#"<insert-API-key>"#"f88710e02094db0b0b2994c0806a53a3f76250d5"# secret.yaml
+  sed -i s#"<insert-API-secret>"#"bca43acbf2d095030f0ea924139acf7e4989ade2"# secret.yaml
   kubectl create -f secret.yaml
 
   echo "Create FlightAssist"
@@ -58,7 +58,6 @@ function application_setup() {
   sed -i s#"registry.ng.bluemix.net/<namespace>/flightassist"#docker.io/tomcli/flightassist# flightassist.yaml
   sed -i s#"registry.ng.bluemix.net/<namespace>/weather-service"#docker.io/tomcli/weather-service# flightassist.yaml
 
-  echo "Travis will demonstrate FlightAssist is successfully deployed. However, user need to fill in their credentials and build their own App for actual usage."
   kubectl create -f flightassist.yaml
 
 }

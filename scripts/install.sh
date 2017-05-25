@@ -28,7 +28,7 @@ function cluster_setup() {
   bx cs workers $CLUSTER
   $(bx cs cluster-config $CLUSTER | grep export)
 
-  echo "Deleting openwhisk namespace if it exists..."
+  echo "Deleting old deployment if it exists..."
   kubectl delete --ignore-not-found=true svc,deployment flightassist-service
   kubectl delete --ignore-not-found=true svc,deployment weather-service
   kubectl delete --ignore-not-found=true -f secret.yaml
@@ -45,10 +45,10 @@ function application_setup() {
   # bx cs cluster-service-bind $CLUSTER_NAME default myweatherinsights
 
   #set dummy cred
-  sed -i s#"<insert-app-ID>"#"1234567"# secret.yaml
-  sed -i s#"<insert-app-key>"#"1234567"# secret.yaml
-  sed -i s#"<insert-API-key>"#"1234567"# secret.yaml
-  sed -i s#"<insert-API-secret>"#"1234567"# secret.yaml
+  sed -i s#"<insert-app-ID>"#1234abc# secret.yaml
+  sed -i s#"<insert-app-key>"#1234abc# secret.yaml
+  sed -i s#"<insert-API-key>"#1234abc# secret.yaml
+  sed -i s#"<insert-API-secret>"#1234abc# secret.yaml
   kubectl create -f secret.yaml
 
   echo "Create FlightAssist"
@@ -57,6 +57,8 @@ function application_setup() {
   sed -i s#"<your-app-end-point-url>"#$IP_ADDR:30080# flightassist.yaml
   sed -i s#"registry.ng.bluemix.net/<namespace>/flightassist"#docker.io/tomcli/flightassist# flightassist.yaml
   sed -i s#"registry.ng.bluemix.net/<namespace>/weather-service"#docker.io/tomcli/weather-service# flightassist.yaml
+
+  echo "Travis will demonstrate FlightAssist is successfully deployed. However, user need to fill in their credentials and build their own App for actual usage."
   kubectl create -f flightassist.yaml
 
 }
@@ -67,3 +69,4 @@ install_bluemix_cli
 bluemix_auth
 cluster_setup
 application_setup
+cluster_setup

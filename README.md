@@ -1,22 +1,14 @@
 [![Build Status](https://travis-ci.org/IBM/containers-paas-serverless.svg?branch=master)](https://travis-ci.org/IBM/containers-paas-serverless)
 
-# Containers vs PAAS vs Serverless
+# Navigating your Microservices deplyoment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
-Flightassist is a Node.js example application for demonstrating and
-comparing various application deployment technologies in the IBM Bluemix
-public cloud.
+Flightassist is a Node.js example application for demonstrating and comparing various application deployment technologies in the IBM Bluemix public cloud.
 
-The intent for this project, when complete, is that it will be
-deployable as a Cloud Foundry application, a containerized application
-using at least one factored-out microservice, and as a set of
-functions deployable to OpenWhisk, the IBM Bluemix function-as-a-service
+The intent for this project, when complete, is that it will be deployable as a Cloud Foundry application, a containerized application
+using at least one factored-out microservice, and as a set of functions deployable to OpenWhisk, the IBM Bluemix function-as-a-service
 offering.
 
-Specifically, a set of trade-offs and comparisons can be made between
-these deployment models, and this application is a proving ground for
-those discussions. This will be the basis for the talk given by
-Lin Sun and Phil Estes at [IBM Interconnect 2017](https://www.ibm.com/cloud-computing/us/en/interconnect/)
-titled [Containerize, PaaS, or Go Serverless? A Case Study in
+Specifically, a set of trade-offs and comparisons can be made between these deployment models, and this application is a proving ground for those discussions. This will be the basis for the talk given by Lin Sun and Phil Estes at [IBM Interconnect 2017](https://www.ibm.com/cloud-computing/us/en/interconnect/) titled [Containerize, PaaS, or Go Serverless? A Case Study in
 Application Deployment Models](https://myibm.ibm.com/events/interconnect/all-sessions/session/4467A).
 
 ## Included Components
@@ -24,6 +16,7 @@ The scenarios are accomplished by using:
 
 - [Cloud Foundry](https://www.cloudfoundry.org)
 - [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
+- [Istio](https://istio.io)
 - [OpenWhisk](https://www.ibm.com/cloud-computing/bluemix/openwhisk)
 - [Cloudant NoSQL Database](https://cloudant.com)
 - [Insights for Weather](https://console.ng.bluemix.net/docs/services/Weather/weather_overview.html#about_weather)

@@ -47,10 +47,10 @@ Then, click **View logs and history** under Kubernetes Deploy stage in your pipe
 
 # Steps
 
-1. [Create your Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
-2. [Deploy monolithic application]()
+1. [Provision application services - Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
+2. [Deploy and test monolithic application](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
 3. Factor monolithic application into microservices and deploy leveraging
-- [Cloud Foundry](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
+- [Cloud Foundry]()
 - [Kubernetes Cluster](#scenario-two-deploy-flightassist-as-containers-using-docker-compose-and-kubernetes-clusters)
 - [Istio]()
 - [OpenWhisk](#scenario-three-deploy-flightassist-with-serverless-using-openwhisk)

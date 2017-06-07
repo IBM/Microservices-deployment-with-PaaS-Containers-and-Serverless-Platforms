@@ -46,8 +46,16 @@ Otherwise, fill in the **OpenWhisk Auth** variable to enable serverless for your
 Then, click **View logs and history** under Kubernetes Deploy stage in your pipeline to access your application via the URL link at the end of your logs.
 
 # Steps
+
 1. [Create your Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
-2. [Deployment Scenarios](#2-deployment-scenarios)
+2. [Deploy monolithic application]()
+3. Factor monolithic application into microservices and deploy leveraging
+- [Cloud Foundry](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
+- [Kubernetes Cluster](#scenario-two-deploy-flightassist-as-containers-using-docker-compose-and-kubernetes-clusters)
+- [Istio]()
+- [OpenWhisk](#scenario-three-deploy-flightassist-with-serverless-using-openwhisk)
+
+After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 # 1. Create your Cloudant Database and Insights for Weather Service
 
@@ -71,17 +79,6 @@ curl -k -X PUT {your-cloudantURL}/trips
 curl -k -X PUT {your-cloudantURL}/weather
 curl -k -X PUT {your-cloudantURL}/connections
 ```
-
-
-# 2. Deployment Scenarios
-- [Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
-- [Scenario Two: Deploy Flightassist as containers using Docker Compose and Kubernetes Clusters](#scenario-two-deploy-flightassist-as-containers-using-docker-compose-and-kubernetes-clusters)
-  - 1. [Docker Compose](#1-docker-compose)
-  - 2. [Kubernetes Clusters](#2-kubernetes-clusters)
-- [Scenario Three: Deploy Flightassist with Serverless using OpenWhisk](#scenario-three-deploy-flightassist-with-serverless-using-openwhisk)
-
-After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
-
 # Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry
 
 In this scenario, we will deploy Flightassist as a monolithic application and host it on Cloud Foundry.

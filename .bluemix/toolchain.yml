@@ -13,7 +13,7 @@ sample-repo:
   service_id: githubpublic
   parameters:
     repo_name: "{{name}}"
-    repo_url: https://github.com/IBM/containers-paas-serverless
+    repo_url: https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms
     type: clone
     has_issues: false
 

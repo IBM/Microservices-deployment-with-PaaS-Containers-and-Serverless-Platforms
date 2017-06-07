@@ -6,6 +6,11 @@ Microservices and containers are now influencing application design and deployme
 
 We use a sample Node.js application, flightassist for demonstrating and comparing various microservices deployment technologies. Specifically, a set of trade-offs and comparisons can be made between these deployment models, and this application is a proving ground for those discussions. 
 
+#### Scenario One: Deploy Flightassist microservices on Cloud Foundry
+#### Scenario Two: Deploy Flightassist microservices on Kubernetes Clusters
+#### Scenario Three: Deploy Flightassist microservices on Istio
+#### Scenario Four: Deploy Flightassist microservices augmented with functions on OpenWhisk
+
 ## Included Components
 The scenarios are accomplished by using:
 

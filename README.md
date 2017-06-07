@@ -48,8 +48,9 @@ Then, click **View logs and history** under Kubernetes Deploy stage in your pipe
 # Steps
 
 1. [Provision application services - Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
-2. [Deploy and test monolithic application](#scenario-one-deploy-flightassist-on-cloud-platform-using-cloud-foundry)
-3. Factor monolithic application into microservices and deploy leveraging
+2. [Deploy monolithic application](#deploy-monolithic-flightassist-application-on-cloud-foundry)
+3. [Factor monolithic application into microservices and test]()
+4. Deploy microservices leveraging:
 - [Cloud Foundry]()
 - [Kubernetes Cluster](#scenario-two-deploy-flightassist-as-containers-using-docker-compose-and-kubernetes-clusters)
 - [Istio]()
@@ -79,7 +80,7 @@ curl -k -X PUT {your-cloudantURL}/trips
 curl -k -X PUT {your-cloudantURL}/weather
 curl -k -X PUT {your-cloudantURL}/connections
 ```
-# Scenario One: Deploy Flightassist on Cloud Platform using Cloud Foundry
+# Deploy monolithic Flightassist application using Cloud Foundry
 
 In this scenario, we will deploy Flightassist as a monolithic application and host it on Cloud Foundry.
 
@@ -105,12 +106,7 @@ application.
 
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
-
-# Scenario Two: Deploy Flightassist as containers using Docker Compose and Kubernetes Clusters
-
-In this scenario, we want to break down Flightassist to multiple containers. Therefore, we will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Docker Compose or Kubernetes. 
-
-## 1. Docker Compose
+# Factor monolithic application into microservices and test
 
 First, install [Docker CLI](https://www.docker.com/community-edition#/download).
 
@@ -131,8 +127,11 @@ docker-compose up
 
 Now, your FlightAssist application should be running on http://localhost:3000/
 
+# Scenario One: Deploy Flightassist microservices on Cloud Foundry
 
-## 2. Kubernetes Clusters
+# Scenario Two: Deploy Flightassist microservices on Kubernetes Cluster
+
+In this scenario, we want to break down Flightassist to multiple containers. Therefore, we will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Docker Compose or Kubernetes. 
 
 First, follow the [Kubernetes Cluster Tutorial](https://github.com/IBM/container-journey-template) to create your own cluster on Bluemix.
 
@@ -174,7 +173,10 @@ kubectl create -f flightassist.yaml
 
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
-# Scenario Three: Deploy Flightassist with Serverless using OpenWhisk
+
+# Scenario Two: Deploy Flightassist microservices on Istio
+
+# Scenario Four: Deploy Flightassist with Serverless using OpenWhisk
 
 In this scenario, we will deploy Flightassist with serverless to show how you could replace your microservices with OpenWhisk actions. 
 

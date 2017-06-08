@@ -2,7 +2,7 @@
 
 # Navigate microservices deplyoment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
-Microservices and containers are now influencing application design and deployment patterns, and will continue to do so for the foreseeable future. According to one survey, 60 percent of all new applications will use cloud-enabled continuous delivery microservice architectures, DevOps, and containers. But with the profileration of microservices, number of deployment platforms have emerged. What do we choose and why? In this journey we help you navigate microservices deplyoment options with some popoular microservices platforms like Cloud Foundry, Kubernetes, OpenWhisk and Istio
+Microservices and containers are now influencing application design and deployment patterns, and will continue to do so for the foreseeable future. According to one survey, 60 percent of all new applications will use cloud-enabled continuous delivery microservice architectures, DevOps, and containers. But with the profileration of microservices, number of deployment platforms have emerged. What do we choose and why? In this journey we help you navigate microservices deplyoment options with some popular microservices platforms like Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
 We use a sample Node.js application, flightassist for demonstrating and comparing various microservices deployment technologies. Specifically, a set of trade-offs and comparisons can be made between these deployment models, and this application is a proving ground for those discussions. 
 
@@ -267,7 +267,7 @@ Now you can see the most recent flight status and weather for all your flights w
 
 This project is based on this [flightassist](https://github.com/estesp/flightassist) example.
 
-[Phil Estes](https://github.com/estesp) and [Lin Sun](https://github.com/linsun) are the main contributers for the [flightassist](https://github.com/estesp/flightassist) example.
+[Phil Estes](https://github.com/estesp) and [Lin Sun](https://github.com/linsun) are the main contributors for the [flightassist](https://github.com/estesp/flightassist) example.
 
 # License
 [Apache 2.0](LICENSE)

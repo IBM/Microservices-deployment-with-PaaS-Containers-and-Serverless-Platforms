@@ -113,13 +113,16 @@ function handleViaWeatherAPI(req, resp, data) {
 }
 
 function handleViaWeatherMicroservice(req, resp, data) {
+    var microserviceURL = process.env.MICROSERVICE_URL;
     console.log("using external weather microservice: " + process.env.USE_WEATHER_SERVICE);
     // overwrite host, endpoint to point to our weather microservice
     if (process.env.DEVMODE === "true" && process.env.DEPLOY !== "swarm") {
-        if(process.env.DEPLOY !== "compose"){
-            host = "localhost";
-        } else{
+        if(process.env.DEPLOY === "compose"){
             host = "weather-service";
+        } else if(process.env.DEPLOY === "cloudfoundry") {
+            host = microserviceURL;
+        } else{
+            host = "localhost";
         }
     } else {
         host = "weather-service";

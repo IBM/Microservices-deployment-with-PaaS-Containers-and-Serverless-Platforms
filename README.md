@@ -2,7 +2,7 @@
 
 # Navigate microservices deplyoment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
-Microservices and containers are now influencing application design and deployment patterns, and will continue to do so for the foreseeable future. According to one survey, 60 percent of all new applications will use cloud-enabled continuous delivery microservice architectures, DevOps, and containers. But with the profileration of microservices, number of deployment platforms have emerged. What do we choose and why? In this journey we help you navigate microservices deplyoment options with some popoular microservices platforms like Cloud Foundry, Kubernetes, OpenWhisk and Istio
+Microservices and containers are now influencing application design and deployment patterns and will continue to do so for the foreseeable future. According to one survey, 60 percent of all new applications will use cloud-enabled continuous delivery microservice architectures, DevOps, and containers. But with the proliferation of microservices, a number of deployment platforms have emerged. What do we choose and why? In this journey, we help you navigate microservices deployment options with some popular microservices platforms like Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
 We use a sample Node.js application, flightassist for demonstrating and comparing various microservices deployment technologies. Specifically, a set of trade-offs and comparisons can be made between these deployment models, and this application is a proving ground for those discussions. 
 
@@ -105,7 +105,7 @@ Now, go to https://console.ng.bluemix.net/dashboard/apps and select your applica
    - `TRIPIT_API_SECRET` : API secret assigned by TripIt
    - `BASE_URL`: You URL for accessing your application. e.g. {app_name}.mybluemix.net
 
-Your application should restart automatically, but can be done manually as well
+Your application should restart automatically but can be done manually as well
 in the UI. With the service bindings and added environment variables, the
 application should be operational at the hostname route you selected for your CF
 application. 
@@ -150,7 +150,7 @@ Next, build your own docker images and push them to your own bluemix container r
 
 > Replace `<namespace>` with your own namespace, you can view your namespace by running `bx cr namespaces`
 >
-> If you have unauthorized error, run `bx cr login` to authorized your container-registry.
+> If you have an unauthorized error, run `bx cr login` to authorized your container-registry.
 
 ```bash
 docker build -f main_application/Dockerfile.local -t registry.ng.bluemix.net/<namespace>/flightassist main_application
@@ -196,7 +196,7 @@ kubectl delete -f flightassist.yaml
 
 Then, install [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli) and Mark down its credentials.
 
-Next, edit `flightassist_serverless.yaml` and replace the `<namespace>` with your own namespace, `<your-app-end-point-url>` with your node ip and nodeport, and `<your-openwhisk-auth>` with your OpenWhisk authendication. You can run `wsk property get --auth | awk '{print $3}'` to view your OpenWhisk authentication.
+Next, edit `flightassist_serverless.yaml` and replace the `<namespace>` with your own namespace, `<your-app-end-point-url>` with your node ip and nodeport, and `<your-openwhisk-auth>` with your OpenWhisk authentication. You can run `wsk property get --auth | awk '{print $3}'` to view your OpenWhisk authentication.
 
 Now, let's deploy the new flightassist app with serverless.
 
@@ -267,7 +267,7 @@ Now you can see the most recent flight status and weather for all your flights w
 
 This project is based on this [flightassist](https://github.com/estesp/flightassist) example.
 
-[Phil Estes](https://github.com/estesp) and [Lin Sun](https://github.com/linsun) are the main contributers for the [flightassist](https://github.com/estesp/flightassist) example.
+[Phil Estes](https://github.com/estesp) and [Lin Sun](https://github.com/linsun) are the main contributors for the [flightassist](https://github.com/estesp/flightassist) example.
 
 # License
 [Apache 2.0](LICENSE)

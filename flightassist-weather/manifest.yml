@@ -1,0 +1,11 @@
+---
+applications:
+- name: filght-weather
+  memory: 256M
+  command: python src/app.py
+  domain: mybluemix.net
+  buildpack: python_buildpack
+  path: .
+  env: 
+    DEPLOY: cloudfoundry
+    WEATHER_URL: fill_In_Here

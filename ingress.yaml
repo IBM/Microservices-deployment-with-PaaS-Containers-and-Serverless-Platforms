@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gateway
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  backend:
+    serviceName: flightassist-service
+    servicePort: 3000
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: flightassist-service
+          servicePort: 3000

@@ -32,15 +32,15 @@ kind: Service
 metadata:
   name: weather-service
   labels:
+    name: weather-service
     run: weather-service
 spec:
-  type: NodePort
   selector:
     run: weather-service
   ports:
    - protocol: TCP
      port: 5000
-     nodePort: 30081
+     name: http
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -90,6 +90,7 @@ metadata:
   name: flightassist-service
   labels:
     run: flightassist-service
+    name: flightassist-service
 spec:
   type: NodePort
   selector:
@@ -98,3 +99,4 @@ spec:
    - protocol: TCP
      port: 3000
      nodePort: 30080
+     name: http

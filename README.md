@@ -80,7 +80,7 @@ bx service create weatherinsights Free-v2 myweatherinsights
 Before moving on, the demo application is missing code to create the databases used to cache API responses in your newly created Cloudant instance. You can run the following commands with your cloudant URL to create the databases.
 
 ```bash
-bx service keys mycloudant #This will output your {service key}
+bx service key-create mycloudant {service key} #You can put any name for your {service key}
 bx service key-show mycloudant {service key} #This will output your cloudant credential, "url" is Your cloudant URL
 curl -k -X PUT {your-cloudantURL}/trips
 curl -k -X PUT {your-cloudantURL}/weather
@@ -181,6 +181,76 @@ Congratulation, now your Flightassist application should be running on `http://<
 
 
 # Scenario Three: Deploy Flightassist microservices on Istio
+
+## 1. Installing Istio in your Cluster
+### 1.1 Download the Istio source
+  1. Download the latest Istio release for your OS: [Istio releases](https://github.com/istio/istio/releases)  
+  2. Extract and go to the root directory.
+  3. Copy the `istioctl` bin to your local bin  
+  ```bash
+  $ cp bin/istioctl /usr/local/bin
+  ## example for macOS
+  ```
+
+### 1.2 Grant Permissions  
+  1. Run the following command to check if your cluster has RBAC  
+  ```bash
+  $ kubectl api-versions | grep rbac
+  ```  
+  2. Grant permissions based on the version of your RBAC  
+    * If you have an **alpha** version, run:
+
+      ```bash
+      $ kubectl apply -f install/kubernetes/istio-rbac-alpha.yaml
+      ```
+
+    * If you have a **beta** version, run:
+
+      ```bash
+      $ kubectl apply -f install/kubernetes/istio-rbac-beta.yaml
+      ```
+
+    * If **your cluster has no RBAC** enabled, proceed to installing the **Control Plane**.
+
+### 1.3 Install the [Istio Control Plane](https://istio.io/docs/concepts/what-is-istio/overview.html#architecture) in your cluster  
+```bash
+kubectl apply -f install/kubernetes/istio.yaml
+cd ..
+```
+You should now have the Istio Control Plane running in Pods of your Cluster.
+```bash
+$ kubectl get pods
+NAME                              READY     STATUS    RESTARTS
+istio-egress-3850639395-30d1v     1/1       Running   0       
+istio-ingress-4068702052-2st6r    1/1       Running   0       
+istio-manager-251184572-x9dd4     2/2       Running   0       
+istio-mixer-2499357295-kn4vq      1/1       Running   0       
+```
+
+## 2. Inject Istio Envoys on Flightassist.
+
+**Important**: You must complete [scenario two for Kubernetes Clusters](#2-kubernetes-clusters) in order to proceed the following steps.
+
+First, you want to delete all the services and deployments from the previous scenario.
+
+```bash
+kubectl delete -f flightassist.yaml
+```
+
+Next, deploy ingress to connect the microservices and inject Istio envoys on Flightassist and Weather Microservice. 
+
+```bash
+kubectl create -f ingress.yaml
+kubectl create -f <(istioctl kube-inject -f flightassist.yaml --includeIPRanges=172.30.0.0/16,172.20.0.0/16)
+```
+
+Now, grab your isito-ingress IP:Port.
+
+```bash
+echo $(kubectl get po -l istio=ingress -o jsonpath={.items[0].status.hostIP}):$(kubectl get svc istio-ingress -o jsonpath={.spec.ports[0].nodePort})
+```
+
+Congratulation, now your Flightassist application should be running on `http://<isito-ingress IP:Port>`.
 
 # Scenario Four: Deploy Flightassist leveraging OpenWhisk functions
 

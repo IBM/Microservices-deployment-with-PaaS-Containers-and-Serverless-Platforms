@@ -27,7 +27,7 @@ The scenarios are accomplished by using:
 
 ## Prerequisites
 
-Register and obtain the [FlightStats Developer API](https://developer.flightstats.com/signup) and [TripIt Developer API](https://www.tripit.com/developer/create) to query flight status. 
+Register and obtain the keys for [FlightStats Developer API](https://developer.flightstats.com/signup) and [TripIt Developer API](https://www.tripit.com/developer/create) to query flight status. 
 
 When signing up for a FlightStats developer key, note that there is a review process that may take 24 hours or more to get your application credentials activated for a 30-day trial with the API.
 
@@ -52,11 +52,13 @@ Then, click **View logs and history** under Kubernetes Deploy stage in your pipe
 1. [Provision application services - Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
 2. [Deploy monolithic application](#deploy-monolithic-flightassist-application-using-cloud-foundry)
 3. [Factor monolithic application into microservices and test](#factor-monolithic-application-into-microservices-and-test)
-4. Deploy microservices leveraging:
-- [Cloud Foundry](#scenario-one-deploy-flightassist-microservices-on-cloud-foundry-1)
-- [Kubernetes Cluster](#scenario-two-deploy-flightassist-microservices-on-kubernetes-cluster)
-- [Istio](#scenario-three-deploy-flightassist-microservices-on-istio)
-- [OpenWhisk](scenario-four-deploy-flightassist-leveraging-openWhisk-functions)
+
+## Deploy microservices leveraging:
+
+4. [Cloud Foundry](#scenario-one-deploy-flightassist-microservices-on-cloud-foundry-1)
+5. [Kubernetes Cluster](#scenario-two-deploy-flightassist-microservices-on-kubernetes-cluster)
+6. [Istio](#scenario-three-deploy-flightassist-microservices-on-istio)
+7. [OpenWhisk](scenario-four-deploy-flightassist-leveraging-openWhisk-functions)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 

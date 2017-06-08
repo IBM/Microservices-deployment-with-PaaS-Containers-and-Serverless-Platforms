@@ -6,6 +6,11 @@ applications:
   domain: mybluemix.net
   buildpack: python_buildpack
   path: .
+  services:
+    - myweatherinsights
   env: 
     DEPLOY: cloudfoundry
-    WEATHER_URL: fill_In_Here
+declared-services:
+  - myweatherinsights:
+      label: weatherinsights
+      plan: Free-v2

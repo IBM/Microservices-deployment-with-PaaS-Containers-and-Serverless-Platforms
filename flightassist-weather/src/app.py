@@ -52,6 +52,9 @@ if __name__ == '__main__':
         with open('/run/secrets/service-bind/binding', 'r') as url_secret:
                 data = json.loads(url_secret.read())
                 WEATHER_EP=data['url']
+    elif deploy_mode == 'cloudfoundry':  
+        data = json.loads(os.environ['VCAP_SERVICES'])
+        WEATHER_EP = data['weatherinsights'][0]['credentials']['url']
     else:
         WEATHER_EP = os.environ['WEATHER_URL']
 

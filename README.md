@@ -237,17 +237,20 @@ First, you want to delete all the services and deployments from the previous sce
 kubectl delete -f flightassist.yaml
 ```
 
+Now, grab your isito-ingress IP:Port.
+
+```bash
+echo $(kubectl get po -l istio=ingress -o jsonpath={.items[0].status.hostIP}):$(kubectl get svc istio-ingress -o jsonpath={.spec.ports[0].nodePort})
+```
+
+Then, edit the `flightassist.yaml` file and replace your **BASE_URL** with `http://<isito-ingress IP:Port>`
+> You also can remove `type:NodePort` on *flightassist-service* because we will access our application via isito-ingress.
+
 Next, deploy ingress to connect the microservices and inject Istio envoys on Flightassist and Weather Microservice. 
 
 ```bash
 kubectl create -f ingress.yaml
 kubectl create -f <(istioctl kube-inject -f flightassist.yaml --includeIPRanges=172.30.0.0/16,172.20.0.0/16)
-```
-
-Now, grab your isito-ingress IP:Port.
-
-```bash
-echo $(kubectl get po -l istio=ingress -o jsonpath={.items[0].status.hostIP}):$(kubectl get svc istio-ingress -o jsonpath={.spec.ports[0].nodePort})
 ```
 
 Congratulation, now your Flightassist application should be running on `http://<isito-ingress IP:Port>`.

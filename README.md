@@ -351,7 +351,7 @@ It's hard to compare the different technologies toe to toe since they are target
 
 **Istio**: Addtion to Kubernetes; Provide load balancing and other features; Needs to know the "envoy" concept.   
 
-**OpenWhisk**: Serverless, event triggering; low cost; Single function based, doesn't work for large apps; Stateless.
+**OpenWhisk**: Serverless, event triggering; low cost; function based, doesn't work for large apps; Stateless.
 
 ## Code Structure
 

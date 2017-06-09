@@ -4,7 +4,7 @@
 
 PaaS platforms like Cloud Foundry, container orchestrators like Kubernetes, Serverless platforms like OpenWhisk and Service-mesh like Istio are all great technologies to deploy and manage your microservices on. Common wisdom says there is no such thing as too many choices, but abundance of choices can lead to analysis paralysis.  In this code we look at deployment experience the different platforms provide, and what do we gain and loose by choosing one against another. 
 
-We start with a sample Node.js monolithic application, Flightassist, factor it into two microservices, and then use it for demonstrating and comparing various deployment technologies. A set of trade-offs and comparisons can be made between these deployment models, and this application provides a basis for those discussions.
+We start with a sample Node.js monolithic application, Flightassist, factor it into two microservices, and then use it for demonstrating and comparing various deployment technologies. A set of trade-offs and comparisions can be made between these deployment models, and this application provides a basis for those discussions.
 
 ![architecure-diagram](images/paas-containers.png)
 
@@ -117,7 +117,7 @@ Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-fl
 
 # 3. Factor monolithic application into microservices and test
 
-To factor the application into microservices, we add a python microservice to the picture. Instead of directly accessing the apis from Node app, the python program will serve as a proxy to query.
+To factor the application into microservices, we add a python microservice to the picture. Instead of directly accessing the apis from Node app, the python program will serve as a proxy to query. This step tests the two microservices and associated dockerfiles which are created.
 
 First, install [Docker CLI](https://www.docker.com/community-edition#/download).
 
@@ -139,9 +139,9 @@ Now, your FlightAssist application should be running on http://localhost:3000/
 
 # 4. Deploy Flightassist microservices on Cloud Foundry
 
-Make sure you have both developer accounts mentioned in prerequisites. Also make sure you have cloudant and weatherinsights services created as listed in step 1. 
+Make sure you have both developer accounts mentioned in prerequisites. Also make sure you have cloudant and weatherinsights services created as listed in [step 1](#1-create-your-cloudant-database-and-insights-for-weather-service). 
 
-In this scenario, we take the Flightassist which is factored in microservices. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
+In this scenario, we take the Flightassist which is factored in microservices. This step tests the two microservices and associated dockerfiles which are created. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
 
 Now we push the python application.
 ```

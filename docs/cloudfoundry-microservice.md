@@ -57,9 +57,9 @@ You can now test the apps by going to http://<i>name2</i>.mybluemix.net
 
 | File                                     | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
-| [flightassist.js](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| [flightassist.js](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
 | All JavaScript files (main_application/*.js)         | The implementation of the flightstats, tripIt, and weather information, shared by all deployment options |
-| [app.py](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
-| [Procfile and requirements.txt](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/flightassist-weather/)| Description of the microservice to be deployed |
-| [package.json](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/main_application/package.json)     | List the packages required by the application |
-| [manifest.yml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/main_application/manifest.yml)     | Description of the application to be deployed |
+| [app.py](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
+| [Procfile and requirements.txt](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/tree/master/flightassist-weather/)| Description of the microservice to be deployed |
+| [package.json](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/package.json)     | List the packages required by the application |
+| [manifest.yml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/manifest.yml)     | Description of the application to be deployed |

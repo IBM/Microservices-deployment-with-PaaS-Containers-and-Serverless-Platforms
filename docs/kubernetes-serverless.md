@@ -66,9 +66,9 @@ Congratulation, now your Flightassist application should be running on `http://<
 
 | File                                     | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
-| [flightassist.js](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
-| [weather.js](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/main_application/weather.js)       | Trigger actions in OpenWhisk to get the weather information |
+| [flightassist.js](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| [weather.js](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/weather.js)       | Trigger actions in OpenWhisk to get the weather information |
 | All JavaScript files (main_application/*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
-| [package.json](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/main_application/package.json)         | List the packages required by the application |
-| [Dockerfile.local](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/main_application/Dockerfile.local)         | Description of the Docker image          |
-| [flightassist_serverless.yaml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/flightassist_serverless.yaml) and [secret.yaml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
+| [package.json](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/package.json)         | List the packages required by the application |
+| [Dockerfile.local](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/Dockerfile.local)         | Description of the Docker image          |
+| [flightassist_serverless.yaml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/flightassist_serverless.yaml) and [secret.yaml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |

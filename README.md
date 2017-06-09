@@ -134,6 +134,48 @@ docker-compose up
 Now, your FlightAssist application should be running on http://localhost:3000/
 
 # Scenario One: Deploy Flightassist microservices on Cloud Foundry
+In this scenario, we want to break down Flightassist to multiple apps. Since Cloud Foundry apps(warden containers) are not allowed to talk privately, they need to communicate via public route.
+
+First, make sure you have cloudant and weatherinsights services are created as listed in step 1. And make sure you have both developer accounts mentioned in prerequisites.
+
+Now we push the python application.
+```
+cf push <name1> -f path-to/flightassist-weather/manifest.yml
+```
+**make sure you pick a unique name for the app.**
+This will bring up the first app we need.
+The output should look like:
+```
+requested state: started
+instances: 1/1
+usage: 256M x 1 instances
+urls: <name1>.mybluemix.net
+last uploaded: Thu Jun 8 21:36:15 UTC 2017
+stack: unknown
+buildpack: python_buildpack
+```
+And we need the **urls** for next step.   
+Now we will push the second app, but **without starting** it.
+```
+cf push <name2> -f path-to/main_application/manifest.yml --no-start
+```
+**make sure you pick a unique name for the app, too.**
+
+Now we inject the environment variables as in monolithic deployment:
+ - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
+ - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
+ - `TRIPIT_API_KEY` : API key assigned by TripIt
+ - `TRIPIT_API_SECRET` : API secret assigned by TripIt
+ - `BASE_URL`: You URL for accessing your application. In the format **https://**{app_name}.mybluemix.net**/**
+
+Plus, a couple more since we have two apps:
+ - `USE_WEATHER_SERVICE`: true
+ - `MICROSERVICE_URL`: <i>name1</i>.mybluemix.net
+ 
+Now we start the 2nd app:
+`cf start <name2>`
+
+You can now test the apps by going to http://<i>name2</i>.mybluemix.net
 
 # Scenario Two: Deploy Flightassist microservices on Kubernetes Cluster
 

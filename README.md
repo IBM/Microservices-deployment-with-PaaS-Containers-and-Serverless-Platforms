@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms.svg?branch=master)](https://travis-ci.org/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms)
 
-# Navigate application deplyoment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
+# Navigate application deployment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
 PaaS platforms like Cloud Foundry, container orchestrators like Kubernetes, Serverless platforms like OpenWhisk and Service-mesh like Istio are all great technologies to deploy and manage your microservices on. Common wisdom says there is no such thing as too many choices, but abundance of choices can lead to analysis paralysis.  In this code we look at deployment experience the different platforms provide, and what do we gain and loose by choosing one against another. 
 

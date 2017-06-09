@@ -141,7 +141,7 @@ Now, your FlightAssist application should be running on http://localhost:3000/
 
 Make sure you have both developer accounts mentioned in prerequisites. Also make sure you have cloudant and weatherinsights services created as listed in [step 1](#1-create-your-cloudant-database-and-insights-for-weather-service). 
 
-In this scenario, we take the Flightassist which is factored in microservices. This step tests the two microservices which are created. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
+In this scenario, we take the Flightassist which is factored in microservices. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
 
 We first push the python microservice.
 ```
@@ -229,7 +229,10 @@ Congratulation, now your Flightassist application should be running on `http://<
 
 # 6. Deploy Flightassist microservices on Istio
 
+Istio is an open platform that provides a uniform way to connect, manage, and secure microservices. Istio is the result of a joint collaboration between IBM, Google and Lyft as a means to support traffic flow management, access policy enforcement and the telemetry data aggregation between microservices, all without requiring changes to the code
+
 ## 6.1 Installing Istio in your Cluster
+
 ### Download the Istio source
   1. Download the latest Istio release for your OS: [Istio releases](https://github.com/istio/istio/releases)  
   2. Extract and go to the root directory.
@@ -304,7 +307,7 @@ Congratulation, now your Flightassist application should be running on `http://<
 
 # 7. Deploy Flightassist leveraging OpenWhisk functions
 
-In this scenario, we will deploy Flightassist with serverless to show how you could replace your microservices with OpenWhisk actions. 
+In this scenario, we will deploy Flightassist with a function to show how you could replace your microservices with OpenWhisk actions. 
 
 **Important**: You must complete [scenario two for Kubernetes Clusters](#2-kubernetes-clusters) in order to proceed the following steps.
 
@@ -318,7 +321,7 @@ Then, install [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli
 
 Next, edit `flightassist_serverless.yaml` and replace the `<namespace>` with your own namespace, `<your-app-end-point-url>` with your node ip and nodeport, and `<your-openwhisk-auth>` with your OpenWhisk authentication. You can run `wsk property get --auth | awk '{print $3}'` to view your OpenWhisk authentication.
 
-Now, let's deploy the new flightassist app with serverless.
+Now, let's deploy the new flightassist app with serverless capability
 
 ```bash
 kubectl create -f flightassist_serverless.yaml
@@ -337,6 +340,18 @@ Once you added a new plan and you have your Flightassist running, open your Flig
 Now you can see the most recent flight status and weather for all your flights within 24 hours.
 
 ![Flightassist status](images/status.png)
+
+# Summary
+
+It's hard to compare the different technologies toe to toe since they are targeted for different use cases. However,we can get a sense of their pros and cons from the above example.
+
+**Cloud Foundry**: Developer Centric; Developers don't have to build or maintain containers; Support various programming languages and libraries; Large bases of services; Kind of hacky to deploy multi apps; Needs to know CF functions well to manage.    
+
+**Kubernetes**: Orchestration tool that manages complicated container delolyments well; Large services available ;Developer has to build and maintain containers in the repositories.   
+
+**Istio**: Addtion to Kubernetes; Provide load balancing and other features; Needs to know the "envoy" concept.   
+
+**OpenWhisk**: Serverless, event triggering; low cost; Single function based, doesn't work for large apps; Stateless.
 
 ## Code Structure
 
@@ -382,19 +397,6 @@ Now you can see the most recent flight status and weather for all your flights w
 | [package.json](main_application/package.json)         | List the packages required by the application |
 | [Dockerfile.local](main_application/Dockerfile.local)         | Description of the Docker image          |
 | [flightassist_serverless.yaml](flightassist_serverless.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
-
-# Comparisons
-
-It's hard to compare the different technologies toe to toe since they are targeted for different use cases. However,we can get a sense of their pros and cons from the above example.
-
-Cloud Foundry: Developer Centric; Developers don't have to build or maintain containers; Support various programming languages and libraries; Large bases of services; Kind of hacky to deploy multi apps; Needs to know CF functions well to manage.    
-Kubernetes: Orchestration tool that manages complicated container delolyments well; Large services available ;Developer has to build and maintain containers in the repositories.   
-
-Istio: Addtion to Kubernetes; Provide load balancing and other features; Needs to know the "envoy" concept.   
-
-OpenWhisk: Servless, event triggering; low cost; Single function based, doesn't work for large apps; Stateless.
-
-
 
 # Reference 
 

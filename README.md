@@ -51,7 +51,7 @@ Then, click **View logs and history** under Kubernetes Deploy stage in your pipe
 
 # Steps
 
-## Part A: Deploy, test and factor Monolithic application into microservices:
+## Part A: Deploy, test and factor monolithic application into microservices:
 
 1. [Provision application services - Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
 2. [Deploy monolithic application](#2-deploy-monolithic-flightassist-application-using-cloud-foundry)

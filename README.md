@@ -57,10 +57,10 @@ Then, click **View logs and history** under Kubernetes Deploy stage in your pipe
 
 ## Deploy microservices leveraging:
 
-4. [Cloud Foundry](#scenario-one-deploy-flightassist-microservices-on-cloud-foundry-1)
-5. [Kubernetes Cluster](#scenario-two-deploy-flightassist-microservices-on-kubernetes-cluster)
-6. [Istio](#scenario-three-deploy-flightassist-microservices-on-istio)
-7. [OpenWhisk](scenario-four-deploy-flightassist-leveraging-openWhisk-functions)
+ - [Cloud Foundry](#scenario-one-deploy-flightassist-microservices-on-cloud-foundry-1)
+ - [Kubernetes Cluster](#scenario-two-deploy-flightassist-microservices-on-kubernetes-cluster)
+ - [Istio](#scenario-three-deploy-flightassist-microservices-on-istio)
+ - [OpenWhisk](scenario-four-deploy-flightassist-leveraging-openWhisk-functions)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
@@ -88,7 +88,7 @@ curl -k -X PUT {your-cloudantURL}/trips
 curl -k -X PUT {your-cloudantURL}/weather
 curl -k -X PUT {your-cloudantURL}/connections
 ```
-# Deploy monolithic Flightassist application using Cloud Foundry
+# 2. Deploy monolithic Flightassist application using Cloud Foundry
 
 In this scenario, we will deploy Flightassist as a monolithic application and host it on Cloud Foundry.
 
@@ -114,7 +114,7 @@ application.
 
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
-# Factor monolithic application into microservices and test
+# 3. Factor monolithic application into microservices and test
 
 First, install [Docker CLI](https://www.docker.com/community-edition#/download).
 

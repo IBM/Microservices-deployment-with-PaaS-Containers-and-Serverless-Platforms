@@ -6,8 +6,6 @@ PaaS platforms like Cloud Foundry, container orchestrators like Kubernetes, Serv
 
 We start with a sample Node.js monolithic application, Flightassist, factor it into two microservices, and then use it for demonstrating and comparing various deployment technologies. A set of trade-offs and comparisons can be made between these deployment models, and this application provides a basis for those discussions.
 
-To factor the application into microservices, we add a python microservice to the picture. Instead of directly accessing the apis from Node app, the python program will serve as a proxy to query.
-
 ![architecure-diagram](images/paas-containers.png)
 
 #### [Scenario One: Deploy Flightassist monolithic application on Cloud Foundry](#2-deploy-monolithic-flightassist-application-using-cloud-foundry) 
@@ -119,6 +117,8 @@ Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-fl
 
 # 3. Factor monolithic application into microservices and test
 
+To factor the application into microservices, we add a python microservice to the picture. Instead of directly accessing the apis from Node app, the python program will serve as a proxy to query.
+
 First, install [Docker CLI](https://www.docker.com/community-edition#/download).
 
 Next, edit the `docker-compose.yaml` file and add your credentials for **FLIGHTSTATS_APP_ID**, **FLIGHTSTATS_APP_KEY**, **TRIPIT_API_KEY**,**TRIPIT_API_SECRET**,**CLOUDANT_URL**, and **WEATHER_URL**. You can run the following command to view your service credentials.
@@ -135,13 +135,13 @@ docker build -f main_application/Dockerfile.local -t flightassist main_applicati
 docker build -f flightassist-weather/Dockerfile.alpine -t weather-service flightassist-weather
 docker-compose up
 ```
-
 Now, your FlightAssist application should be running on http://localhost:3000/
 
 # 4. Deploy Flightassist microservices on Cloud Foundry
-In this scenario, we want to break down Flightassist to multiple apps. Since Cloud Foundry apps(warden containers) are not allowed to talk privately, they need to communicate via public route.
 
-First, make sure you have cloudant and weatherinsights services are created as listed in step 1. And make sure you have both developer accounts mentioned in prerequisites.
+Make sure you have both developer accounts mentioned in prerequisites. Also make sure you have cloudant and weatherinsights services created as listed in step 1. 
+
+In this scenario, we take the Flightassist which is factored in microservices. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
 
 Now we push the python application.
 ```

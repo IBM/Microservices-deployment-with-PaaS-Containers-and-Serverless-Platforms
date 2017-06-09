@@ -57,10 +57,10 @@ Then, click **View logs and history** under Kubernetes Deploy stage in your pipe
 
 ## Deploy microservices leveraging:
 
- - [Cloud Foundry](#scenario-one-deploy-flightassist-microservices-on-cloud-foundry-1)
- - [Kubernetes Cluster](#scenario-two-deploy-flightassist-microservices-on-kubernetes-cluster)
- - [Istio](#scenario-three-deploy-flightassist-microservices-on-istio)
- - [OpenWhisk](scenario-four-deploy-flightassist-leveraging-openWhisk-functions)
+4. [Cloud Foundry](#deploy-flightassist-microservices-on-cloud-foundry-1)
+5. [Kubernetes Cluster](#deploy-flightassist-microservices-on-kubernetes-cluster)
+6. [Istio](#deploy-flightassist-microservices-on-istio)
+7. [OpenWhisk](deploy-flightassist-leveraging-openWhisk-functions)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
@@ -135,7 +135,7 @@ docker-compose up
 
 Now, your FlightAssist application should be running on http://localhost:3000/
 
-# Scenario One: Deploy Flightassist microservices on Cloud Foundry
+# 4.  Deploy Flightassist microservices on Cloud Foundry
 In this scenario, we want to break down Flightassist to multiple apps. Since Cloud Foundry apps(warden containers) are not allowed to talk privately, they need to communicate via public route.
 
 First, make sure you have cloudant and weatherinsights services are created as listed in step 1. And make sure you have both developer accounts mentioned in prerequisites.
@@ -179,7 +179,7 @@ Now we start the 2nd app:
 
 You can now test the apps by going to http://<i>name2</i>.mybluemix.net
 
-# Scenario Two: Deploy Flightassist microservices on Kubernetes Cluster
+# 5.  Deploy Flightassist microservices on Kubernetes Cluster
 
 In this scenario, we want to break down Flightassist to multiple containers. Therefore, we will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Docker Compose or Kubernetes. 
 
@@ -224,10 +224,10 @@ kubectl create -f flightassist.yaml
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 
-# Scenario Three: Deploy Flightassist microservices on Istio
+# 6.  Deploy Flightassist microservices on Istio
 
-## 1. Installing Istio in your Cluster
-### 1.1 Download the Istio source
+## 6.1 Installing Istio in your Cluster
+### Download the Istio source
   1. Download the latest Istio release for your OS: [Istio releases](https://github.com/istio/istio/releases)  
   2. Extract and go to the root directory.
   3. Copy the `istioctl` bin to your local bin  
@@ -236,7 +236,7 @@ Congratulation, now your Flightassist application should be running on `http://<
   ## example for macOS
   ```
 
-### 1.2 Grant Permissions  
+### Grant Permissions  
   1. Run the following command to check if your cluster has RBAC  
   ```bash
   $ kubectl api-versions | grep rbac
@@ -256,7 +256,7 @@ Congratulation, now your Flightassist application should be running on `http://<
 
     * If **your cluster has no RBAC** enabled, proceed to installing the **Control Plane**.
 
-### 1.3 Install the [Istio Control Plane](https://istio.io/docs/concepts/what-is-istio/overview.html#architecture) in your cluster  
+### Install the [Istio Control Plane](https://istio.io/docs/concepts/what-is-istio/overview.html#architecture) in your cluster  
 ```bash
 kubectl apply -f install/kubernetes/istio.yaml
 cd ..
@@ -271,7 +271,7 @@ istio-manager-251184572-x9dd4     2/2       Running   0
 istio-mixer-2499357295-kn4vq      1/1       Running   0       
 ```
 
-## 2. Inject Istio Envoys on Flightassist.
+## 6.2. Inject Istio Envoys on Flightassist.
 
 **Important**: You must complete [scenario two for Kubernetes Clusters](#2-kubernetes-clusters) in order to proceed the following steps.
 
@@ -299,7 +299,7 @@ kubectl create -f <(istioctl kube-inject -f flightassist.yaml --includeIPRanges=
 
 Congratulation, now your Flightassist application should be running on `http://<isito-ingress IP:Port>`.
 
-# Scenario Four: Deploy Flightassist leveraging OpenWhisk functions
+# 7.  Deploy Flightassist leveraging OpenWhisk functions
 
 In this scenario, we will deploy Flightassist with serverless to show how you could replace your microservices with OpenWhisk actions. 
 

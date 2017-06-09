@@ -141,9 +141,9 @@ Now, your FlightAssist application should be running on http://localhost:3000/
 
 Make sure you have both developer accounts mentioned in prerequisites. Also make sure you have cloudant and weatherinsights services created as listed in [step 1](#1-create-your-cloudant-database-and-insights-for-weather-service). 
 
-In this scenario, we take the Flightassist which is factored in microservices. This step tests the two microservices and associated dockerfiles which are created. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
+In this scenario, we take the Flightassist which is factored in microservices. This step tests the two microservices which are created. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
 
-Now we push the python application.
+We first push the python microservice.
 ```
 cf push <name1> -f path-to/flightassist-weather/manifest.yml
 ```
@@ -184,7 +184,7 @@ You can now test the apps by going to http://<i>name2</i>.mybluemix.net
 
 # 5. Deploy Flightassist microservices on Kubernetes Cluster
 
-In this scenario, we want to break down Flightassist to multiple containers. Therefore, we will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Docker Compose or Kubernetes. 
+In this scenario, we use the Flightassist microservices in which are in two containers. We will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Kubernetes. 
 
 First, follow the [Kubernetes Cluster Tutorial](https://github.com/IBM/container-journey-template) to create your own cluster on Bluemix.
 

@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms.svg?branch=master)](https://travis-ci.org/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms)
 
-# Navigate microservices deplyoment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
+# Monlothic to Cloud-Native: Navigate application deplyoment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
 Microservices and containers are now influencing application design and deployment patterns and will continue to do so for the foreseeable future. According to one survey, 60 percent of all new applications will use cloud-enabled continuous delivery microservice architectures, DevOps, and containers. But with the proliferation of microservices, a number of deployment platforms have emerged. What do we choose and why? In this journey, we help you navigate microservices deployment options with some popular microservices platforms like Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
@@ -51,11 +51,15 @@ Then, click **View logs and history** under Kubernetes Deploy stage in your pipe
 
 # Steps
 
+## Part A: Deploy, test and factor Monolithic application into microservices:
+
 1. [Provision application services - Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
 2. [Deploy monolithic application](#2-deploy-monolithic-flightassist-application-using-cloud-foundry)
 3. [Factor monolithic application into microservices and test](#3-factor-monolithic-application-into-microservices-and-test)
+   3.1 [Microservices application codebases]()
+   3.2 [Docker containers]()
 
-## Deploy microservices leveraging:
+## Part B: Deploy microservices leveraging:
 
 4. [Cloud Foundry](#4-deploy-flightassist-microservices-on-cloud-foundry)
 5. [Kubernetes Cluster](#5-deploy-flightassist-microservices-on-kubernetes-cluster)

@@ -5,7 +5,7 @@
 Microservices and containers are now influencing application design and deployment patterns and will continue to do so for the foreseeable future. According to one survey, 60 percent of all new applications will use cloud-enabled continuous delivery microservice architectures, DevOps, and containers. But with the proliferation of microservices, a number of deployment platforms have emerged. What do we choose and why? In this journey, we help you navigate microservices deployment options with some popular microservices platforms like Cloud Foundry, Kubernetes, OpenWhisk and Istio. 
 
 We start with a sample Node.js monolithic application, flightassist, factor it into microservices, and then use it for demonstrating and comparing various deployment technologies. Specifically, a set of trade-offs and comparisons can be made between these deployment models.
-To factor the application into microservices, we'll add a python microservice to the picture. Instead of directly access the apis from Node app, the python program will serve as a proxy to query the two external services.
+To factor the application into microservices, we'll add a python microservice to the picture. Instead of directly accessing the apis from Node app, the python program will serve as a proxy to query the two external services.
 
 ![architecure-diagram](images/paas-containers.png)
 

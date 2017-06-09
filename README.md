@@ -2,10 +2,11 @@
 
 # Navigate application deplyoment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
-Microservices and containers are now influencing application design and deployment patterns and will continue to do so for the foreseeable future. According to one survey, 60 percent of all new applications will use cloud-enabled continuous delivery microservice architectures, DevOps, and containers. But with the proliferation of microservices, a number of deployment platforms have emerged. What do we choose and why? In this journey, we help you navigate microservices deployment options with some popular microservices platforms like Cloud Foundry, Kubernetes, OpenWhisk and Istio. 
+PaaS platforms like Cloud Foundry, container orchestrators like Kubernetes, Serverless platforms like OpenWhisk and Service-mesh like Istio are all great technologies to deploy and manage your microservices on. Common wisdom says there is no such thing as too many choices, but abundance of choices can lead to analysis paralysis.  In this code we look at deployment experience the different platforms provide, and what do we gain and loose by choosing one against another. 
 
-We start with a sample Node.js monolithic application, flightassist, factor it into microservices, and then use it for demonstrating and comparing various deployment technologies. Specifically, a set of trade-offs and comparisons can be made between these deployment models.
-To factor the application into microservices, we'll add a python microservice to the picture. Instead of directly accessing the apis from Node app, the python program will serve as a proxy to query the two external services.
+We start with a sample Node.js monolithic application, Flightassist, factor it into two microservices, and then use it for demonstrating and comparing various deployment technologies. A set of trade-offs and comparisons can be made between these deployment models, and this application provides a basis for those discussions.
+
+To factor the application into microservices, we add a python microservice to the picture. Instead of directly accessing the apis from Node app, the python program will serve as a proxy to query.
 
 ![architecure-diagram](images/paas-containers.png)
 

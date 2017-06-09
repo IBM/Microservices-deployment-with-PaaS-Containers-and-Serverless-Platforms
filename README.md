@@ -4,16 +4,16 @@
 
 Microservices and containers are now influencing application design and deployment patterns and will continue to do so for the foreseeable future. According to one survey, 60 percent of all new applications will use cloud-enabled continuous delivery microservice architectures, DevOps, and containers. But with the proliferation of microservices, a number of deployment platforms have emerged. What do we choose and why? In this journey, we help you navigate microservices deployment options with some popular microservices platforms like Cloud Foundry, Kubernetes, OpenWhisk and Istio. 
 
-We start with a sample Node.js monolithic aapplication, flightassist, factor it into microservices, and then use it for demonstrating and comparing various deployment technologies. Specifically, a set of trade-offs and comparisons can be made between these deployment models, and this application is a proving ground for those discussions. 
+We start with a sample Node.js monolithic application, flightassist, factor it into microservices, and then use it for demonstrating and comparing various deployment technologies. Specifically, a set of trade-offs and comparisons can be made between these deployment models.
+To factor the application into microservices, we'll add a python microservice to the picture. Instead of directly access the apis from Node app, the python program will serve as a proxy to query the two external services.
 
 ![architecure-diagram](images/paas-containers.png)
 
-To demostrate the multi container situation, we'll add a python program to the picture. Instead of directly access the apis from Node app, the python program will serve as a proxy to query the two services.The following scenarios are based on that flow.
-
-#### [Scenario One: Deploy Flightassist microservices on Cloud Foundry](#4-deploy-flightassist-microservices-on-cloud-foundry) 
-#### [Scenario Two: Deploy Flightassist microservices on Kubernetes Clusters](#5-deploy-flightassist-microservices-on-kubernetes-cluster)
-#### [Scenario Three: Deploy Flightassist microservices on Istio](#6-deploy-flightassist-microservices-on-istio)
-#### [Scenario Four: Deploy Flightassist microservices augmented with functions on OpenWhisk](#7-deploy-flightassist-leveraging-openwhisk-functions)
+#### [Scenario One: Deploy Flightassist monolithic application on Cloud Foundry](#2-deploy-monolithic-flightassist-application-using-cloud-foundry) 
+#### [Scenario Two: Deploy Flightassist microservices on Cloud Foundry](#4-deploy-flightassist-microservices-on-cloud-foundry) 
+#### [Scenario Three: Deploy Flightassist microservices on Kubernetes Clusters](#5-deploy-flightassist-microservices-on-kubernetes-cluster)
+#### [Scenario Four: Deploy Flightassist microservices on Istio](#6-deploy-flightassist-microservices-on-istio)
+#### [Scenario Five: Deploy Flightassist microservices augmented with functions on OpenWhisk](#7-deploy-flightassist-leveraging-openwhisk-functions)
 
 ## Included Components
 The scenarios are accomplished by using:

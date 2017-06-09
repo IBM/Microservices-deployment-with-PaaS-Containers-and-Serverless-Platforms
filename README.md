@@ -97,12 +97,10 @@ curl -k -X PUT {your-cloudantURL}/connections
 
 In this scenario, we will deploy Flightassist as a monolithic application and host it on Cloud Foundry.
 
-First, install [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html).
-
-Then, type the following commands to push your application with your own unique application name.
+First, type the following commands to push your application with your own unique application name.
 
 ```bash
-cf push {your_unique_app_name} -f main_application/manifest.yml
+bx app push {your_unique_app_name} -f main_application/manifest.yml
 ```
 
 Now, go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:

@@ -6,7 +6,7 @@ In this scenario, we take the Flightassist which is factored in microservices. S
 
 We first push the python microservice.
 ```
-cf push <name1> -f path-to/flightassist-weather/manifest.yml
+bx app push <name1> -f path-to/flightassist-weather/manifest.yml
 ```
 **make sure you pick a unique name for the app.**   
 This will bring up the first app we need.
@@ -23,7 +23,7 @@ buildpack: python_buildpack
 And we need the **urls** for next step.   
 Now we will push the second app, but **without starting** it.
 ```
-cf push <name2> -f path-to/main_application/manifest.yml --no-start
+bx app push <name2> -f path-to/main_application/manifest.yml --no-start
 ```
 **make sure you pick a unique name for the app, too.**
 
@@ -39,7 +39,7 @@ Plus, a couple more since we have two apps:
  - `MICROSERVICE_URL`: <i>name1</i>.mybluemix.net
  
 Now we start the 2nd app:
-`cf start <name2>`
+`bx app start <name2>`
 
 You can now test the apps by going to http://<i>name2</i>.mybluemix.net
 

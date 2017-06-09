@@ -2,7 +2,7 @@
 
 # Navigate application deployment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
-PaaS platforms like Cloud Foundry, container orchestrators like Kubernetes, Serverless platforms like OpenWhisk and Service-mesh like Istio are all great technologies to deploy and manage your microservices on. Common wisdom says there is no such thing as too many choices, but abundance of choices can lead to analysis paralysis.  In this code we look at deployment experience the different platforms provide, and what do we gain and loose by choosing one against another. 
+PaaS platforms like Cloud Foundry, container orchestrators like Kubernetes, Serverless platforms like OpenWhisk and Service-mesh like Istio are all great technologies to deploy and manage your microservices on. Common wisdom says there is no such thing as too many choices, but abundance of choices can lead to analysis paralysis.  In this code we look at deployment experience the different platforms provide, and what do we gain and loose by choosing one vs another. 
 
 We start with a sample Node.js monolithic application, Flightassist, factor it into two microservices, and then use it for demonstrating and comparing various deployment technologies. A set of trade-offs and comparisions can be made between these deployment models, and this application provides a basis for those discussions.
 

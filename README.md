@@ -1,17 +1,18 @@
 [![Build Status](https://travis-ci.org/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms.svg?branch=master)](https://travis-ci.org/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms)
 
-# Navigate microservices deplyoment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
+# Navigate application deployment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
-Microservices and containers are now influencing application design and deployment patterns and will continue to do so for the foreseeable future. According to one survey, 60 percent of all new applications will use cloud-enabled continuous delivery microservice architectures, DevOps, and containers. But with the proliferation of microservices, a number of deployment platforms have emerged. What do we choose and why? In this journey, we help you navigate microservices deployment options with some popular microservices platforms like Cloud Foundry, Kubernetes, OpenWhisk and Istio
+PaaS platforms like Cloud Foundry, container orchestrators like Kubernetes, Serverless platforms like OpenWhisk and Service-mesh like Istio are all great technologies to deploy and manage your microservices on. Common wisdom says there is no such thing as too many choices, but abundance of choices can lead to analysis paralysis.  In this code we look at deployment experience the different platforms provide, and what do we gain and loose by choosing one vs another. 
 
-We use a sample Node.js application, flightassist for demonstrating and comparing various microservices deployment technologies. Specifically, a set of trade-offs and comparisons can be made between these deployment models, and this application is a proving ground for those discussions. 
+We start with a sample Node.js monolithic application, Flightassist, factor it into two microservices, and then use it for demonstrating and comparing various deployment technologies. A set of trade-offs and comparisions can be made between these deployment models, and this application provides a basis for those discussions.
 
 ![architecure-diagram](images/paas-containers.png)
 
-#### Scenario One: Deploy Flightassist microservices on Cloud Foundry 
-#### Scenario Two: Deploy Flightassist microservices on Kubernetes Clusters
-#### Scenario Three: Deploy Flightassist microservices on Istio
-#### Scenario Four: Deploy Flightassist microservices augmented with functions on OpenWhisk
+#### [Scenario One: Deploy Flightassist monolithic application on Cloud Foundry](#2-deploy-monolithic-flightassist-application-using-cloud-foundry) 
+#### [Scenario Two: Deploy Flightassist microservices on Cloud Foundry](#4-deploy-flightassist-microservices-on-cloud-foundry) 
+#### [Scenario Three: Deploy Flightassist microservices on Kubernetes Clusters](#5-deploy-flightassist-microservices-on-kubernetes-cluster)
+#### [Scenario Four: Deploy Flightassist microservices on Istio](#6-deploy-flightassist-microservices-on-istio)
+#### [Scenario Five: Deploy Flightassist microservices augmented with functions on OpenWhisk](#7-deploy-flightassist-leveraging-openwhisk-functions)
 
 ## Included Components
 The scenarios are accomplished by using:
@@ -49,16 +50,18 @@ Then, click **View logs and history** under Kubernetes Deploy stage in your pipe
 
 # Steps
 
+## Part A: Deploy, test and factor monolithic application into microservices:
+
 1. [Provision application services - Cloudant Database and Insights for Weather Service](#1-create-your-cloudant-database-and-insights-for-weather-service)
-2. [Deploy monolithic application](#deploy-monolithic-flightassist-application-using-cloud-foundry)
-3. [Factor monolithic application into microservices and test](#factor-monolithic-application-into-microservices-and-test)
+2. [Deploy monolithic application](#2-deploy-monolithic-flightassist-application-using-cloud-foundry)
+3. [Factor monolithic application into microservices and test](#3-factor-monolithic-application-into-microservices-and-test)
+ 
+## Part B: Deploy microservices leveraging:
 
-## Deploy microservices leveraging:
-
-4. [Cloud Foundry](#scenario-one-deploy-flightassist-microservices-on-cloud-foundry-1)
-5. [Kubernetes Cluster](#scenario-two-deploy-flightassist-microservices-on-kubernetes-cluster)
-6. [Istio](#scenario-three-deploy-flightassist-microservices-on-istio)
-7. [OpenWhisk](scenario-four-deploy-flightassist-leveraging-openWhisk-functions)
+4. [Cloud Foundry](#4-deploy-flightassist-microservices-on-cloud-foundry)
+5. [Kubernetes Cluster](#5-deploy-flightassist-microservices-on-kubernetes-cluster)
+6. [Istio](#6-deploy-flightassist-microservices-on-istio)
+7. [OpenWhisk](#7-deploy-flightassist-leveraging-openwhisk-functions)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
@@ -86,7 +89,7 @@ curl -k -X PUT {your-cloudantURL}/trips
 curl -k -X PUT {your-cloudantURL}/weather
 curl -k -X PUT {your-cloudantURL}/connections
 ```
-# Deploy monolithic Flightassist application using Cloud Foundry
+# 2. Deploy monolithic Flightassist application using Cloud Foundry
 
 In this scenario, we will deploy Flightassist as a monolithic application and host it on Cloud Foundry.
 
@@ -112,7 +115,9 @@ application.
 
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
-# Factor monolithic application into microservices and test
+# 3. Factor monolithic application into microservices and test
+
+To factor the application into microservices, we add a python microservice to the picture. Instead of directly accessing the apis from Node app, the python program will serve as a proxy to query. This step tests the two microservices and associated dockerfiles which are created.
 
 First, install [Docker CLI](https://www.docker.com/community-edition#/download).
 
@@ -130,14 +135,56 @@ docker build -f main_application/Dockerfile.local -t flightassist main_applicati
 docker build -f flightassist-weather/Dockerfile.alpine -t weather-service flightassist-weather
 docker-compose up
 ```
-
 Now, your FlightAssist application should be running on http://localhost:3000/
 
-# Scenario One: Deploy Flightassist microservices on Cloud Foundry
+# 4. Deploy Flightassist microservices on Cloud Foundry
 
-# Scenario Two: Deploy Flightassist microservices on Kubernetes Cluster
+Make sure you have both developer accounts mentioned in prerequisites. Also make sure you have cloudant and weatherinsights services created as listed in [step 1](#1-create-your-cloudant-database-and-insights-for-weather-service). 
 
-In this scenario, we want to break down Flightassist to multiple containers. Therefore, we will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Docker Compose or Kubernetes. 
+In this scenario, we take the Flightassist which is factored in microservices. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
+
+We first push the python microservice.
+```
+cf push <name1> -f path-to/flightassist-weather/manifest.yml
+```
+**make sure you pick a unique name for the app.**   
+This will bring up the first app we need.
+The output should look like:
+```
+requested state: started
+instances: 1/1
+usage: 256M x 1 instances
+urls: <name1>.mybluemix.net
+last uploaded: Thu Jun 8 21:36:15 UTC 2017
+stack: unknown
+buildpack: python_buildpack
+```
+And we need the **urls** for next step.   
+Now we will push the second app, but **without starting** it.
+```
+cf push <name2> -f path-to/main_application/manifest.yml --no-start
+```
+**make sure you pick a unique name for the app, too.**
+
+Now we inject the environment variables as in monolithic deployment:
+ - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
+ - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
+ - `TRIPIT_API_KEY` : API key assigned by TripIt
+ - `TRIPIT_API_SECRET` : API secret assigned by TripIt
+ - `BASE_URL`: You URL for accessing your application. In the format **https://**{app_name}.mybluemix.net**/**
+
+Plus, a couple more since we have two apps:
+ - `USE_WEATHER_SERVICE`: true
+ - `MICROSERVICE_URL`: <i>name1</i>.mybluemix.net
+ 
+Now we start the 2nd app:
+`cf start <name2>`
+
+You can now test the apps by going to http://<i>name2</i>.mybluemix.net
+
+# 5. Deploy Flightassist microservices on Kubernetes Cluster
+
+In this scenario, we use the Flightassist microservices in which are in two containers. We will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Kubernetes. 
 
 First, follow the [Kubernetes Cluster Tutorial](https://github.com/IBM/container-journey-template) to create your own cluster on Bluemix.
 
@@ -180,10 +227,13 @@ kubectl create -f flightassist.yaml
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
 
-# Scenario Three: Deploy Flightassist microservices on Istio
+# 6. Deploy Flightassist microservices on Istio
 
-## 1. Installing Istio in your Cluster
-### 1.1 Download the Istio source
+Istio is an open platform that provides a uniform way to connect, manage, and secure microservices. Istio is the result of a joint collaboration between IBM, Google and Lyft as a means to support traffic flow management, access policy enforcement and the telemetry data aggregation between microservices, all without requiring changes to the code
+
+## 6.1 Installing Istio in your Cluster
+
+### Download the Istio source
   1. Download the latest Istio release for your OS: [Istio releases](https://github.com/istio/istio/releases)  
   2. Extract and go to the root directory.
   3. Copy the `istioctl` bin to your local bin  
@@ -192,7 +242,7 @@ Congratulation, now your Flightassist application should be running on `http://<
   ## example for macOS
   ```
 
-### 1.2 Grant Permissions  
+### Grant Permissions  
   1. Run the following command to check if your cluster has RBAC  
   ```bash
   $ kubectl api-versions | grep rbac
@@ -212,7 +262,7 @@ Congratulation, now your Flightassist application should be running on `http://<
 
     * If **your cluster has no RBAC** enabled, proceed to installing the **Control Plane**.
 
-### 1.3 Install the [Istio Control Plane](https://istio.io/docs/concepts/what-is-istio/overview.html#architecture) in your cluster  
+### Install the [Istio Control Plane](https://istio.io/docs/concepts/what-is-istio/overview.html#architecture) in your cluster  
 ```bash
 kubectl apply -f install/kubernetes/istio.yaml
 cd ..
@@ -227,7 +277,7 @@ istio-manager-251184572-x9dd4     2/2       Running   0
 istio-mixer-2499357295-kn4vq      1/1       Running   0       
 ```
 
-## 2. Inject Istio Envoys on Flightassist.
+## 6.2. Inject Istio Envoys on Flightassist.
 
 **Important**: You must complete [scenario two for Kubernetes Clusters](#2-kubernetes-clusters) in order to proceed the following steps.
 
@@ -255,9 +305,9 @@ kubectl create -f <(istioctl kube-inject -f flightassist.yaml --includeIPRanges=
 
 Congratulation, now your Flightassist application should be running on `http://<isito-ingress IP:Port>`.
 
-# Scenario Four: Deploy Flightassist leveraging OpenWhisk functions
+# 7. Deploy Flightassist leveraging OpenWhisk functions
 
-In this scenario, we will deploy Flightassist with serverless to show how you could replace your microservices with OpenWhisk actions. 
+In this scenario, we will deploy Flightassist with a function to show how you could replace your microservices with OpenWhisk actions. 
 
 **Important**: You must complete [scenario two for Kubernetes Clusters](#2-kubernetes-clusters) in order to proceed the following steps.
 
@@ -271,7 +321,7 @@ Then, install [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli
 
 Next, edit `flightassist_serverless.yaml` and replace the `<namespace>` with your own namespace, `<your-app-end-point-url>` with your node ip and nodeport, and `<your-openwhisk-auth>` with your OpenWhisk authentication. You can run `wsk property get --auth | awk '{print $3}'` to view your OpenWhisk authentication.
 
-Now, let's deploy the new flightassist app with serverless.
+Now, let's deploy the new flightassist app with serverless capability
 
 ```bash
 kubectl create -f flightassist_serverless.yaml
@@ -290,6 +340,18 @@ Once you added a new plan and you have your Flightassist running, open your Flig
 Now you can see the most recent flight status and weather for all your flights within 24 hours.
 
 ![Flightassist status](images/status.png)
+
+# Summary
+
+It's hard to compare the different technologies toe to toe since they are targeted for different use cases. However,we can get a sense of their pros and cons from the above example.
+
+**Cloud Foundry**: Developer Centric; Developers don't have to build or maintain containers; Support various programming languages and libraries; Large bases of services; Kind of hacky to deploy multi apps; Needs to know CF functions well to manage.    
+
+**Kubernetes**: Orchestration tool that manages complicated container delolyments well; Large services available ;Developer has to build and maintain containers in the repositories.   
+
+**Istio**: Addtion to Kubernetes; Provide load balancing and other features; Needs to know the "envoy" concept.   
+
+**OpenWhisk**: Serverless, event triggering; low cost; function based, doesn't work for large apps; Stateless.
 
 ## Code Structure
 

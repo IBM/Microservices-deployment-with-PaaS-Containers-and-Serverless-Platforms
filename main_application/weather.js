@@ -119,12 +119,12 @@ function handleViaWeatherMicroservice(req, resp, data) {
     if (process.env.DEVMODE === "true" && process.env.DEPLOY !== "swarm") {
         if(process.env.DEPLOY === "compose"){
             host = "weather-service";
-        } else if(process.env.DEPLOY === "cloudfoundry") {
-            host = microserviceURL;
         } else{
             host = "localhost";
         }
-    } else {
+    } else if(process.env.DEPLOY === "cloudfoundry") {
+            host = microserviceURL;
+    } else{
         host = "weather-service";
     }
     var endpoint = "/weather/" + req.query.lat + "/" + req.query.lon;
@@ -137,6 +137,9 @@ function handleViaWeatherMicroservice(req, resp, data) {
         rejectUnauthorized: false
     };
 
+    if (process.env.DEPLOY === "cloudfoundry"){
+        options.port = null;
+    }
     //send the request to the Weather API
     restcall.get(options, false, function(newData) {
         // cache this data in cloudant with the current epoch ms

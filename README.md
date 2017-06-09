@@ -103,7 +103,7 @@ Now, go to https://console.ng.bluemix.net/dashboard/apps and select your applica
    - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
    - `TRIPIT_API_KEY` : API key assigned by TripIt
    - `TRIPIT_API_SECRET` : API secret assigned by TripIt
-   - `BASE_URL`: You URL for accessing your application. e.g. {app_name}.mybluemix.net
+   - `BASE_URL`: You URL for accessing your application. e.g. https://{app_name}.mybluemix.net/
 
 Your application should restart automatically but can be done manually as well
 in the UI. With the service bindings and added environment variables, the

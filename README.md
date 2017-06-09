@@ -182,6 +182,10 @@ Now we start the 2nd app:
 
 You can now test the apps by going to http://<i>name2</i>.mybluemix.net
 
+## Take away points
+To push an app, we simply use `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can eaisly be consumed by your application. When pushing multi apps that needs to communite to each other, however, it is a little hacky. Another common pratice than the environment variables we used in this example, is to bind a message queue service.
+
+
 # 5. Deploy Flightassist microservices on Kubernetes Cluster
 
 In this scenario, we use the Flightassist microservices in which are in two containers. We will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Kubernetes. 
@@ -226,6 +230,8 @@ kubectl create -f flightassist.yaml
 
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
+## Take away points
+Kubernetes is a powerful orchestration tool. In this example we get a taste of the logical concept of cluster, creating a deployment and service binding. It also has the container networking features built in. However, as a developer, you need to deal with container image and repositories.
 
 # 6. Deploy Flightassist microservices on Istio
 
@@ -305,6 +311,9 @@ kubectl create -f <(istioctl kube-inject -f flightassist.yaml --includeIPRanges=
 
 Congratulation, now your Flightassist application should be running on `http://<isito-ingress IP:Port>`.
 
+## Takeaway points
+Istio is an addon feature to manage your application traffic. It has to reside on a paltform. Other than the proxy feature we tested in the example, it also provides rich layer-7 routing, circuit breakers, policy enforcement and telemetry recording/reporting functions.
+
 # 7. Deploy Flightassist leveraging OpenWhisk functions
 
 In this scenario, we will deploy Flightassist with a function to show how you could replace your microservices with OpenWhisk actions. 
@@ -328,6 +337,15 @@ kubectl create -f flightassist_serverless.yaml
 ```
 
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. Also, you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+
+## Takeaway points
+In this example, the flightassist app is a perfect use case to use openwhisk: 
+a. It is an event triggered app, the triggering point is when it is accessed
+b. It is a stateless app, there is no sessions to manage
+c. It doesn't require persistance
+d. It performs a simple function 
+
+Many complicated apps are not so easy to be converted into servless functions.
 
 # How to Use Flightassist
 

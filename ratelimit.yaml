@@ -1,0 +1,8 @@
+rules:
+- aspects:
+  - kind: quotas
+    params:
+      quotas:
+      - descriptorName: RequestCount
+        maxAmount: 50
+        expiration: 10s

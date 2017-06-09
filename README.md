@@ -9,10 +9,10 @@ We start with a sample Node.js monolithic application, Flightassist, factor it i
 ![architecure-diagram](images/paas-containers.png)
 
 #### [Scenario One: Deploy Flightassist monolithic application on Cloud Foundry](#2-deploy-monolithic-flightassist-application-using-cloud-foundry) 
-#### [Scenario Two: Deploy Flightassist microservices on Cloud Foundry](#4-deploy-flightassist-microservices-on-cloud-foundry) 
-#### [Scenario Three: Deploy Flightassist microservices on Kubernetes Clusters](#5-deploy-flightassist-microservices-on-kubernetes-cluster)
-#### [Scenario Four: Deploy Flightassist microservices on Istio](#6-deploy-flightassist-microservices-on-istio)
-#### [Scenario Five: Deploy Flightassist microservices augmented with functions on OpenWhisk](#7-deploy-flightassist-leveraging-openwhisk-functions)
+#### [Scenario Two: Deploy Flightassist microservices on Cloud Foundry](docs/cloudfoundry-microservice.md) 
+#### [Scenario Three: Deploy Flightassist microservices on Kubernetes Clusters](docs/kubernetes-microservice.md)
+#### [Scenario Four: Deploy Flightassist microservices on Istio](docs/kubernetes-istio.md)
+#### [Scenario Five: Deploy Flightassist microservices augmented with functions on OpenWhisk](docs/kubernetes-serverless.md)
 
 ## Included Components
 The scenarios are accomplished by using:
@@ -58,10 +58,10 @@ Then, click **View logs and history** under Kubernetes Deploy stage in your pipe
  
 ## Part B: Deploy microservices leveraging:
 
-4. [Cloud Foundry](#4-deploy-flightassist-microservices-on-cloud-foundry)
-5. [Kubernetes Cluster](#5-deploy-flightassist-microservices-on-kubernetes-cluster)
-6. [Istio](#6-deploy-flightassist-microservices-on-istio)
-7. [OpenWhisk](#7-deploy-flightassist-leveraging-openwhisk-functions)
+4. [Cloud Foundry](docs/cloudfoundry-microservice.md)
+5. [Kubernetes Cluster](docs/kubernetes-microservice.md)
+6. [Istio](docs/kubernetes-istio.md)
+7. [OpenWhisk](docs/kubernetes-serverless.md)
 
 After you deployed Flightassist using any platform, you can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
@@ -140,6 +140,16 @@ docker build -f flightassist-weather/Dockerfile.alpine -t weather-service flight
 docker-compose up
 ```
 Now, your FlightAssist application should be running on http://localhost:3000/
+
+# Deploy microservices leveraging
+
+Now you know to deploy your application and microservices on your local host. So let's deploy your application and microservices on the cloud with these 4 different scenarios. You can view [Summary](#summary) to have an overview of the pros and cons for each scenarios.
+
+1. [Cloud Foundry](docs/cloudfoundry-microservice.md)
+2. [Kubernetes Cluster](docs/kubernetes-microservice.md)
+3. [Istio](docs/kubernetes-istio.md)
+4. [OpenWhisk](docs/kubernetes-serverless.md)
+
 
 # How to Use Flightassist
 

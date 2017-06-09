@@ -8,6 +8,8 @@ We use a sample Node.js application, flightassist for demonstrating and comparin
 
 ![architecure-diagram](images/paas-containers.png)
 
+To demostrate the multi container situation, we'll add a python program to the picture. Instead of directly access the apis from Node app, the python program will serve as a proxy to query the two services.The following scenarios are based on that flow.
+
 #### Scenario One: Deploy Flightassist microservices on Cloud Foundry 
 #### Scenario Two: Deploy Flightassist microservices on Kubernetes Clusters
 #### Scenario Three: Deploy Flightassist microservices on Istio
@@ -142,7 +144,7 @@ Now we push the python application.
 ```
 cf push <name1> -f path-to/flightassist-weather/manifest.yml
 ```
-**make sure you pick a unique name for the app.**
+**make sure you pick a unique name for the app.**   
 This will bring up the first app we need.
 The output should look like:
 ```
@@ -377,6 +379,19 @@ Now you can see the most recent flight status and weather for all your flights w
 | [package.json](main_application/package.json)         | List the packages required by the application |
 | [Dockerfile.local](main_application/Dockerfile.local)         | Description of the Docker image          |
 | [flightassist_serverless.yaml](flightassist_serverless.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
+
+# Comparisons
+
+It's hard to compare the different technologies toe to toe since they are targeted for different use cases. However,we can get a sense of their pros and cons from the above example.
+
+Cloud Foundry: Developer Centric; Developers don't have to build or maintain containers; Support various programming languages and libraries; Large bases of services; Kind of hacky to deploy multi apps; Needs to know CF functions well to manage.    
+Kubernetes: Orchestration tool that manages complicated container delolyments well; Large services available ;Developer has to build and maintain containers in the repositories.   
+
+Istio: Addtion to Kubernetes; Provide load balancing and other features; Needs to know the "envoy" concept.   
+
+OpenWhisk: Servless, event triggering; low cost; Single function based, doesn't work for large apps; Stateless.
+
+
 
 # Reference 
 

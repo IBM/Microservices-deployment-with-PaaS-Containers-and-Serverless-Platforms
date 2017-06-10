@@ -359,18 +359,6 @@ Now you can see the most recent flight status and weather for all your flights w
 
 ![Flightassist status](images/status.png)
 
-# Summary
-
-It's hard to compare the different technologies toe to toe since they are targeted for different use cases. However,we can get a sense of their pros and cons from the above example.
-
-**Cloud Foundry**: Developer Centric; Developers don't have to build or maintain containers; Support various programming languages and libraries; Large bases of services; Kind of hacky to deploy multi apps; Needs to know CF functions well to manage.    
-
-**Kubernetes**: Orchestration tool that manages complicated container delolyments well; Large services available ;Developer has to build and maintain containers in the repositories.   
-
-**Istio**: Addtion to Kubernetes; Provide load balancing and other features; Needs to know the "envoy" concept.   
-
-**OpenWhisk**: Serverless, event triggering; low cost; function based, doesn't work for large apps; Stateless.
-
 ## Code Structure
 
 ### Cloud Foundry application

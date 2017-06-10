@@ -114,6 +114,14 @@ application should be operational at the hostname route you selected for your CF
 application. 
 
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+## Code Structure
+
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| All JavaScript files (main_application/*.js)         | The implementation of the flightstats, tripIt, and weather information, shared by all deployment options |
+| [package.json](main_application/package.json)     | List the packages required by the application |
+| [manifest.yml](main_application/manifest.yml)     | Description of the application to be deployed |
 
 # 3. Factor monolithic application into microservices and test
 
@@ -136,6 +144,17 @@ docker build -f flightassist-weather/Dockerfile.alpine -t weather-service flight
 docker-compose up
 ```
 Now, your FlightAssist application should be running on http://localhost:3000/
+
+## Code Structure
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| All JavaScript files (main_application/*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
+| [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
+| [package.json](main_application/package.json)         | List the packages required by the application |
+| [Dockerfile.local](main_application/Dockerfile.local) and [Dockerfile.alpine](flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
+| [docker-compose.yaml](docker-compose.yaml) | Specification file for the deployment of the service in Docker |
+
 
 # 4. Deploy Flightassist microservices on Cloud Foundry
 
@@ -229,6 +248,18 @@ kubectl create -f flightassist.yaml
 ```
 
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+
+## Code Structure
+
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| All JavaScript files (main_application/*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
+| [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
+| [package.json](main_application/package.json)         | List the packages required by the application |
+| [Dockerfile.local](main_application/Dockerfile.local) and [Dockerfile.alpine](flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
+| [flightassist.yaml](flightassist.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
+
 
 ## Take away points
 Kubernetes is a powerful orchestration tool. In this example we get a taste of the logical concept of cluster, creating a deployment and service binding. It also has the container networking features built in. However, as a developer, you need to deal with container image and repositories.
@@ -338,6 +369,16 @@ kubectl create -f flightassist_serverless.yaml
 
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. Also, you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
 
+## Code Structure
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| [weather.js](main_application/weather.js)       | Trigger actions in OpenWhisk to get the weather information |
+| All JavaScript files (main_application/*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
+| [package.json](main_application/package.json)         | List the packages required by the application |
+| [Dockerfile.local](main_application/Dockerfile.local)         | Description of the Docker image          |
+| [flightassist_serverless.yaml](flightassist_serverless.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
+
 ## Takeaway points
 In this example, the flightassist app is a perfect use case to use openwhisk: 
 a. It is an event triggered app, the triggering point is when it is accessed
@@ -358,51 +399,6 @@ Once you added a new plan and you have your Flightassist running, open your Flig
 Now you can see the most recent flight status and weather for all your flights within 24 hours.
 
 ![Flightassist status](images/status.png)
-
-## Code Structure
-
-### Cloud Foundry application
-
-| File                                     | Description                              |
-| ---------------------------------------- | ---------------------------------------- |
-| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
-| All JavaScript files (main_application/*.js)         | The implementation of the flightstats, tripIt, and weather information, shared by all deployment options |
-| [package.json](main_application/package.json)     | List the packages required by the application |
-| [manifest.yml](main_application/manifest.yml)     | Description of the application to be deployed |
-
-### Docker Compose with microservices
-
-| File                                     | Description                              |
-| ---------------------------------------- | ---------------------------------------- |
-| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
-| All JavaScript files (main_application/*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
-| [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
-| [package.json](main_application/package.json)         | List the packages required by the application |
-| [Dockerfile.local](main_application/Dockerfile.local) and [Dockerfile.alpine](flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
-| [docker-compose.yaml](docker-compose.yaml) | Specification file for the deployment of the service in Docker |
-
-
-### Kubernetes deployment with microservices
-
-| File                                     | Description                              |
-| ---------------------------------------- | ---------------------------------------- |
-| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
-| All JavaScript files (main_application/*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
-| [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
-| [package.json](main_application/package.json)         | List the packages required by the application |
-| [Dockerfile.local](main_application/Dockerfile.local) and [Dockerfile.alpine](flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
-| [flightassist.yaml](flightassist.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
-
-### Kubernetes deployment with serverless
-
-| File                                     | Description                              |
-| ---------------------------------------- | ---------------------------------------- |
-| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
-| [weather.js](main_application/weather.js)       | Trigger actions in OpenWhisk to get the weather information |
-| All JavaScript files (main_application/*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
-| [package.json](main_application/package.json)         | List the packages required by the application |
-| [Dockerfile.local](main_application/Dockerfile.local)         | Description of the Docker image          |
-| [flightassist_serverless.yaml](flightassist_serverless.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
 
 # Reference 
 

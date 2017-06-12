@@ -57,8 +57,8 @@ Congratulation, now your Flightassist application should be running on `http://<
 ## Takeaway points
 In this example, the flightassist app is a perfect use case to use openwhisk: 
 1. It is an event triggered app, the triggering point is when it is accessed
-2. It is a stateless app, there is no sessions to manage
-3. It doesn't require persistance
+2. It is a stateless app, there are no sessions to manage
+3. It doesn't require persistence
 4. It performs a simple function
 
 Many complicated apps are not so easy to be converted into serverless functions.

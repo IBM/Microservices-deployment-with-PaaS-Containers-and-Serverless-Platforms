@@ -117,6 +117,14 @@ application should be operational at the hostname route you selected for your CF
 application. 
 
 Congratulation, now you can learn about [How to Use Flightassist](#how-to-use-flightassist) and start testing your application.
+## Code Structure
+
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| All JavaScript files (main_application/*.js)         | The implementation of the flightstats, tripIt, and weather information, shared by all deployment options |
+| [package.json](main_application/package.json)     | List the packages required by the application |
+| [manifest.yml](main_application/manifest.yml)     | Description of the application to be deployed |
 
 # 3. Factor monolithic application into microservices and test
 
@@ -139,6 +147,7 @@ docker build -f flightassist-weather/Dockerfile.alpine -t weather-service flight
 docker-compose up
 ```
 Now, your FlightAssist application should be running on http://localhost:3000/
+
 
 # Deploy microservices leveraging
 

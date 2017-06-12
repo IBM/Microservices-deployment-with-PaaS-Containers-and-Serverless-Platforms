@@ -42,12 +42,8 @@ kubectl create -f flightassist.yaml
 
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms#how-to-use-flightassist) and start testing your application.
 
-## Pros
-- Orchestration tool that manages complicated container delolyments well
-- Large services available 
-
-## Cons
-- Developer has to build and maintain containers in the repositories 
+## Take away points
+Kubernetes is a powerful orchestration tool. In this example we get a taste of the logical concept of cluster, creating a deployment and service binding. It also has the container networking features built in. However, as a developer, you need to deal with container image and repositories. 
 
 
 # Code Structure

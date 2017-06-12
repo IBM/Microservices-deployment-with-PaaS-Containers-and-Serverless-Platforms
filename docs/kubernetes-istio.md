@@ -126,12 +126,8 @@ Now, your rate limit is 50 requests per 10 seconds. Since the flightassist websi
 You can learn about other additional features on Istio by clicking [here](https://istio.io/docs/tasks/index.html).
 
 
-## Pros
-- Addtion to Kubernetes
-- Provide load balancing and other features
-
-## Cons
-- Needs to know the "envoy" concept  
+## Takeaway points
+Istio is an addon feature to manage your application traffic. It has to reside on a paltform. Other than the proxy feature we tested in the example, it also provides rich layer-7 routing, circuit breakers, policy enforcement and telemetry recording/reporting functions.
 
 
 # Code Structure

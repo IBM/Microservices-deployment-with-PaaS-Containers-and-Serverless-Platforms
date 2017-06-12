@@ -34,7 +34,7 @@ Now we inject the environment variables as in monolithic deployment:
  - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
  - `TRIPIT_API_KEY` : API key assigned by TripIt
  - `TRIPIT_API_SECRET` : API secret assigned by TripIt
- - `BASE_URL`: You URL for accessing your application. In the format **https://**{name2}.mybluemix.net**/**
+ - `BASE_URL`: You URL for accessing your application. In the format **https://**{name2}**.mybluemix.net/**
 
 Plus, a couple more since we have two apps:
  - `USE_WEATHER_SERVICE`: true
@@ -45,15 +45,9 @@ Now we start the 2nd app:
 
 You can now test the apps by going to http://<i>name2</i>.mybluemix.net
 
-## Pros
-- Developer Centric
-- Developers don't have to build or maintain containers
-- Support various programming languages and libraries
-- Large bases of services
 
-## Cons
-- Kind of hacky to deploy multi apps
-- Needs to know CF functions well to manage
+## Take away points
+To push an app, we simply use `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can eaisly be consumed by your application. When pushing multi apps that needs to communite to each other, however, it is a little hacky. Another common pratice than the environment variables we used in this example, is to bind a message queue service.
 
 # Code Structure
 

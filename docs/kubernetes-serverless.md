@@ -54,13 +54,12 @@ kubectl create -f flightassist_serverless.yaml
 
 Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. Also, you can learn about [How to Use Flightassist](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms#how-to-use-flightassist) and start testing your application.
 
-## Pros
-- Serverless, event triggering
-- Low cost
-
-## Cons
-- Function based, doesn't work for large apps
-- Stateless
+## Takeaway points
+In this example, the flightassist app is a perfect use case to use openwhisk: 
+a. It is an event triggered app, the triggering point is when it is accessed
+b. It is a stateless app, there is no sessions to manage
+c. It doesn't require persistance
+d. It performs a simple function
 
 # Code Structure
 

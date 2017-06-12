@@ -218,7 +218,7 @@ You can now test the apps by going to http://<i>name2</i>.mybluemix.net
 | [manifest.yml](main_application/manifest.yml)     | Description of the application to be deployed |
 
 ## Takeaway points
-To push an app, we simply use `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can easily be consumed by your application. When pushing multi apps that need to communicate to each other, however, it is a little hacky. Another common practice than the environment variables we used in this example, is to bind a message queue service.
+To push an app, we simply use `bx app push` or `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can easily be consumed by your application. When pushing multi apps that need to communicate to each other, however, it is a little hacky. Another common practice than the environment variables we used in this example, is to bind a message queue service.
 
 # 5. Deploy Flightassist microservices on Kubernetes Cluster
 

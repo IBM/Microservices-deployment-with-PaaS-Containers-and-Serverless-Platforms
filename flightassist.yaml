@@ -92,6 +92,7 @@ metadata:
     run: flightassist-service
     name: flightassist-service
 spec:
+  # You can remove type: NodePort for istio deployment.
   type: NodePort
   selector:
     run: flightassist-service

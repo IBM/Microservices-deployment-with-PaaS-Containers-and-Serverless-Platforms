@@ -2,7 +2,7 @@
 
 # Navigate application deployment options with Cloud Foundry, Kubernetes, OpenWhisk and Istio
 
-PaaS platforms like Cloud Foundry, container orchestrators like Kubernetes, Serverless platforms like OpenWhisk and Service-mesh like Istio are all great technologies to deploy and manage your microservices on. Common wisdom says there is no such thing as too many choices, but abundance of choices can lead to analysis paralysis.  In this code we look at deployment experience the different platforms provide, and what do we gain and loose by choosing one vs another. 
+PaaS platforms like Cloud Foundry, container orchestrators like Kubernetes, Serverless platforms like OpenWhisk and Service-mesh like Istio are all great technologies to deploy and manage your microservices on. Common wisdom says there is no such thing as too many choices, but abundance of choices can lead to analysis paralysis.  In this code, we look at deployment experience the different platforms provide, and what do we gain and loose by choosing one vs another. 
 
 We start with a sample Node.js monolithic application, Flightassist, factor it into two microservices, and then use it for demonstrating and comparing various deployment technologies. A set of trade-offs and comparisions can be made between these deployment models, and this application provides a basis for those discussions.
 
@@ -67,7 +67,11 @@ After you deployed Flightassist using any platform, you can go to [How to Use Fl
 
 # 1. Create your Cloudant Database and Insights for Weather Service
 
-First, clone and get in our repository `git clone https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms.git && cd Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms` to obtain the necessary files and scripts for building this example.
+First, clone and get in our repository to obtain the necessary files and scripts for building this example.
+
+```bash
+git clone https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms.git && cd Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms
+```
 
 Since we need to create services using the command line, we need to install [Bluemix CLI](http://clis.ng.bluemix.net/ui/home.html) before proceeding to the following steps.
 
@@ -93,13 +97,12 @@ curl -k -X PUT {your-cloudantURL}/connections
 
 In this scenario, we will deploy Flightassist as a monolithic application and host it on Cloud Foundry.
 
-First, install [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html).
-
-Then, type the following commands to push your application with your own unique application name.
+First, type the following commands to push your application with your own unique application name.
 
 ```bash
-cf push {your_unique_app_name} -f main_application/manifest.yml
+bx app push {your_unique_app_name} -f main_application/manifest.yml
 ```
+> Note: If you want to use `cf` commands, please install [cloudfoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and run `cf push {your_unique_app_name} -f main_application/manifest.yml`
 
 Now, go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
    - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
@@ -164,8 +167,10 @@ In this scenario, we take the Flightassist which is factored in microservices. S
 
 We first push the python microservice.
 ```
-cf push <name1> -f path-to/flightassist-weather/manifest.yml
+bx app push <name1> -f path-to/flightassist-weather/manifest.yml
 ```
+> Note: If you want to use `cf` commands, please install [cloudfoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and replace all the `bx app push` command with `cf push`
+
 **make sure you pick a unique name for the app.**   
 This will bring up the first app we need.
 The output should look like:
@@ -190,7 +195,7 @@ Now we inject the environment variables as in monolithic deployment:
  - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
  - `TRIPIT_API_KEY` : API key assigned by TripIt
  - `TRIPIT_API_SECRET` : API secret assigned by TripIt
- - `BASE_URL`: You URL for accessing your application. In the format **https://**{app_name}.mybluemix.net**/**
+ - `BASE_URL`: You URL for accessing your application. In the format **https://**{name2}**.mybluemix.net/**
 
 Plus, a couple more since we have two apps:
  - `USE_WEATHER_SERVICE`: true
@@ -201,9 +206,19 @@ Now we start the 2nd app:
 
 You can now test the apps by going to http://<i>name2</i>.mybluemix.net
 
-## Take away points
-To push an app, we simply use `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can eaisly be consumed by your application. When pushing multi apps that needs to communite to each other, however, it is a little hacky. Another common pratice than the environment variables we used in this example, is to bind a message queue service.
+## Code Structure
 
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| All JavaScript files (main_application/*.js)         | The implementation of the flightstats, tripIt, and weather information, shared by all deployment options |
+| [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
+| [Procfile and requirements.txt](flightassist-weather/)| Description of the microservice to be deployed |
+| [package.json](main_application/package.json)     | List the packages required by the application |
+| [manifest.yml](main_application/manifest.yml)     | Description of the application to be deployed |
+
+## Takeaway points
+To push an app, we simply use `bx app push` or `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can easily be consumed by your application. When pushing multi apps that need to communicate to each other, however, it is a little hacky. Another common practice than the environment variables we used in this example, is to bind a message queue service.
 
 # 5. Deploy Flightassist microservices on Kubernetes Cluster
 
@@ -261,8 +276,8 @@ Congratulation, now your Flightassist application should be running on `http://<
 | [flightassist.yaml](flightassist.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
 
 
-## Take away points
-Kubernetes is a powerful orchestration tool. In this example we get a taste of the logical concept of cluster, creating a deployment and service binding. It also has the container networking features built in. However, as a developer, you need to deal with container image and repositories.
+## Takeaway points
+Kubernetes is a powerful orchestration tool. In this example we get a taste of the logical concept of clusters, creating a deployment and service binding. It also has the container networking features built in. However, as a developer, you need to deal with container image and repositories. 
 
 # 6. Deploy Flightassist microservices on Istio
 
@@ -316,7 +331,7 @@ istio-mixer-2499357295-kn4vq      1/1       Running   0
 
 ## 6.2. Inject Istio Envoys on Flightassist.
 
-**Important**: You must complete [scenario two for Kubernetes Clusters](#2-kubernetes-clusters) in order to proceed the following steps.
+**Important**: You must complete [scenario three: Microservices Kubernetes Clusters](#5-deploy-flightassist-microservices-on-kubernetes-cluster) in order to proceed to the following steps.
 
 First, you want to delete all the services and deployments from the previous scenario.
 
@@ -342,14 +357,41 @@ kubectl create -f <(istioctl kube-inject -f flightassist.yaml --includeIPRanges=
 
 Congratulation, now your Flightassist application should be running on `http://<isito-ingress IP:Port>`.
 
+## 6.3. Exporing additional features on Istio.
+
+One feature provided by Istio is rate limits. Rate limits can limit the number of accesses from users and prevent your website from getting abused.
+
+To enable this, run 
+
+```bash 
+istioctl mixer rule create global flightassist-service.default.svc.cluster.local -f ratelimit.yaml
+```
+
+Now, your rate limit is 50 requests per 10 seconds. Since the flightassist website will use 15-20 requests per visit, you should see your Mixer returns a `RESOURCE_EXHAUSTED` after you refresh your site 3 to 4 times.
+
+You can learn about other additional features on Istio by clicking [here](https://istio.io/docs/tasks/index.html).
+
+## Code Structure
+
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| All JavaScript files (main_application/*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
+| [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
+| [package.json](main_application/package.json)         | List the packages required by the application |
+| [Dockerfile.local](main_application/Dockerfile.local) and [Dockerfile.alpine](flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
+| [flightassist.yaml](flightassist.yaml) and [secret.yaml](secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
+| [ingress.yaml](ingress.yaml)| Specification file for adding flightassist's endpoint to istio-ingress| 
+| [ratelimit.yaml](ratelimit.yaml) | Specification file for creating rate limits with Istio Mixer| 
+
 ## Takeaway points
-Istio is an addon feature to manage your application traffic. It has to reside on a paltform. Other than the proxy feature we tested in the example, it also provides rich layer-7 routing, circuit breakers, policy enforcement and telemetry recording/reporting functions.
+Istio is an addon feature to manage your application traffic. It has to reside on a platform. Other than the proxy feature we tested in the example, it also provides rich layer-7 routing, circuit breakers, policy enforcement and telemetry recording/reporting functions.
 
 # 7. Deploy Flightassist leveraging OpenWhisk functions
 
-In this scenario, we will deploy Flightassist with a function to show how you could replace your microservices with OpenWhisk actions. 
+In this scenario, we will deploy Flightassist with a function that can query all the necessary Weather data. This shows how you could replace your microservices with OpenWhisk actions. Therefore, you can move all your low cost microservices on OpenWhisk to save space and runtime on your server.
 
-**Important**: You must complete [scenario two for Kubernetes Clusters](#2-kubernetes-clusters) in order to proceed the following steps.
+**Important**: You must complete [scenario three: Microservices Kubernetes Clusters](#5-deploy-flightassist-microservices-on-kubernetes-cluster) in order to proceed to the following steps.
 
 First, you want to delete all the services and deployments from the previous scenario.
 
@@ -381,12 +423,12 @@ Congratulation, now your Flightassist application should be running on `http://<
 
 ## Takeaway points
 In this example, the flightassist app is a perfect use case to use openwhisk: 
-a. It is an event triggered app, the triggering point is when it is accessed
-b. It is a stateless app, there is no sessions to manage
-c. It doesn't require persistance
-d. It performs a simple function 
+1. It is an event triggered app, the triggering point is when it is accessed
+2. It is a stateless app, there are no sessions to manage
+3. It doesn't require persistence
+4. It performs a simple function
 
-Many complicated apps are not so easy to be converted into servless functions.
+Many complicated apps are not so easy to be converted into serverless functions.
 
 # How to Use Flightassist
 

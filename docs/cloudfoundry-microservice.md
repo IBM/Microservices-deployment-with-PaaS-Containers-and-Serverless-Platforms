@@ -8,7 +8,7 @@ We first push the python microservice.
 ```
 bx app push <name1> -f path-to/flightassist-weather/manifest.yml
 ```
-> Note: If you want to use `cf` commands, please install [cloudfoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and replease all the `bx app push` command with `cf push`
+> Note: If you want to use `cf` commands, please install [cloudfoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and replace all the `bx app push` command with `cf push`
 
 **make sure you pick a unique name for the app.**   
 This will bring up the first app we need.

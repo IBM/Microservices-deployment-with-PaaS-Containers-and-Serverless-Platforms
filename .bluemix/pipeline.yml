@@ -52,7 +52,7 @@ stages:
        cf set-env "${CF_APP}" FLIGHTSTATS_APP_KEY "${FLIGHTSTATS_APP_KEY}"
        cf set-env "${CF_APP}" TRIPIT_API_KEY "${TRIPIT_API_KEY}"
        cf set-env "${CF_APP}" TRIPIT_API_SECRET "${TRIPIT_API_SECRET}"
-       cf set-env "${CF_APP}" BASE_URL "https://${CF_APP}".mybluemix.net
+       cf set-env "${CF_APP}" BASE_URL https://"${CF_APP}".mybluemix.net/
        cf restage "${CF_APP}"
        # View logs
        # cf logs "${CF_APP}" --recent

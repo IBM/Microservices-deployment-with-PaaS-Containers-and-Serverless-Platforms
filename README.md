@@ -102,6 +102,7 @@ First, type the following commands to push your application with your own unique
 ```bash
 bx app push {your_unique_app_name} -f main_application/manifest.yml
 ```
+> Note: If you want to use `cf` commands, please install [cloudfoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and do `cf push {your_unique_app_name} -f main_application/manifest.yml`
 
 Now, go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
    - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats

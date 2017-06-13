@@ -41,3 +41,6 @@ jspm_packages
 .vscode
 # local test
 testtripit
+
+#get rid of ds_store
+.DS_Store

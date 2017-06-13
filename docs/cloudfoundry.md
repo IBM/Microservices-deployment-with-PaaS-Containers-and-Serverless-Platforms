@@ -53,9 +53,9 @@ To push an app, we simply use `bx app push` or `cf push` command. There is no co
 
 | File                                     | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
-| [flightassist.js](main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| [flightassist.js](../main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
 | All JavaScript files (main_application/*.js)         | The implementation of the flightstats, tripIt, and weather information, shared by all deployment options |
-| [app.py](flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
-| [Procfile and requirements.txt](flightassist-weather/)| Description of the microservice to be deployed |
-| [package.json](main_application/package.json)     | List the packages required by the application |
-| [manifest.yml](main_application/manifest.yml)     | Description of the application to be deployed |
+| [app.py](../flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
+| [Procfile and requirements.txt](../flightassist-weather/)| Description of the microservice to be deployed |
+| [package.json](../main_application/package.json)     | List the packages required by the application |
+| [manifest.yml](../main_application/manifest.yml)     | Description of the application to be deployed |

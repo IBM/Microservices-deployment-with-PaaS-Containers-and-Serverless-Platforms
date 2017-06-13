@@ -133,11 +133,11 @@ Istio is an addon feature to manage your application traffic. It has to reside o
 
 | File                                     | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
-| [flightassist.js](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
+| [flightassist.js](../main_application/flightassist.js)       | Main application, start the express web server and calling the major AJAX functions|
 | All JavaScript files (main_application/*.js)         | The implementation of the flightstats and tripIt information, shared by all deployment options |
-| [app.py](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
-| [package.json](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/package.json)         | List the packages required by the application |
-| [Dockerfile.local](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/main_application/Dockerfile.local) and [Dockerfile.alpine](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
-| [flightassist.yaml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/flightassist.yaml) and [secret.yaml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
-| [ingress.yaml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/ingress.yaml)| Specification file for adding flightassist's endpoint to istio-ingress| 
-| [ratelimit.yaml](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms/blob/master/ratelimit.yaml) | Specification file for creating rate limits with Istio Mixer| 
+| [app.py](../flightassist-weather/scr/app.py) | Weather Microservice, query and sent weather information to the main application |
+| [package.json](../main_application/package.json)         | List the packages required by the application |
+| [Dockerfile.local](../main_application/Dockerfile.local) and [Dockerfile.alpine](../flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
+| [flightassist.yaml](../flightassist.yaml) and [secret.yaml](../secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
+| [ingress.yaml](../ingress.yaml)| Specification file for adding flightassist's endpoint to istio-ingress| 
+| [ratelimit.yaml](../ratelimit.yaml) | Specification file for creating rate limits with Istio Mixer| 

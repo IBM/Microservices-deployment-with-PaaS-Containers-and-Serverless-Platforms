@@ -12,6 +12,7 @@ Then, install the container registry plugin for Bluemix CLI.
 bx plugin install container-registry -r Bluemix
 ```
 Next, build your own docker images and push them to your own bluemix container registry.
+> You may skip these steps through deploying the secrets if you performed the Flightassist microservices deployment on Kubernetes scenario
 
 > Replace `<namespace>` with your own namespace, you can view your namespace by running `bx cr namespaces`
 >
@@ -24,7 +25,7 @@ docker push registry.ng.bluemix.net/<namespace>/flightassist
 docker push registry.ng.bluemix.net/<namespace>/weather-service
 ```
 
-Then, you need to run the following commands to bind your Cloudant and Weather Insights services to your clusters. 
+Then, you need to run the following commands to bind your Cloudant and Weather Insights services to your clusters.
 
 ```bash
 bx cs cluster-service-bind {your-cluster-name} default mycloudant
@@ -86,7 +87,7 @@ istio-mixer-2499357295-kn4vq      1/1       Running   0
 
 ## 3. Inject Istio Envoys on Flightassist.
 
-> Note : you need to delete all the services and deployments from the previous scenario.
+> Note : if you performed the Flightassist microservices deployment on Kubernetes scenario you need to delete the previous services and deployments.
 >
 > ```bash
 > kubectl delete -f flightassist.yaml
@@ -101,23 +102,23 @@ echo $(kubectl get po -l istio=ingress -o jsonpath={.items[0].status.hostIP}):$(
 Then, edit the `flightassist.yaml` and replace the ```<namespace>``` with your own namespace. You can obtain your namespace by running `bx cr namespace`. Also replace `<your-app-end-point-url>` with `http://<isito-ingress IP:Port>`
 > You also can remove `type:NodePort` on *flightassist-service* because we will access our application via isito-ingress.
 
-Next, deploy ingress to connect the microservices and inject Istio envoys on Flightassist and Weather Microservice. 
+Next, deploy ingress to connect the microservices and inject Istio envoys on Flightassist and Weather Microservice.
 
 ```bash
 kubectl create -f ingress.yaml
 kubectl create -f <(istioctl kube-inject -f flightassist.yaml --includeIPRanges=172.30.0.0/16,172.20.0.0/16)
 ```
 
-Congratulation, now your Flightassist application should be running on `http://<isito-ingress IP:Port>`. You can go to [How to Use Flightassist](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms#how-to-use-flightassist) and start testing your application.
+Congratulations, now your Flightassist application should be running on `http://<isito-ingress IP:Port>`. You can go to [How to Use Flightassist](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms#how-to-use-flightassist) and start testing your application.
 
 
 ## 4. Exporing additional features on Istio.
 
 One feature provided by Istio is rate limits. Rate limits can limit the number of accesses from users and prevent your website from getting abused.
 
-To enable this, run 
+To enable this, run
 
-```bash 
+```bash
 istioctl mixer rule create global flightassist-service.default.svc.cluster.local -f ratelimit.yaml
 ```
 
@@ -126,7 +127,7 @@ Now, your rate limit is 50 requests per 10 seconds. Since the flightassist websi
 You can learn about other additional features on Istio by clicking [here](https://istio.io/docs/tasks/index.html).
 
 ## Takeaway points
-Istio is an addon feature to manage your application traffic. It has to reside on a platform. Other than the proxy feature we tested in the example, it also provides rich layer-7 routing, circuit breakers, policy enforcement and telemetry recording/reporting functions.
+Istio is an addon feature to manage your application traffic. It has to reside on a platform. In addition to the proxy feature we tested in the example, it also provides rich layer-7 routing, circuit breakers, policy enforcement and telemetry recording/reporting functions.
 
 
 # Code Structure
@@ -139,5 +140,5 @@ Istio is an addon feature to manage your application traffic. It has to reside o
 | [package.json](../main_application/package.json)         | List the packages required by the application |
 | [Dockerfile.local](../main_application/Dockerfile.local) and [Dockerfile.alpine](../flightassist-weather/Dockerfile.alpine) | Description of the Docker image |
 | [flightassist.yaml](../flightassist.yaml) and [secret.yaml](../secret.yaml)| Specification file for the deployment of the service and secret in Kubernetes |
-| [ingress.yaml](../ingress.yaml)| Specification file for adding flightassist's endpoint to istio-ingress| 
-| [ratelimit.yaml](../ratelimit.yaml) | Specification file for creating rate limits with Istio Mixer| 
+| [ingress.yaml](../ingress.yaml)| Specification file for adding flightassist's endpoint to istio-ingress|
+| [ratelimit.yaml](../ratelimit.yaml) | Specification file for creating rate limits with Istio Mixer|

@@ -1,12 +1,12 @@
 # Deploy Flightassist microservices on Cloud Foundry
 
-Make sure you have both developer accounts mentioned in prerequisites. Also make sure you have cloudant and weatherinsights services created as listed in [step 1](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms#1-create-your-cloudant-database-and-insights-for-weather-service). 
+Make sure you have both developer accounts mentioned in prerequisites. Also make sure you have cloudant and weatherinsights services created as listed in [step 1](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms#1-create-your-cloudant-database-and-insights-for-weather-service).
 
-In this scenario, we take the Flightassist which is factored in microservices. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
+In this scenario, we take the Flightassist which is factored to use the weather microservice. Since Cloud Foundry apps (warden containers) are not allowed to talk privately, they need to communicate via public route.
 
 We first push the python microservice.
 ```
-bx app push <name1> -f path-to/flightassist-weather/manifest.yml
+bx app push {your_unique_proxy_name} -f flightassist-weather/manifest.yml
 ```
 > Note: If you want to use `cf` commands, please install [cloudfoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and replace all the `bx app push` command with `cf push`
 
@@ -17,7 +17,7 @@ The output should look like:
 requested state: started
 instances: 1/1
 usage: 256M x 1 instances
-urls: <name1>.mybluemix.net
+urls: {proxy_name}.mybluemix.net
 last uploaded: Thu Jun 8 21:36:15 UTC 2017
 stack: unknown
 buildpack: python_buildpack
@@ -25,7 +25,7 @@ buildpack: python_buildpack
 And we need the **urls** for next step.   
 Now we will push the second app, but **without starting** it.
 ```
-bx app push <name2> -f path-to/main_application/manifest.yml --no-start
+bx app push {your_unique_app_name} -f main_application/manifest.yml --no-start
 ```
 **make sure you pick a unique name for the app, too.**
 
@@ -38,16 +38,16 @@ Now we inject the environment variables as in monolithic deployment:
 
 Plus, a couple more since we have two apps:
  - `USE_WEATHER_SERVICE`: true
- - `MICROSERVICE_URL`: <i>name1</i>.mybluemix.net
- 
-Now we start the 2nd app:
-`bx app start <name2>`
+ - `MICROSERVICE_URL`: {proxy_name}.mybluemix.net
 
-You can now test the apps by going to http://<i>name2</i>.mybluemix.net
+Now we start the 2nd app:
+`bx app start {app_name}`
+
+You can now test the apps by going to http://{app_name}.mybluemix.net
 
 
 ## Takeaway points
-To push an app, we simply use `bx app push` or `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can easily be consumed by your application. When pushing multi apps that need to communicate to each other, however, it is a little hacky. Another common practice than the environment variables we used in this example, is to bind a message queue service.
+To push an app, we simply use `bx app push` or `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can easily be consumed by your application. When pushing multi apps that need to communicate to each other, however, it is a little hacky. Another common alternative to creating public routes and sharing through environment variables as used in this example, is to bind a message queue service for communication.
 
 # Code Structure
 

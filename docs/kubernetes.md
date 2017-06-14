@@ -1,6 +1,6 @@
 # Deploy Flightassist microservices on Kubernetes Cluster
 
-In this scenario, we use the Flightassist microservices in which are in two containers. We will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Kubernetes. 
+In this scenario, we use the Flightassist microservices version which runs in two containers. We will run Flightassist as our main application with weather-service as our microservice to query the weather data. Then, we will host those containers using Kubernetes.
 
 First, follow the [Kubernetes Cluster Tutorial](https://github.com/IBM/container-journey-template) to create your own cluster on Bluemix.
 
@@ -22,7 +22,7 @@ docker push registry.ng.bluemix.net/<namespace>/flightassist
 docker push registry.ng.bluemix.net/<namespace>/weather-service
 ```
 
-Then, you need to run the following commands to bind your Cloudant and Weather Insights services to your clusters. 
+Then, you need to run the following commands to bind your Cloudant and Weather Insights services to your clusters.
 
 ```bash
 bx cs cluster-service-bind {your-cluster-name} default mycloudant
@@ -46,10 +46,10 @@ kubectl create -f secret.yaml
 kubectl create -f flightassist.yaml
 ```
 
-Congratulation, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms#how-to-use-flightassist) and start testing your application.
+Congratulations, now your Flightassist application should be running on `http://<your_node_ip>:30080`. You can go to [How to Use Flightassist](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms#how-to-use-flightassist) and start testing your application.
 
 ## Takeaway points
-Kubernetes is a powerful orchestration tool. In this example we get a taste of the logical concept of clusters, creating a deployment and service binding. It also has the container networking features built in. However, as a developer, you need to deal with container image and repositories. 
+Kubernetes is a powerful orchestration tool. In this example we get a taste of the logical concept of clusters, creating a deployment and service binding. It also has the container networking features built in. However, as a developer, you need to handle building container images and managing images in repositories. 
 
 
 # Code Structure

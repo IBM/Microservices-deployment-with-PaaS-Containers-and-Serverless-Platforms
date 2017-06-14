@@ -8,13 +8,6 @@ We start with a sample Node.js monolithic application, Flightassist, factor it i
 
 ![architecure-diagram](images/paas-containers.png)
 
-## Scenarios
-- [Deploy Flightassist monolithic application on Cloud Foundry](#2-deploy-monolithic-flightassist-application-using-cloud-foundry)
-- [Deploy Flightassist microservices on Cloud Foundry](docs/cloudfoundry.md)
-- [Deploy Flightassist microservices on Kubernetes Clusters](docs/kubernetes.md)
-- [Deploy Flightassist microservices on Istio](docs/istio.md)
-- [Deploy Flightassist microservices augmented with functions on OpenWhisk](docs/openwhisk.md)
-
 ## Included Components
 The scenarios are accomplished by using:
 
@@ -39,10 +32,10 @@ Click the button to deploy your app and fill in all the variables from **Deliver
 
 [![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/)
 
-### Toolchain Scenarios One: Monolithic Application
+### Toolchain Scenario One: Monolithic Application
 You should see a link under the Cloud Foundry Deploy stage and that's where your application is hosting.
 
-### Toolchain Scenarios Two: Microservices on Kubernetes Clusters, with or without Serverless capabilities
+### Toolchain Scenario Two: Microservices on Kubernetes Clusters, with or without Serverless capabilities
 
 If you want to deploy with microservices, please leave the **OpenWhisk Auth** variable blank on **Delivery Pipeline**.
 Otherwise, fill in the **OpenWhisk Auth** variable to enable serverless for your Flightassist.

@@ -8,11 +8,12 @@ We start with a sample Node.js monolithic application, Flightassist, factor it i
 
 ![architecure-diagram](images/paas-containers.png)
 
-#### [Scenario One: Deploy Flightassist monolithic application on Cloud Foundry](#2-deploy-monolithic-flightassist-application-using-cloud-foundry)
-#### [Scenario Two: Deploy Flightassist microservices on Cloud Foundry](docs/cloudfoundry.md)
-#### [Scenario Three: Deploy Flightassist microservices on Kubernetes Clusters](docs/kubernetes.md)
-#### [Scenario Four: Deploy Flightassist microservices on Istio](docs/istio.md)
-#### [Scenario Five: Deploy Flightassist microservices augmented with functions on OpenWhisk](docs/openwhisk.md)
+## Scenarios
+- [Deploy Flightassist monolithic application on Cloud Foundry](#2-deploy-monolithic-flightassist-application-using-cloud-foundry)
+- [Deploy Flightassist microservices on Cloud Foundry](docs/cloudfoundry.md)
+- [Deploy Flightassist microservices on Kubernetes Clusters](docs/kubernetes.md)
+- [Deploy Flightassist microservices on Istio](docs/istio.md)
+- [Deploy Flightassist microservices augmented with functions on OpenWhisk](docs/openwhisk.md)
 
 ## Included Components
 The scenarios are accomplished by using:

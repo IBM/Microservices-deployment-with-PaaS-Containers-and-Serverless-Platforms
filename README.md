@@ -9,7 +9,6 @@ We start with a sample Node.js monolithic application, Flightassist, factor it i
 ![architecure-diagram](images/paas-containers.png)
 
 ## Included Components
-The scenarios are accomplished by using:
 
 - [Cloud Foundry](https://www.cloudfoundry.org)
 - [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)

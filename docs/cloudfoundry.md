@@ -47,7 +47,7 @@ You can now test the apps by going to http://{app_name}.mybluemix.net
 
 
 ## Takeaway points
-To push an app, we simply use `bx app push` or `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can easily be consumed by your application. When pushing multi apps that need to communicate to each other, however, it is a little hacky. Another common alternative to creating public routes and sharing through environment variables as used in this example, is to bind a message queue service for communication.
+To push an app, we simply use `bx app push` or `cf push` command. There is no container image or repository involved. Cloud Foundry has wide inventories of build packs to support different programming languages. If you run `cf marketplace`, you can find the huge list of services provided by Bluemix that can easily be consumed by your application. When pushing multiple microservices that need to communicate to each other, however, the experience is not so smooth. Another common alternative to creating public routes and sharing information through environment variables as used in this example, is to bind a message queue service for communication.
 
 # Code Structure
 

@@ -56,13 +56,7 @@ kubectl create -f flightassist_serverless.yaml
 Congratulations, now your Flightassist application should be running on `http://<your_node_ip>:30080`. Also, you can learn about [How to Use Flightassist](https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms#how-to-use-flightassist) and start testing your application.
 
 ## Takeaway points
-In this example, the weather microservice in the Flightassist app is a perfect use case to use OpenWhisk:
-1. It is an event triggered app, the triggering point is when it is accessed
-2. It is a stateless app, there are no sessions to manage
-3. It doesn't require persistence
-4. It performs a simple function
-
-Many complicated apps are not so easy to be converted into serverless functions.
+In this example, the weather microservice in the Flightassist app is a perfect use case to convert it into a function on OpenWhisk. It is an event triggered app, a stateless app, there are no sessions to manage, doesn't require persistence, and performs a simple logical step.  Many microservices which don't need to be long running applicatons or tasks can easilty be converted into serverless functions. This essentially gives you benefits like scaling etc, as well as cost benefits that you pay for infrastructure only when the application is used etc. 
 
 # Code Structure
 

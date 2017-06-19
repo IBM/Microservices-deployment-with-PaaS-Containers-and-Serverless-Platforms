@@ -127,7 +127,8 @@ Now, your rate limit is 50 requests per 10 seconds. Since the flightassist websi
 You can learn about other additional features on Istio by clicking [here](https://istio.io/docs/tasks/index.html).
 
 ## Takeaway points
-Istio is an addon feature to manage your application traffic. It has to reside on a platform. In addition to the proxy feature we tested in the example, it also provides rich layer-7 routing, circuit breakers, policy enforcement and telemetry recording/reporting functions.
+
+Istio is a service-mesh for microservices deployment and managing your application traffic. Istio provides an easy way to create this service mesh by deploying a control plane and injecting sidecars, an extended version of the Envoy proxy, in the same Pod as your microservice. In addition to the proxy feature we tested in the example, it also provides rich layer-7 routing, circuit breakers, policy enforcement and telemetry recording/reporting functions. This gives end users much better control over canary deployments, and not worrying about issues like serivce discovery etc. In addition, there is a focus from monitoring and trace collection from an application and microservices perspective, which a native container orchestration experience would not provide. However, Istio on its own is not suffcient, and it has to reside on a platform. 
 
 
 # Code Structure

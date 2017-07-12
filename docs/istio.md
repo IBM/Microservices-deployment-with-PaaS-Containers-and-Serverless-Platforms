@@ -1,4 +1,4 @@
-# Deploy Flightassist microservices on Istio
+# Enable Flightassist microservices with Istio service-mesh capabilities
 
 Istio is an open platform that provides a uniform way to connect, manage, and secure microservices. Istio is the result of a joint collaboration between IBM, Google and Lyft as a means to support traffic flow management, access policy enforcement and the telemetry data aggregation between microservices, all without requiring changes to the code
 

@@ -11,11 +11,11 @@ We start with a sample Node.js monolithic application, Flightassist, factor it i
 ## Included Components
 
 - [Cloud Foundry](https://www.cloudfoundry.org)
-- [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
+- [Kubernetes Clusters](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov)
 - [Istio](https://istio.io)
-- [OpenWhisk](https://www.ibm.com/cloud-computing/bluemix/openwhisk)
-- [Cloudant NoSQL Database](https://cloudant.com)
-- [Insights for Weather](https://console.ng.bluemix.net/docs/services/Weather/weather_overview.html#about_weather)
+- [OpenWhisk](https://www.ibm.com/cloud/functions)
+- [Cloudant NoSQL Database](https://www.ibm.com/cloud/cloudant)
+- [Insights for Weather](https://cloud.ibm.com/docs/services/Weather/weather_overview.html#about_weather)
 - [TripIt Developer API](https://www.tripit.com/developer)
 - [FlightStats Developer API](https://developer.flightstats.com)
 
@@ -29,7 +29,7 @@ When signing up for a FlightStats developer key, note that there is a review pro
 
 Click the button to deploy your app and fill in all the variables from **Delivery Pipeline**. For Further instructions, please follow the [Toolchain instructions](https://github.com/IBM/container-journey-template/blob/master/Toolchain_Instructions_new.md).
 
-[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/)
+[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://cloud.ibm.com/devops/setup/deploy/)
 
 ### Toolchain Scenario One: Monolithic Application
 You should see a link under the Cloud Foundry Deploy stage and that's where your application is hosting.
@@ -63,12 +63,12 @@ After you deployed Flightassist using any platform, you can go to [How to Use Fl
 First, clone and get in our repository to obtain the necessary files and scripts for building this example.
 
 ```bash
-git clone https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms.git && cd Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms
+git clone https://github.com/IBM/Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms && cd Microservices-deployment-with-PaaS-Containers-and-Serverless-Platforms
 ```
 
-Since we need to create services using the command line, we need to install [Bluemix CLI](http://clis.ng.bluemix.net/ui/home.html) before proceeding to the following steps.
+Since we need to create services using the command line, we need to install [Bluemix CLI](https://cloud.ibm.com/docs/cli/index.html) before proceeding to the following steps.
 
-We will use Bluemix's [The Cloudant NoSQL database service](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south) and [Insights for Weather service](https://console.ng.bluemix.net/catalog/services/weather-company-data?env_id=ibm:yp:us-south) for our database and weather data. Therefore, run the following commands to create cloudant and Insights for Weather service.
+We will use Bluemix's [The Cloudant NoSQL database service](https://cloud.ibm.com/catalog/services/cloudant?env_id=ibm:yp:us-south) and [Insights for Weather service](https://cloud.ibm.com/catalog/services/weather-company-data?env_id=ibm:yp:us-south) for our database and weather data. Therefore, run the following commands to create cloudant and Insights for Weather service.
 
 > For this example, we recommend you name your services to *mycloudant* and *myweatherinsights*.
 
@@ -97,7 +97,7 @@ bx app push {your_unique_app_name} -f main_application/manifest.yml
 ```
 > Note: If you want to use `cf` commands, please install [cloudfoundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and run `cf push {your_unique_app_name} -f main_application/manifest.yml`
 
-Now, go to https://console.ng.bluemix.net/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
+Now, go to https://cloud.ibm.com/dashboard/apps and select your application. Click the *Runtime* settings for your application and add these four environment variables to set up external credentials to the TripIt and FlightStats services:
    - `FLIGHTSTATS_APP_ID` : application ID assigned by FlightStats
    - `FLIGHTSTATS_APP_KEY` : application key assigned by FlightStats
    - `TRIPIT_API_KEY` : API key assigned by TripIt
@@ -115,7 +115,7 @@ Congratulations, now you can learn about [How to Use Flightassist](#how-to-use-f
 
 To factor the application into microservices, we add a python microservice to the picture. Instead of directly accessing the apis from Node app, the python program will serve as a proxy to query. This step locally tests the app with the microservice and associated docker container images which are created.
 
-First, install [Docker CLI](https://www.docker.com/community-edition#/download).
+First, install [Docker CLI](https://www.docker.com/products/docker-engine#/download).
 
 Next, edit the `docker-compose.yaml` file and add your credentials for **FLIGHTSTATS_APP_ID**, **FLIGHTSTATS_APP_KEY**, **TRIPIT_API_KEY**,**TRIPIT_API_SECRET**,**CLOUDANT_URL**, and **WEATHER_URL**. Create a key for the weather service and then run the following commands to view the service urls.
 
